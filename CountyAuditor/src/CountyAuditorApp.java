@@ -13,7 +13,6 @@ public class CountyAuditorApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("countyAuditor.fxml"));
-       // Parent root = FXMLLoader.load(getClass().getResource("countyAuditor.fxml"));
         Parent root = loader.load();
 
         CountyAuditorController controller = loader.getController();

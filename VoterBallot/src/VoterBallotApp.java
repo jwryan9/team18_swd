@@ -8,7 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class VoterBallot extends Application {
+public class VoterBallotApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -16,11 +16,11 @@ public class VoterBallot extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("VoterBallot.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("voterBallot.fxml"));
         Parent root = loader.load();
 
-       // CountyAuditorController controller = loader.getController();
-       // controller.initGUI();
+        VoterBallotController controller = loader.getController();
+        controller.initCanidates();
 
         primaryStage.setTitle("Ballot");
         primaryStage.setScene(new Scene(root));
