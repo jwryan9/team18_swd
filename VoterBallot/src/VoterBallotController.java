@@ -82,16 +82,36 @@ public class VoterBallotController {
 
 
     @FXML private void setSelections(ActionEvent event) throws NullPointerException {
-        presidentSelection.setText(presidentDropdown.getValue().toString());
-        usSenateSelection.setText(usSenateDropdown.getValue().toString());
-        usHouseSelection.setText(usHouseDropdown.getValue().toString());
+        ComboBox a = (ComboBox) event.getSource();
+        System.out.println(a.getId());
+        switch (a.getId()) {
+            case "presidentDropdown":
+                presidentSelection.setText(presidentDropdown.getValue().toString());
+                break;
+            case "usSenateDropdown":
+                usSenateSelection.setText(usSenateDropdown.getValue().toString());
+                break;
+            case "usHouseDropdown":
+                usHouseSelection.setText(usHouseDropdown.getValue().toString());
+                break;
+            case "governorDropdown":
+                governorSelection.setText(governorDropdown.getValue().toString());
+                break;
+            case "stateSenateDropdown":
+                usSenateSelection.setText(stateSenateDropdown.getValue().toString());
+                break;
+            case "stateHouseDropdown":
+                stateHouseSelection.setText(stateHouseDropdown.getValue().toString());
+                break;
+            case "countyJudgeDropdown":
+                countyJudgeSelection.setText(countyJudgeDropdown.getValue().toString());
+                break;
+            case "countySheriffSelection":
+                countySheriffSelection.setText(countySheriffDropdown.getValue().toString());
+                break;
 
-        governorSelection.setText(governorDropdown.getValue().toString());
-        stateSenateSelection.setText(stateSenateDropdown.getValue().toString());
-        stateHouseSelection.setText(stateHouseDropdown.getValue().toString());
+        }
 
-        countyJudgeSelection.setText(countyJudgeDropdown.getValue().toString());
-        countySheriffSelection.setText(countySheriffDropdown.getValue().toString());
     }
 
     @FXML private void submitVote(ActionEvent event) {
