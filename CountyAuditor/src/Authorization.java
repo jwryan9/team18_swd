@@ -74,13 +74,15 @@ public class Authorization {
             @Override
             public void onAuthenticated(AuthData authData) {
                 System.out.println("valid login");
-
+                //loginFrame.setVisible(false);
+                CountyAuditorApp.main();
                 validLogin = true;
             }
 
             @Override
             public void onAuthenticationError(FirebaseError firebaseError) {
                 System.out.println("invalid login");
+                System.out.println(firebaseError.toString());
 
                 validLogin = false;
             }
