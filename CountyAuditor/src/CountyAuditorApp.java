@@ -17,7 +17,7 @@ public class CountyAuditorApp extends Application {
         Parent root = loader.load();
 
         CountyAuditorController controller = loader.getController();
-        controller.setComboBoxes();
+        controller.initGUI();
 
         primaryStage.setTitle("Candidate Entry");
         primaryStage.setScene(new Scene(root));

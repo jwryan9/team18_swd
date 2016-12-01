@@ -25,9 +25,9 @@ public class CountyAuditorController {
 
     private Map<Integer,Candidate> CandidateMap;
 
-    public void setComboBoxes() {
+    public void initGUI() {
 
-        CandidateMap = new HashMap<Integer,Candidate>();
+        CandidateMap = new HashMap<>();
 
         stateDropdown.getItems().removeAll();
         stateDropdown.getItems().setAll("IL", "IA", "FL");
