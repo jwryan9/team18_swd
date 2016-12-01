@@ -8,12 +8,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.*;
+import javax.swing.tree.ExpandVetoException;
+
 public class CountyAuditorApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+       // Authorization.authenticate();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("countyAuditor.fxml"));
-       // Parent root = FXMLLoader.load(getClass().getResource("countyAuditor.fxml"));
+        // Parent root = FXMLLoader.load(getClass().getResource("countyAuditor.fxml"));
         Parent root = loader.load();
 
         CountyAuditorController controller = loader.getController();
@@ -25,7 +35,7 @@ public class CountyAuditorApp extends Application {
 
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public static void main() {
+        launch();
     }
 }
