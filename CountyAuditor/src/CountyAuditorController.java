@@ -41,7 +41,7 @@ public class CountyAuditorController {
     @FXML
     private ComboBox partyDropdown;
 
-    private Map<Integer,Candidate> CandidateMap;
+    private static Map<String,String[]> officeOptions = new HashMap<>();
 
     /**
      * Initializes values for comboBoxes and instantiates CandidateMap
@@ -63,11 +63,16 @@ public class CountyAuditorController {
 
         officeDropdown.getItems().removeAll();
         officeDropdown.getItems().setAll("US President", "US Senate", "US House",
-                                         "Governor","State Senate", "State House",
+                                         "Governor", "State Senate", "State House",
                                          "County Judge", "County Sheriff");
 
         partyDropdown.getItems().removeAll();
         partyDropdown.getItems().setAll("Democrat", "Republican", "Green", "Tea", "Other");
+
+        officeOptions.put("Federal",new String[]{"US President", "US Senate", "US House"});
+        officeOptions.put("State",new String[]{"Governor", "State Senate", "State House"});
+        officeOptions.put("County",new String[]{"County Judge", "County Sheriff"});
+
     }
 
     /**
@@ -90,14 +95,23 @@ public class CountyAuditorController {
         System.out.println("ID " + id);
         System.out.println("Name " + name + " City " + city + " State " + state);
 
+        String level = "Federal";
+        for(String key:officeOptions.keySet()){
+            for(String value:officeOptions.get(key)){
+                if(office == value){
+                    level = key;
+                }
+            }
+        }
+        System.out.println("Level Key:" + level);
         boolean validInput = CountyAuditorModel.checkInput(name,city);
 
         if(validInput == true){
             System.out.println("VALID INPUT");
 
             Candidate newCandidate = new Candidate(name, city, state, office, party);
-            CandidateMap.put(id,newCandidate);
-            CountyAuditorModel.exportCandidate(id, newCandidate);
+            //CandidateMap.put(id,newCandidate);
+            CountyAuditorModel.exportCandidate(id, newCandidate, level);
         }
         else{
             System.out.println("ERROR: INVALID INPUT");

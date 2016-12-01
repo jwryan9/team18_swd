@@ -70,17 +70,14 @@ public class CountyAuditorModel {
 
     }
 
-    public static void exportCandidate(int id, Candidate candidate){
+    public static void exportCandidate(int id, Candidate candidate, String level){
         Firebase candidateRef = ref;
 
-        if(candidate.getOffice() == "US President") {
+        if(level == "Federal") {
             candidateRef = candidateRef.child("Federal/" + candidate.getOffice());
         }
-        else if(candidate.getOffice() == "State Senator") {
-            candidateRef = candidateRef.child("State/" + candidate.getState() + "/" + candidate.getOffice());
-        }
-        else if(candidate.getOffice() == "County Sheriff") {
-            candidateRef = candidateRef.child("County/" + candidate.getState() + "/"  + candidate.getOffice());
+        else{
+            candidateRef = candidateRef.child(level + "/" + candidate.getState() + "/" + candidate.getOffice());
         }
 
         candidateRef = candidateRef.child(Integer.toString(id));

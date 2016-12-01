@@ -22,6 +22,7 @@ public class CountyAuditorApp extends Application {
         primaryStage.setTitle("Candidate Entry");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {
