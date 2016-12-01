@@ -5,26 +5,47 @@ import javafx.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-//import java.awt.*;
-
-
 /**
- * Created by jasonryan on 11/30/16.
+ * Controller class for CountyAuditor application.
+ * Displays GUI for adding candidates running for various
+ * elected offices.
  */
 public class CountyAuditorController {
+    /**
+     * TextField for candidate name
+     */
     @FXML
     private javafx.scene.control.TextField nameField;
+
+    /**
+     * TextField for candidate hometown
+     */
     @FXML
     private javafx.scene.control.TextField cityField;
+
+    /**
+     * ComboBox for candidate state selection
+     */
     @FXML
     private ComboBox stateDropdown;
+
+    /**
+     * ComboBox for candidate office selection
+     */
     @FXML
     private ComboBox officeDropdown;
+
+    /**
+     * ComboBox for candidate party affiliation selection
+     */
     @FXML
     private ComboBox partyDropdown;
 
     private Map<Integer,Candidate> CandidateMap;
 
+    /**
+     * Initializes values for comboBoxes and instantiates CandidateMap
+     */
     public void initGUI() {
 
         CandidateMap = new HashMap<>();
@@ -50,6 +71,11 @@ public class CountyAuditorController {
         partyDropdown.getItems().setAll("Democrat", "Republican", "Green", "Tea", "Other");
     }
 
+    /**
+     * Processes click of add candidate button, adds candidate to database
+     *
+     * @param event ActionEvent item relating to add button
+     */
     @FXML
     private void processAdd(ActionEvent event) {
 
