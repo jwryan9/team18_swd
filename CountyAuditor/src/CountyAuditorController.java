@@ -30,13 +30,24 @@ public class CountyAuditorController {
         CandidateMap = new HashMap<>();
 
         stateDropdown.getItems().removeAll();
-        stateDropdown.getItems().setAll("IL", "IA", "FL");
+        stateDropdown.getItems().setAll("AL", "AK", "AZ", "AR", "CA",
+                                        "CO", "CT", "DE", "FL", "GA",
+                                        "HI", "ID", "IL", "IN", "IA",
+                                        "KS", "KY", "LA", "ME", "MD",
+                                        "MA", "MI", "MN", "MS", "MO",
+                                        "MT", "NE", "NV", "NH", "NJ",
+                                        "NM", "NY", "NC", "ND", "OH",
+                                        "OK", "OR", "PA", "RI", "SC",
+                                        "SD", "TN", "TX", "UT", "VT",
+                                        "VA", "WA", "WV", "WI", "WY");
 
         officeDropdown.getItems().removeAll();
-        officeDropdown.getItems().setAll("US President", "State Senator", "County Sheriff");
+        officeDropdown.getItems().setAll("US President", "US Senate", "US House",
+                                        "State Senate", "State House", "Governor",
+                                        "County Judge", "County Sheriff");
 
         partyDropdown.getItems().removeAll();
-        partyDropdown.getItems().setAll("Democrat", "Republican", "Green", "Tea");
+        partyDropdown.getItems().setAll("Democrat", "Republican", "Green", "Tea", "Other");
     }
 
     @FXML
