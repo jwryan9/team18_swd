@@ -15,13 +15,13 @@ public class CountyAuditorController {
      * TextField for candidate name
      */
     @FXML
-    private javafx.scene.control.TextField nameField;
+    private TextField nameField;
 
     /**
      * TextField for candidate hometown
      */
     @FXML
-    private javafx.scene.control.TextField cityField;
+    private TextField cityField;
 
     /**
      * ComboBox for candidate state selection
@@ -82,10 +82,6 @@ public class CountyAuditorController {
      */
     @FXML
     private void processAdd(ActionEvent event) {
-
-
-
-
         String name = nameField.getText();
         String city = cityField.getText();
         String state = stateDropdown.getSelectionModel().getSelectedItem().toString();
