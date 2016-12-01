@@ -25,7 +25,7 @@ public class VoterBallotController {
     private ComboBox stateHouseDropdown;
 
 
-    public void initCanidates() {
+    public void initCandidates() {
         initFederal();
         initState();
         initCounty();

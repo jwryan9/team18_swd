@@ -20,7 +20,7 @@ public class VoterBallotApp extends Application {
         Parent root = loader.load();
 
         VoterBallotController controller = loader.getController();
-        controller.initCanidates();
+        controller.initCandidates();
 
         primaryStage.setTitle("Ballot");
         primaryStage.setScene(new Scene(root));
