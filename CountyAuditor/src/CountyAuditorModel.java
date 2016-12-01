@@ -1,6 +1,10 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import com.firebase.client.*;
-
+import com.firebase.client.DataSnapshot;
 /**
  * Created by AdamGary on 12/1/16.
  */
@@ -20,12 +24,52 @@ public class CountyAuditorModel {
 
         return true;
     }
-/*
-    public static Map<Integer,Candidate> getCandidatesFromDatabase(){
 
+    public static int generateNewCandidateID(String newCandidateLevel){
+
+        int newID = 1;
+
+        String[] level = {"Federal","State","County"};
+        Firebase levelRef = ref;
+        Map<String,ArrayList<Integer>> candidateIdNumbers = new HashMap<>();
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(String aLevel:level) {
+                    ArrayList<Integer> ids = new ArrayList<Integer>();
+                    String idChild = dataSnapshot.child(aLevel+"/IDs").getValue(String.class);
+                    System.out.println("idChild: " + idChild);
+
+                    if(idChild!=null) {
+                        String[] idArray = idChild.split(",");
+
+                        for (String aID:idArray
+                                ) {
+                            ids.add(Integer.parseInt(aID));
+                        }
+                    }
+
+
+                    candidateIdNumbers.put(aLevel, ids);
+                }
+                System.out.println("map: " + candidateIdNumbers);
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.err.println("Firebase Error");
+            }
+        });
+
+        ArrayList<Integer> usedIds = candidateIdNumbers.get(newCandidateLevel);
+        newID = usedIds.get(usedIds.size()-1) + 1;
+
+
+        return newID;
 
     }
-*/
+
     public static void exportCandidate(int id, Candidate candidate){
         Firebase candidateRef = ref;
 
@@ -33,10 +77,10 @@ public class CountyAuditorModel {
             candidateRef = candidateRef.child("Federal/" + candidate.getOffice());
         }
         else if(candidate.getOffice() == "State Senator") {
-            candidateRef = candidateRef.child("State/" + candidate.getOffice());
+            candidateRef = candidateRef.child("State/" + candidate.getState() + "/" + candidate.getOffice());
         }
-        else if(candidate.getOffice() == "Sheriff") {
-            candidateRef = candidateRef.child("County/" + candidate.getOffice());
+        else if(candidate.getOffice() == "County Sheriff") {
+            candidateRef = candidateRef.child("County/" + candidate.getState() + "/"  + candidate.getOffice());
         }
 
         candidateRef = candidateRef.child(Integer.toString(id));

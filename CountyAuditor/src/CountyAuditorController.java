@@ -48,7 +48,6 @@ public class CountyAuditorController {
      */
     public void initGUI() {
 
-        CandidateMap = new HashMap<>();
 
         stateDropdown.getItems().removeAll();
         stateDropdown.getItems().setAll("AL", "AK", "AZ", "AR", "CA",
@@ -79,21 +78,24 @@ public class CountyAuditorController {
     @FXML
     private void processAdd(ActionEvent event) {
 
+
+
+
         String name = nameField.getText();
         String city = cityField.getText();
         String state = stateDropdown.getSelectionModel().getSelectedItem().toString();
         String office = officeDropdown.getSelectionModel().getSelectedItem().toString();
         String party = partyDropdown.getSelectionModel().getSelectedItem().toString();
-        int id = 3;
-
-        System.out.println("Name" + name + " City" + city + " State" + state);
+        int id = name.hashCode();
+        System.out.println("ID " + id);
+        System.out.println("Name " + name + " City " + city + " State " + state);
 
         boolean validInput = CountyAuditorModel.checkInput(name,city);
 
         if(validInput == true){
             System.out.println("VALID INPUT");
 
-            Candidate newCandidate = new Candidate(id, name, city, state, office, party);
+            Candidate newCandidate = new Candidate(name, city, state, office, party);
             CandidateMap.put(id,newCandidate);
             CountyAuditorModel.exportCandidate(id, newCandidate);
         }
