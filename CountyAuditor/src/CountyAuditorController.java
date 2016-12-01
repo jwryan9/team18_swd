@@ -64,7 +64,7 @@ public class CountyAuditorController {
 
         officeDropdown.getItems().removeAll();
         officeDropdown.getItems().setAll("US President", "US Senate", "US House",
-                                        "State Senate", "State House", "Governor",
+                                         "Governor","State Senate", "State House",
                                         "County Judge", "County Sheriff");
 
         partyDropdown.getItems().removeAll();
