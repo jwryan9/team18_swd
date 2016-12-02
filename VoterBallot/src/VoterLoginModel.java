@@ -120,12 +120,8 @@ public class VoterLoginModel{
             isRegisteredVoter = false;
         }
 
-
-
         return isRegisteredVoter;
     }
-
-
 
     /*
     public void run(){
