@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -48,15 +49,21 @@ public class VoterBallotController {
 
     @FXML private Text countySheriffSelection;
 
-    public void initCandidates() {
+    public void initCandidates() throws InterruptedException {
         VoterBallotModel.initFederal();
-        Map<String,ArrayList<Candidate>> federalCandidates = VoterBallotModel.getFederalCandidates();
+        System.out.println("Here");
+
+        Map<String,ArrayList<Candidate>> federalCandidates = VoterBallotModel.getFederalCandidates();// VoterBallotModel.getFederalCandidates();
+        System.out.println("feds keyset:" + federalCandidates.keySet());
+        VoterBallotModel.initFederal();
+
+
 
         while(federalCandidates.keySet().size()<3){
             federalCandidates = VoterBallotModel.getFederalCandidates();
         }
 
-        System.out.println("feds keyset:" + federalCandidates.keySet());
+
 
 
         presidentDropdown.getItems().add("");

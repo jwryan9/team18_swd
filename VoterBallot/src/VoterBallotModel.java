@@ -3,6 +3,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import com.firebase.client.*;
 
 /**
@@ -10,15 +14,17 @@ import com.firebase.client.*;
  */
 public class VoterBallotModel {
 
+    private static boolean waitingBool = true;
 
     private static Map<String,ArrayList<Candidate>> federalCandidates = new HashMap<>();
 
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Candidates");
 
     public static void initFederal() {
-        String level = "Federal";
 
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            String level = "Federal";
+
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String[] federalPositions = {"US President", "US Senate", "US House"};
@@ -41,6 +47,7 @@ public class VoterBallotModel {
 
                 }
                 System.out.println("Federal Keys " + federalCandidates.keySet());
+                waitingBool = false;
             }
 
             @Override
@@ -48,6 +55,8 @@ public class VoterBallotModel {
                 System.err.println("Firebase Error");
             }
         });
+
+
     }
 
     public static void initState(String stateAbbriviation) {
@@ -61,7 +70,8 @@ public class VoterBallotModel {
     }
 
 
-    public static Map<String, ArrayList<Candidate>> getFederalCandidates() {
+    public static Map<String, ArrayList<Candidate>> getFederalCandidates() throws InterruptedException{
+
         return federalCandidates;
     }
 
