@@ -11,23 +11,17 @@ import java.util.Map;
  * Created by jasonryan on 12/1/16.
  */
 public class VoterBallotController {
-    @FXML
-    private ComboBox presidentDropdown;
+    @FXML private ComboBox presidentDropdown;
 
-    @FXML
-    private ComboBox usSenateDropdown;
+    @FXML private ComboBox usSenateDropdown;
 
-    @FXML
-    private ComboBox usHouseDropdown;
+    @FXML private ComboBox usHouseDropdown;
 
-    @FXML
-    private ComboBox governorDropdown;
+    @FXML private ComboBox governorDropdown;
 
-    @FXML
-    private ComboBox stateSenateDropdown;
+    @FXML private ComboBox stateSenateDropdown;
 
-    @FXML
-    private ComboBox stateHouseDropdown;
+    @FXML private ComboBox stateHouseDropdown;
 
     @FXML private ComboBox countyJudgeDropdown;
 
