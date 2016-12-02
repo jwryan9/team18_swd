@@ -83,13 +83,13 @@ public class CountyAuditorController {
     @FXML
     private void processAdd(ActionEvent event) {
         String name = nameField.getText();
-        String city = cityField.getText();
+        String county = cityField.getText();
         String state = stateDropdown.getSelectionModel().getSelectedItem().toString();
         String office = officeDropdown.getSelectionModel().getSelectedItem().toString();
         String party = partyDropdown.getSelectionModel().getSelectedItem().toString();
         int id = name.hashCode();
         System.out.println("ID " + id);
-        System.out.println("Name " + name + " City " + city + " State " + state);
+        System.out.println("Name " + name + " County " + county + " State " + state);
 
         String level = "Federal";
         for(String key:officeOptions.keySet()){
@@ -100,12 +100,12 @@ public class CountyAuditorController {
             }
         }
         System.out.println("Level Key:" + level);
-        boolean validInput = CountyAuditorModel.checkInput(name,city);
+        boolean validInput = CountyAuditorModel.checkInput(name,county);
 
         if(validInput == true){
             System.out.println("VALID INPUT");
 
-            Candidate newCandidate = new Candidate(name, city, state, office, party);
+            Candidate newCandidate = new Candidate(name, county, state, office, party);
             //CandidateMap.put(id,newCandidate);
             CountyAuditorModel.exportCandidate(id, newCandidate, level);
         }
