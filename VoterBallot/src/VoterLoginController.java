@@ -23,7 +23,7 @@ public class VoterLoginController {
 
     @FXML private Button loginButton;
     
-    @FXML private Text loginFailText;
+    @FXML private Text validVoterText;
 
     @FXML private void login(ActionEvent event) {
         String ssn = ssnField.getText();
@@ -50,8 +50,8 @@ public class VoterLoginController {
                     System.out.println("Registered Voter Found");
                     System.out.println("Opening Ballot");
 
-                    loginFailText.setFill(Color.BLACK);
-                    loginFailText.setText("Registered Voter Found");
+                    validVoterText.setFill(Color.BLACK);
+                    validVoterText.setText("Registered Voter Found");
                     try {
                         VoterBallotApp newBallot = new VoterBallotApp();
                         newBallot.start(VoterBallotApp.classStage);
@@ -62,16 +62,16 @@ public class VoterLoginController {
                     }
                 }
                 else {
-                    loginFailText.setFill(Color.RED);
-                    loginFailText.setText("ERROR: VOTER NOT REGISTERED");
+                    validVoterText.setFill(Color.RED);
+                    validVoterText.setText("ERROR: VOTER NOT REGISTERED");
                     System.out.println("Registered Voter Not Found");
                 }
 
 
             }
             else{
-                loginFailText.setFill(Color.RED);
-                loginFailText.setText("ERROR: INVALID INPUT");
+                validVoterText.setFill(Color.RED);
+                validVoterText.setText("ERROR: INVALID INPUT");
                 System.out.println("ERROR: INVALID INPUT");
             }
 

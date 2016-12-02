@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 public class VoterLoginApp extends Application {
 
+    public static Stage classStage;// = new Stage();
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -18,6 +20,7 @@ public class VoterLoginApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("voterLogin.fxml"));
         Parent root = loader.load();
+        classStage = primaryStage;
 
         VoterLoginController controller = loader.getController();
         VoterLoginModel.getVotersFromDatabase();

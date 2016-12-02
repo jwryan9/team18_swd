@@ -3,7 +3,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
+import javax.xml.ws.FaultAction;
 import java.io.IOException;
 
 /**
@@ -36,6 +39,8 @@ public class VoterRegistrationController {
      * PasswordField for voter social security number
      */
     @FXML private PasswordField ssnField;
+
+    @FXML private Text registerValidText;
 
     /**
      * Initializes state selection ComboBox
@@ -83,8 +88,13 @@ public class VoterRegistrationController {
 
                 Voter newVoter = new Voter(encryptedSSN, (firstName+ " " + lastName), zipCode);
                 VoterRegistrationModel.exportVoter(encryptedSSN, newVoter);
+
+                registerValidText.setFill(Color.BLACK);
+                registerValidText.setText("Registration Information Added");
             }
             else{
+                registerValidText.setFill(Color.RED);
+                registerValidText.setText("ERROR: INVALID INPUT");
                 System.out.println("ERROR: INVALID INPUT");
             }
 
