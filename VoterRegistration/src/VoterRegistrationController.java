@@ -6,7 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
+import javax.swing.*;
 import javax.xml.ws.FaultAction;
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -47,6 +49,7 @@ public class VoterRegistrationController {
      */
     public void initStates() {
         stateDropdown.getItems().removeAll();
+        stateDropdown.getItems().add("");
         stateDropdown.getItems().addAll("AL", "AK", "AZ", "AR", "CA",
                 "CO", "CT", "DE", "FL", "GA",
                 "HI", "ID", "IL", "IN", "IA",
@@ -89,8 +92,19 @@ public class VoterRegistrationController {
                 Voter newVoter = new Voter(encryptedSSN, (firstName+ " " + lastName), zipCode);
                 VoterRegistrationModel.exportVoter(encryptedSSN, newVoter);
 
-                registerValidText.setFill(Color.BLACK);
-                registerValidText.setText(validInput);
+                //registerValidText.setFill(Color.BLACK);
+                //registerValidText.setText(validInput);
+                ImageIcon icon = new ImageIcon("thumbsup.png");
+                System.out.println("size: " + icon.getIconHeight());
+                ShowMessage("Registration Successful",icon);
+
+                firstNameField.setText("");
+                lastNameField.setText("");
+                ssnField.setText("");
+                zipField.setText("");
+                stateDropdown.getSelectionModel().selectFirst();
+
+
             }
             else{
                 registerValidText.setFill(Color.RED);
@@ -105,5 +119,13 @@ public class VoterRegistrationController {
 
     }
 
+    private void ShowMessage(String message, ImageIcon icon) {
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                int input = JOptionPane.showOptionDialog(null, message, "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, null, null);
+            }
+        });
+    }
 
 }
