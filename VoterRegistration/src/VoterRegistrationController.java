@@ -4,6 +4,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+
 /**
  * Controller class for VoterRegistration application.
  * Displays GUI for adding registered voters.
@@ -63,10 +65,20 @@ public class VoterRegistrationController {
         String lastName = lastNameField.getText();
         String zipCode = zipField.getText();
         String ssn = ssnField.getText();
+        String encryptedSSN = "";
         int id = ssn.hashCode();
 
-        System.out.println("ID :" + id);
+        System.out.println("ssn :" + ssn);
         System.out.println("First name: " + firstName + "Last Name: " + lastName + "Zip Code: " + zipCode);
+
+        try {
+            RunEncryptor myEncryptor = new RunEncryptor(ssn); // create an object of type RunEncryptor
+            encryptedSSN = myEncryptor.encodeMessage(); // encrypt the message
+            System.out.println("encryptedSSN: " + encryptedSSN);
+        } catch (IOException e){
+            System.out.println("IOEXCEPTION");
+        }
+
 
     }
 }
