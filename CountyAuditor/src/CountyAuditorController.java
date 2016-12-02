@@ -73,7 +73,7 @@ public class CountyAuditorController {
     /**
      * Processes click of add candidate button, adds candidate to database.
      *
-     * @param event ActionEvent item relating to add button
+     * @param event ActionEvent item of add button click
      */
     @FXML private void processAdd(ActionEvent event) {
         String name = nameField.getText();

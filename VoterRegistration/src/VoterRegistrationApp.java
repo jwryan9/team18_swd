@@ -20,7 +20,7 @@ public class VoterRegistrationApp extends Application {
         Parent root = loader.load();
 
         VoterRegistrationController controller = loader.getController();
-        //controller.initCandidates();
+        controller.initStates();
 
         primaryStage.setTitle("Voter Registration");
         primaryStage.setScene(new Scene(root));
