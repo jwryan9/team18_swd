@@ -7,8 +7,8 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CountyAuditorController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="184.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="457.0" minWidth="10.0" prefWidth="416.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="150.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="325.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -23,7 +23,7 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Candidate Residence:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+      <Label text="County/State" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
@@ -43,15 +43,9 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <ComboBox id="partyDropdown" fx:id="partyDropdown" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </GridPane.margin>
-      </ComboBox>
-      <Button id="addButton" fx:id="addButton" mnemonicParsing="false" onAction="#processAdd" text="Add Candidate" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
       <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -66,17 +60,23 @@
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <ComboBox id="stateDropdown" fx:id="stateDropdown" prefWidth="150.0" promptText="State" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <ComboBox id="stateDropdown" fx:id="stateDropdown" prefWidth="100.0" promptText="State" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </ComboBox>
          </children>
       </GridPane>
-      <ComboBox id="officeDropdown" fx:id="officeDropdown" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2">
+      <ComboBox id="officeDropdown" fx:id="officeDropdown" prefWidth="250.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </ComboBox>
+      <ComboBox id="partyDropdown" fx:id="partyDropdown" prefWidth="250.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+      </ComboBox>
+      <Button id="addButton" fx:id="addButton" mnemonicParsing="false" onAction="#processAdd" text="Add Candidate" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
    </children>
 </GridPane>
