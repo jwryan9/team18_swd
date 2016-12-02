@@ -1,7 +1,7 @@
 import com.firebase.client.Firebase;
 
 /**
- * Created by AdamGary on 12/1/16.
+ * Class to hold the validate and update the voter registration information.
  */
 public class VoterRegistrationModel {
 
@@ -10,6 +10,12 @@ public class VoterRegistrationModel {
      */
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Voters");
 
+    /**
+     * Method to check the user input for the voter registration app.
+     * @param id    the voter's social security number.
+     * @param zip   the voter's zip code.
+     * @return      the error code for invalid entry, and an empty string if the input is valid.
+     */
     public static String checkInput(String id, String zip){
 
         if(!id.matches("\\d+") || id.length() != 9){
@@ -21,6 +27,11 @@ public class VoterRegistrationModel {
         return "";
     }
 
+    /**
+     * Method to export a voter to the database.
+     * @param encryptedID   the voter's encrypted ssn.
+     * @param voter         the voter to upload.
+     */
     public synchronized static void exportVoter(String encryptedID, Voter voter){
         Firebase candidateRef = ref;
 
