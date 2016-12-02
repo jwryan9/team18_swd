@@ -21,7 +21,7 @@ public class CountyAuditorController {
      * TextField for candidate hometown
      */
     @FXML
-    private TextField cityField;
+    private TextField zipField;
 
     /**
      * ComboBox for candidate state selection
@@ -83,7 +83,7 @@ public class CountyAuditorController {
     @FXML
     private void processAdd(ActionEvent event) {
         String name = nameField.getText();
-        String county = cityField.getText();
+        String county = zipField.getText();
         String state = stateDropdown.getSelectionModel().getSelectedItem().toString();
         String office = officeDropdown.getSelectionModel().getSelectedItem().toString();
         String party = partyDropdown.getSelectionModel().getSelectedItem().toString();
