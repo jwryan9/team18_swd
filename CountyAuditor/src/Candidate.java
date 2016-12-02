@@ -4,16 +4,16 @@
 public class Candidate {
     //private int idNumber;
     private String name;
-    private String county;
+    private String zip;
     private String state;
     private String office;
     private String party;
 
 
-    public Candidate(String name, String county, String state, String office, String party){
+    public Candidate(String name, String zip, String state, String office, String party){
         //this.idNumber;
         this.name = name;
-        this.county = county;
+        this.zip = zip;
         this.state = state;
         this.office = office;
         this.party = party;
@@ -29,8 +29,8 @@ public class Candidate {
         return name;
     }
 
-    public String getCounty() {
-        return county;
+    public String getZip() {
+        return zip;
     }
 
     public String getState() {

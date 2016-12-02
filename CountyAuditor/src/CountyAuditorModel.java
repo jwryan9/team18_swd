@@ -13,12 +13,12 @@ public class CountyAuditorModel {
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Candidates");
 
 
-    public static boolean checkInput(String name, String county){
+    public static boolean checkInput(String name, String zip){
 
         if(!name.matches("[a-zA-Z ']*$") || name.length() == 0){
             return false;
         }
-        if(!county.matches("[a-zA-z ']*$") || county.length() == 0){
+        if(!zip.matches("\\d+") || zip.length() != 5){
             return false;
         }
 
@@ -36,7 +36,7 @@ public class CountyAuditorModel {
             candidateRef = candidateRef.child(level + "/" + candidate.getState() + "/" + candidate.getOffice());
         }
         else if(level == "County"){
-            candidateRef = candidateRef.child(level + "/" + candidate.getCounty() + "/" + candidate.getOffice());
+            candidateRef = candidateRef.child(level + "/" + candidate.getZip() + "/" + candidate.getOffice());
         }
 
         candidateRef = candidateRef.child(Integer.toString(id));

@@ -7,14 +7,14 @@ import java.util.Map;
 public class Candidate {
     private int idNumber;
     private String name;
-    private String county;
+    private String zip;
     private String state;
     private String office;
     private String party;
 
     public Candidate(Map<String,String> newCandidateMap, int idNumber){
         this.name = newCandidateMap.get("name");
-        this.county = newCandidateMap.get("county");
+        this.zip = newCandidateMap.get("zip");
         this.state = newCandidateMap.get("state");
         this.office = newCandidateMap.get("office");
         this.party = newCandidateMap.get("party");
@@ -22,10 +22,10 @@ public class Candidate {
 
     }
 
-    public Candidate(String name, String county, String state, String office, String party){
+    public Candidate(String name, String zip, String state, String office, String party){
         //this.idNumber;
         this.name = name;
-        this.county = county;
+        this.zip = zip;
         this.state = state;
         this.office = office;
         this.party = party;
@@ -34,7 +34,7 @@ public class Candidate {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("name", this.name);
-        result.put("county", this.county);
+        result.put("zip", this.zip);
         result.put("state", this.state);
         result.put("office", this.office);
         result.put("party", this.party);
@@ -52,8 +52,8 @@ public class Candidate {
         return name;
     }
 
-    public String getCounty() {
-        return county;
+    public String getZip() {
+        return zip;
     }
 
     public String getState() {
