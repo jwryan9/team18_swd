@@ -17,14 +17,6 @@ public class VoterLoginModel{
 
     private static boolean isRegisteredVoter;
 
-    private String id;
-
-    private String zip;
-
-    public VoterLoginModel(String id, String zip){
-        this.id = id;
-        this.zip = zip;
-    }
 
     public static boolean validateInput(String ssn, String zipCode){
         if(zipCode.length() == 5 && zipCode.matches("\\d+") && ssn.length() == 9 && ssn.matches("\\d+")) {
@@ -74,7 +66,7 @@ public class VoterLoginModel{
 
     }
 
-    public static void getVotersFromDatabase(){
+    public synchronized static void getVotersFromDatabase(){
 
         ref.addChildEventListener(new ChildEventListener() {
             @Override
@@ -105,7 +97,7 @@ public class VoterLoginModel{
 
     }
 
-    public static boolean checkVoterRegistrationQuery(String encryptedID, String zipCode) {
+    public synchronized static boolean checkVoterRegistrationQuery(String encryptedID, String zipCode) {
 
         if(registeredVoters.containsKey(encryptedID)){
 

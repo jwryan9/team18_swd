@@ -35,7 +35,7 @@ public class CountyAuditorModel {
      * @param candidate     The reference to the candidate object.
      * @param level         The level of government that the candidate is seeking office.
      */
-    public static void exportCandidate(int id, Candidate candidate, String level){
+    public synchronized static void exportCandidate(int id, Candidate candidate, String level){
         Firebase candidateRef = ref;
 
         if(level == "Federal") {

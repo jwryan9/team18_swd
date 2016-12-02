@@ -20,7 +20,7 @@ public class VoterBallotModel {
 
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Candidates");
 
-    public static void initFederal() {
+    public synchronized static void initFederal() {
 
             String level = "Federal";
 
@@ -59,11 +59,11 @@ public class VoterBallotModel {
 
     }
 
-    public static void initState(String stateAbbriviation) {
+    public synchronized static void initState(String stateAbbriviation) {
 
     }
 
-    public static void initCounty(String county) {
+    public synchronized static void initCounty(String county) {
 
 
 
