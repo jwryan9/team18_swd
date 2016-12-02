@@ -45,17 +45,15 @@ public class VoterBallotController {
 
     public void initCandidates() throws InterruptedException {
         VoterBallotModel.initFederal();
-        System.out.println("Here");
 
         Map<String,ArrayList<Candidate>> federalCandidates = VoterBallotModel.getFederalCandidates();// VoterBallotModel.getFederalCandidates();
-        System.out.println("feds keyset:" + federalCandidates.keySet());
-        VoterBallotModel.initFederal();
 
 
 
         while(federalCandidates.keySet().size()<3){
             federalCandidates = VoterBallotModel.getFederalCandidates();
         }
+        System.out.println("feds keyset:" + federalCandidates.keySet());
 
 
 
@@ -99,7 +97,7 @@ public class VoterBallotController {
                 governorSelection.setText(governorDropdown.getValue().toString());
                 break;
             case "stateSenateDropdown":
-                usSenateSelection.setText(stateSenateDropdown.getValue().toString());
+                stateSenateSelection.setText(stateSenateDropdown.getValue().toString());
                 break;
             case "stateHouseDropdown":
                 stateHouseSelection.setText(stateHouseDropdown.getValue().toString());
