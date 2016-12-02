@@ -47,6 +47,8 @@ public class VoterBallotController {
 
     @FXML private Button submitButton;
 
+    private Map<String, String> selections;
+
     public void initCandidates() throws InterruptedException {
         VoterBallotModel.initFederal();
 
@@ -108,6 +110,28 @@ public class VoterBallotController {
     }
 
     @FXML private void submitVote(ActionEvent event) {
+        final int numOffices = 8;
+
+        String presidentName = presidentSelection.getText().split(" \\(")[0];
+        String usSenateName = usSenateSelection.getText().split(" \\(")[0];
+        String usHouseName = usHouseSelection.getText().split(" \\(")[0];
+        String governorName = governorSelection.getText().split(" \\(")[0];
+        String stateSenateName = stateSenateSelection.getText().split(" \\(")[0];
+        String stateHouseName = stateHouseSelection.getText().split(" \\(")[0];
+        String countyJudgeName = countyJudgeSelection.getText().split(" \\(")[0];
+        String countySheriffName = countySheriffSelection.getText().split(" \\(")[0];
+
+        selections = new HashMap<>(numOffices);
+
+        selections.put("US President", String.valueOf(presidentName.hashCode()));
+        selections.put("US Senate", String.valueOf(usSenateName.hashCode()));
+        selections.put("US House", String.valueOf(usHouseName.hashCode()));
+        selections.put("Governor", String.valueOf(governorName.hashCode()));
+        selections.put("State Senate", String.valueOf(stateSenateName.hashCode()));
+        selections.put("State House", String.valueOf(stateHouseName.hashCode()));
+        selections.put("County Judge", String.valueOf(countyJudgeName.hashCode()));
+        selections.put("County Sheriff", String.valueOf(countySheriffName.hashCode()));
+
         try {
             VoterLoginApp newLogin = new VoterLoginApp();
             newLogin.start(VoterLoginApp.classStage);
