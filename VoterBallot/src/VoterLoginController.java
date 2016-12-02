@@ -31,12 +31,11 @@ public class VoterLoginController {
         String encryptedSSN;
         boolean isRegisteredVoter;
 
-        boolean validInput = VoterLoginModel.validateInput(ssn, zipCode);
-
+        String validInput = VoterLoginModel.validateInput(ssn, zipCode);
 
         try {
 
-            if(validInput == true){
+            if(validInput.isEmpty()){
                 System.out.println("VALID INPUT");
 
                 RunEncryptor myEncryptor = new RunEncryptor(ssn); // create an object of type RunEncryptor
@@ -51,7 +50,7 @@ public class VoterLoginController {
                     System.out.println("Opening Ballot");
 
                     validVoterText.setFill(Color.BLACK);
-                    validVoterText.setText("Registered Voter Found");
+                    validVoterText.setText("Registered voter found");
                     try {
                         VoterBallotApp newBallot = new VoterBallotApp();
                         newBallot.start(VoterBallotApp.classStage);
@@ -71,7 +70,7 @@ public class VoterLoginController {
             }
             else{
                 validVoterText.setFill(Color.RED);
-                validVoterText.setText("ERROR: INVALID INPUT");
+                validVoterText.setText(validInput);
                 System.out.println("ERROR: INVALID INPUT");
             }
 

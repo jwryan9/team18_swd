@@ -72,7 +72,7 @@ public class VoterRegistrationController {
         String ssn = ssnField.getText();
         String encryptedSSN = "";
 
-        boolean validInput = VoterRegistrationModel.checkInput(ssn, zipCode);
+        String validInput = VoterRegistrationModel.checkInput(ssn, zipCode);
         System.out.println("ssn :" + ssn);
         System.out.println("First name: " + firstName + "Last Name: " + lastName + "Zip Code: " + zipCode);
 
@@ -83,18 +83,18 @@ public class VoterRegistrationController {
             encryptedSSN = myEncryptor.encodeMessage(); // encrypt the message
             System.out.println("encryptedSSN: " + encryptedSSN);
 
-            if(validInput == true){
+            if(validInput.isEmpty()){
                 System.out.println("VALID INPUT");
 
                 Voter newVoter = new Voter(encryptedSSN, (firstName+ " " + lastName), zipCode);
                 VoterRegistrationModel.exportVoter(encryptedSSN, newVoter);
 
                 registerValidText.setFill(Color.BLACK);
-                registerValidText.setText("Registration Information Added");
+                registerValidText.setText(validInput);
             }
             else{
                 registerValidText.setFill(Color.RED);
-                registerValidText.setText("ERROR: INVALID INPUT");
+                registerValidText.setText(validInput);
                 System.out.println("ERROR: INVALID INPUT");
             }
 

@@ -102,9 +102,9 @@ public class CountyAuditorController {
             }
         }
         System.out.println("Level Key:" + level);
-        boolean validInput = CountyAuditorModel.checkInput(name,county);
+        String validInput = CountyAuditorModel.checkInput(name,county);
 
-        if(validInput == true){
+        if(validInput.isEmpty()){
             System.out.println("VALID INPUT");
 
             Candidate newCandidate = new Candidate(name, county, state, office, party);
@@ -118,7 +118,7 @@ public class CountyAuditorController {
         }
         else{
             entryValidText.setFill(Color.RED);
-            entryValidText.setText("ERROR: INVALID INPUT");
+            entryValidText.setText(validInput);
             System.out.println("ERROR: INVALID INPUT");
         }
     }
