@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class VoterBallotApp extends Application {
 
-    public static Stage classStage = new Stage();
+    public static Stage classStage;// = new Stage();
 
     public static void main() {
         launch();
