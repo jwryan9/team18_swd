@@ -7,14 +7,12 @@ public class Voter {
     private String ID;
     private String name;
     private String zipCode;
-    private String startPosition;
 
 
-    public Voter(String encryptedID, String name, String zipCode, String startPosition){
+    public Voter(String encryptedID, String name, String zipCode){
         this.ID = encryptedID;
         this.name = name;
         this.zipCode = zipCode;
-        this.startPosition = startPosition;
     }
 
     public String getID() {
@@ -29,7 +27,4 @@ public class Voter {
         return zipCode;
     }
 
-    public String getStartPosition() {
-        return startPosition;
-    }
 }

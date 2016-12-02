@@ -77,20 +77,16 @@ public class VoterRegistrationController {
             RunEncryptor myEncryptor = new RunEncryptor(ssn); // create an object of type RunEncryptor
             encryptedSSN = myEncryptor.encodeMessage(); // encrypt the message
             System.out.println("encryptedSSN: " + encryptedSSN);
-            String startPosition = encryptedSSN.split(",")[1];
-            encryptedSSN = encryptedSSN.split(",")[0];
+
             if(validInput == true){
                 System.out.println("VALID INPUT");
 
-                Voter newVoter = new Voter(encryptedSSN, (firstName+ " " + lastName), zipCode, startPosition);
+                Voter newVoter = new Voter(encryptedSSN, (firstName+ " " + lastName), zipCode);
                 VoterRegistrationModel.exportVoter(encryptedSSN, newVoter);
             }
             else{
                 System.out.println("ERROR: INVALID INPUT");
             }
-
-            RunDecryptor myDecryptor = new RunDecryptor(encryptedSSN, Integer.parseInt(startPosition)); // create a new object of type RunDecryptor
-            System.out.println("decoded id: " + myDecryptor.decodeMessage()); // decode the message
 
         } catch (IOException e){
             System.out.println("IOEXCEPTION");

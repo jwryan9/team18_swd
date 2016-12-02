@@ -42,15 +42,18 @@ public class RunEncryptor {
 
         String keyFileLocation = "keys.txt";
 
+
         try{
             File keyFile = new File(keyFileLocation);
             Scanner fileScan = new Scanner(keyFile);
-            startPosition = Integer.parseInt(fileScan.nextLine()); // parse the starting position to make it a integer
+            // startPosition = Integer.parseInt(fileScan.nextLine()); // parse the starting position to make it a integer
             String keysFromFileString = fileScan.nextLine();
             fileScan.close();
 
             keys = new int[id.length()]; // create an integer array the length of the message without spaces
             String[] keyArray = keysFromFileString.split(",");
+            int startPosition = Integer.parseInt(id)%keyArray.length;
+
             int j = startPosition;
 
             for(int i = 0;i<id.length();i++){ // loop through the keyArray
@@ -65,12 +68,9 @@ public class RunEncryptor {
 
             FileWriter fWriter = new FileWriter(keyFile);
             PrintWriter printKeys = new PrintWriter(fWriter);
-            printKeys.println(Integer.toString(j)); // update the start position of the key file
             printKeys.println(keysFromFileString);  // print the string of keys into the key file
             printKeys.close();
 
-            //keys = keyArray;
-            //startPosition = startPos;
             idString = id.toUpperCase();
             charCipher = new char[idString.length()];
             charMessage = idString.toCharArray();
@@ -116,7 +116,7 @@ public class RunEncryptor {
         }
         System.out.println("\nCipher Text: "+ new String(charCipher)); // print the cipher text
         String encryptedID = new String(charCipher);
-        return (encryptedID + "," + startPosition);
+        return encryptedID;
 
 
     }
