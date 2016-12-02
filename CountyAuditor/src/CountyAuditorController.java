@@ -44,7 +44,7 @@ public class CountyAuditorController {
     private static Map<String,String[]> officeOptions = new HashMap<>();
 
     /**
-     * Initializes values for comboBoxes and instantiates CandidateMap
+     * Initializes values for comboBoxes and instantiates CandidateMap.
      */
     public void initGUI() {
 
@@ -76,7 +76,7 @@ public class CountyAuditorController {
     }
 
     /**
-     * Processes click of add candidate button, adds candidate to database
+     * Processes click of add candidate button, adds candidate to database.
      *
      * @param event ActionEvent item relating to add button
      */

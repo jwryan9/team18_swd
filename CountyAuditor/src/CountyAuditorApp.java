@@ -1,6 +1,3 @@
-/**
- * Created by jasonryan on 11/30/16.
- */
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +12,15 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.tree.ExpandVetoException;
 
+/**
+ * Class to add candidates to the database.
+ */
 public class CountyAuditorApp extends Application {
-
+    /**
+     * Method to start the javaFX program.
+     * @param primaryStage      the primary window.
+     * @throws Exception        throws exception for Parent use.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -35,6 +39,9 @@ public class CountyAuditorApp extends Application {
 
     }
 
+    /**
+     * Main method to launch the application.
+     */
     public static void main() {
         launch();
     }

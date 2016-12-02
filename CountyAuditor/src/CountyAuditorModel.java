@@ -1,18 +1,22 @@
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+
 import com.firebase.client.*;
-import com.firebase.client.DataSnapshot;
+
 /**
- * Created by AdamGary on 12/1/16.
+ * Class to export candidates to the database.
  */
 public class CountyAuditorModel {
 
+    /**
+     * Variable to hold reference to the database.
+     */
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Candidates");
 
-
+    /**
+     * Method to check the user input for the candidate information.
+     * @param name      the candidate's name.
+     * @param zip       the candidate's zip.
+     * @return          boolean if the entered data is valid.
+     */
     public static boolean checkInput(String name, String zip){
 
         if(!name.matches("[a-zA-Z ']*$") || name.length() == 0){
@@ -25,7 +29,12 @@ public class CountyAuditorModel {
         return true;
     }
 
-
+    /**
+     * Method to export a candidate to the database.
+     * @param id            The candidate's id number.
+     * @param candidate     The reference to the candidate object.
+     * @param level         The level of government that the candidate is seeking office.
+     */
     public static void exportCandidate(int id, Candidate candidate, String level){
         Firebase candidateRef = ref;
 
