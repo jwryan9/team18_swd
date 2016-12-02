@@ -49,7 +49,6 @@ public class VoterRegistrationController {
      */
     public void initStates() {
         stateDropdown.getItems().removeAll();
-        stateDropdown.getItems().add("");
         stateDropdown.getItems().addAll("AL", "AK", "AZ", "AR", "CA",
                 "CO", "CT", "DE", "FL", "GA",
                 "HI", "ID", "IL", "IN", "IA",
@@ -96,14 +95,9 @@ public class VoterRegistrationController {
                 //registerValidText.setText(validInput);
                 ImageIcon icon = new ImageIcon("thumbsup.png");
                 System.out.println("size: " + icon.getIconHeight());
-                ShowMessage("Registration Successful",icon);
+                showMessage("Registration Successful",icon);
 
-                firstNameField.setText("");
-                lastNameField.setText("");
-                ssnField.setText("");
-                zipField.setText("");
-                stateDropdown.getSelectionModel().selectFirst();
-
+                resetGUI();
 
             }
             else{
@@ -119,7 +113,15 @@ public class VoterRegistrationController {
 
     }
 
-    private void ShowMessage(String message, ImageIcon icon) {
+    private void resetGUI() {
+        firstNameField.setText("");
+        lastNameField.setText("");
+        ssnField.setText("");
+        zipField.setText("");
+        stateDropdown.getSelectionModel().clearSelection();
+    }
+
+    private void showMessage(String message, ImageIcon icon) {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {

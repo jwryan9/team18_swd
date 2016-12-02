@@ -1,10 +1,13 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import sun.jvm.hotspot.debugger.win32.coff.COFFLineNumber;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +53,6 @@ public class CountyAuditorController {
 
 
         stateDropdown.getItems().removeAll();
-        stateDropdown.getItems().add("");
         stateDropdown.getItems().addAll("AL", "AK", "AZ", "AR", "CA",
                                         "CO", "CT", "DE", "FL", "GA",
                                         "HI", "ID", "IL", "IN", "IA",
@@ -63,13 +65,11 @@ public class CountyAuditorController {
                                         "VA", "WA", "WV", "WI", "WY");
 
         officeDropdown.getItems().removeAll();
-        officeDropdown.getItems().add("");
         officeDropdown.getItems().addAll("US President", "US Senate", "US House",
                                          "Governor", "State Senate", "State House",
                                          "County Judge", "County Sheriff");
 
         partyDropdown.getItems().removeAll();
-        partyDropdown.getItems().add("");
         partyDropdown.getItems().setAll("Democrat", "Republican", "Green", "Tea", "Other");
 
         officeOptions.put("Federal",new String[]{"US President", "US Senate", "US House"});
@@ -113,7 +113,8 @@ public class CountyAuditorController {
 
             entryValidText.setFill(Color.BLACK);
             entryValidText.setText("Candidate Added");
-
+            ImageIcon icon = new ImageIcon("countryflag.png");
+            showMessage("Added Candidate Successfully",icon);
             resetGUI();
         }
         else{
@@ -127,10 +128,20 @@ public class CountyAuditorController {
         nameField.setText("");
         zipField.setText("");
 
-        stateDropdown.getSelectionModel().selectFirst();
-        officeDropdown.getSelectionModel().selectFirst();
-        partyDropdown.getSelectionModel().selectFirst();
+        stateDropdown.getSelectionModel().clearSelection();
+        officeDropdown.getSelectionModel().clearSelection();
+        partyDropdown.getSelectionModel().clearSelection();
 
         entryValidText.setText("");
+    }
+
+
+    private void showMessage(String message, ImageIcon icon) {
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                int input = JOptionPane.showOptionDialog(null, message, "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, null, null);
+            }
+        });
     }
 }
