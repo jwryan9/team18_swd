@@ -14,32 +14,27 @@ public class CountyAuditorController {
     /**
      * TextField for candidate name
      */
-    @FXML
-    private TextField nameField;
+    @FXML private TextField nameField;
 
     /**
      * TextField for candidate hometown
      */
-    @FXML
-    private TextField zipField;
+    @FXML private TextField zipField;
 
     /**
      * ComboBox for candidate state selection
      */
-    @FXML
-    private ComboBox stateDropdown;
+    @FXML private ComboBox stateDropdown;
 
     /**
      * ComboBox for candidate office selection
      */
-    @FXML
-    private ComboBox officeDropdown;
+    @FXML private ComboBox officeDropdown;
 
     /**
      * ComboBox for candidate party affiliation selection
      */
-    @FXML
-    private ComboBox partyDropdown;
+    @FXML private ComboBox partyDropdown;
 
     private static Map<String,String[]> officeOptions = new HashMap<>();
 
@@ -80,8 +75,7 @@ public class CountyAuditorController {
      *
      * @param event ActionEvent item relating to add button
      */
-    @FXML
-    private void processAdd(ActionEvent event) {
+    @FXML private void processAdd(ActionEvent event) {
         String name = nameField.getText();
         String county = zipField.getText();
         String state = stateDropdown.getSelectionModel().getSelectedItem().toString();
