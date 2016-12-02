@@ -2,6 +2,7 @@
  * Created by jasonryan on 12/1/16.
  */
 
+import com.sun.scenario.effect.impl.prism.PrImage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,15 +11,17 @@ import javafx.stage.Stage;
 
 public class VoterBallotApp extends Application {
 
-    public static void main(String[] args) {
-        launch(args);
+    public static Stage classStage = new Stage();
+
+    public static void main() {
+        launch();
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("voterBallot.fxml"));
         Parent root = loader.load();
-
+        classStage = primaryStage;
         VoterBallotController controller = loader.getController();
         controller.initCandidates();
 

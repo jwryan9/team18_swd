@@ -20,7 +20,7 @@ public class VoterLoginApp extends Application {
         Parent root = loader.load();
 
         VoterLoginController controller = loader.getController();
-
+        VoterLoginModel.getVotersFromDatabase();
         primaryStage.setTitle("Ballot Login");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
