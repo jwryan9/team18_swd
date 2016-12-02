@@ -10,18 +10,18 @@ public class VoterRegistrationModel {
      */
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Voters");
 
-    public static boolean checkInput(String id, String zip){
+    public static String checkInput(String id, String zip){
 
         if(!id.matches("\\d+") || id.length() != 9){
-            return false;
+            return "Error: Invalid Social Security Number";
         }
         if(!zip.matches("\\d+") || zip.length() != 5){
-            return false;
+            return "Error: Invalid Zip Code";
         }
-        return true;
+        return "";
     }
 
-    public static void exportVoter(String encryptedID, Voter voter){
+    public synchronized static void exportVoter(String encryptedID, Voter voter){
         Firebase candidateRef = ref;
 
         candidateRef = ref.child(encryptedID);
