@@ -100,8 +100,8 @@ public class RunEncryptor {
                     if (currentChar == alphabet[j]) { // if the current character matches one in the alphabet
                         n = keys[keyCounter]; // the n value is updated to the key counter value
                         cipherN = j + n; // the cipher n is the current place in the alphabet plus the key value
-                        if (cipherN > 25) { // if the key is over 25 then reduce it to the actual place in the alphabet array
-                            cipherN = cipherN % 26;
+                        if (cipherN > 35) { // if the key is over 25 then reduce it to the actual place in the alphabet array
+                            cipherN = cipherN % 36;
                         }
                         charCipher[i] = alphabet[cipherN]; // update the cipher message with the correct character
                         keyCounter = keyCounter + 1; // go to the next key
