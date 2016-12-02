@@ -1,6 +1,9 @@
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import sun.jvm.hotspot.debugger.win32.coff.COFFLineNumber;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +39,8 @@ public class CountyAuditorController {
      */
     @FXML private ComboBox partyDropdown;
 
+    @FXML private Text entryValidText;
+
     private static Map<String,String[]> officeOptions = new HashMap<>();
 
     /**
@@ -45,7 +50,8 @@ public class CountyAuditorController {
 
 
         stateDropdown.getItems().removeAll();
-        stateDropdown.getItems().setAll("AL", "AK", "AZ", "AR", "CA",
+        stateDropdown.getItems().add("");
+        stateDropdown.getItems().addAll("AL", "AK", "AZ", "AR", "CA",
                                         "CO", "CT", "DE", "FL", "GA",
                                         "HI", "ID", "IL", "IN", "IA",
                                         "KS", "KY", "LA", "ME", "MD",
@@ -57,11 +63,13 @@ public class CountyAuditorController {
                                         "VA", "WA", "WV", "WI", "WY");
 
         officeDropdown.getItems().removeAll();
-        officeDropdown.getItems().setAll("US President", "US Senate", "US House",
+        officeDropdown.getItems().add("");
+        officeDropdown.getItems().addAll("US President", "US Senate", "US House",
                                          "Governor", "State Senate", "State House",
                                          "County Judge", "County Sheriff");
 
         partyDropdown.getItems().removeAll();
+        partyDropdown.getItems().add("");
         partyDropdown.getItems().setAll("Democrat", "Republican", "Green", "Tea", "Other");
 
         officeOptions.put("Federal",new String[]{"US President", "US Senate", "US House"});
@@ -102,9 +110,27 @@ public class CountyAuditorController {
             Candidate newCandidate = new Candidate(name, county, state, office, party);
             //CandidateMap.put(id,newCandidate);
             CountyAuditorModel.exportCandidate(id, newCandidate, level);
+
+            entryValidText.setFill(Color.BLACK);
+            entryValidText.setText("Candidate Added");
+
+            resetGUI();
         }
         else{
+            entryValidText.setFill(Color.RED);
+            entryValidText.setText("ERROR: INVALID INPUT");
             System.out.println("ERROR: INVALID INPUT");
         }
+    }
+
+    private void resetGUI() {
+        nameField.setText("");
+        zipField.setText("");
+
+        stateDropdown.getSelectionModel().selectFirst();
+        officeDropdown.getSelectionModel().selectFirst();
+        partyDropdown.getSelectionModel().selectFirst();
+
+        entryValidText.setText("");
     }
 }
