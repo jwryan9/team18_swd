@@ -18,11 +18,15 @@ public class VoterLoginModel{
     private static boolean isRegisteredVoter;
 
 
-    public static boolean validateInput(String ssn, String zipCode){
-        if(zipCode.length() == 5 && zipCode.matches("\\d+") && ssn.length() == 9 && ssn.matches("\\d+")) {
-            return true;
+    public static String validateInput(String ssn, String zipCode){
+
+        if(ssn.length() == 9 && ssn.matches("\\d+")){
+            return "Error: Invalid Social Security Number";
         }
-        return false;
+        if(zipCode.length() == 5 && zipCode.matches("\\d+")) {
+            return "Error: Invalid Zip Code";
+        }
+        return "";
     }
 
     public synchronized static boolean checkVoterRegistration(String encryptedID, String zipCode) {
