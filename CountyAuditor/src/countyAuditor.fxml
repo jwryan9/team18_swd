@@ -77,6 +77,6 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </ComboBox>
-      <Button id="addButton" fx:id="addButton" mnemonicParsing="false" onAction="#processAdd" text="Add Candidate" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+      <Button id="addButton" fx:id="addButton" mnemonicParsing="false" onAction="#processAdd" prefHeight="25.0" prefWidth="200.0" text="Add Candidate" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
    </children>
 </GridPane>
