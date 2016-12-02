@@ -108,9 +108,7 @@ public class VoterBallotController {
             case "countySheriffSelection":
                 countySheriffSelection.setText(countySheriffDropdown.getValue().toString());
                 break;
-
         }
-
     }
 
     @FXML private void submitVote(ActionEvent event) {

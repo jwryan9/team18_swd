@@ -5,6 +5,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
@@ -54,7 +55,8 @@ public class VoterLoginController {
                     try {
                         VoterBallotApp newBallot = new VoterBallotApp();
                         newBallot.start(VoterBallotApp.classStage);
-
+                        Stage stage = (Stage) loginButton.getScene().getWindow();
+                        stage.close();
                     }catch (Exception e){
                         System.err.println("cannot open ballot");
                     }
