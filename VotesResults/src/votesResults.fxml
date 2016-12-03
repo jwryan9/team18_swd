@@ -11,7 +11,6 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ChoiceBox id="federalRep" fx:id="federalOffice" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
                   <TextField id="federalYearBox" fx:id="federalYearBox" layoutX="171.0" layoutY="14.0" prefHeight="30.0" prefWidth="52.0" promptText="Year" />
                   <Slider id="federalYearSlider" fx:id="federalYearSlider" layoutX="230.0" layoutY="21.0" prefHeight="18.0" prefWidth="94.0" />
                   <StackedBarChart id="federalChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="571.0">
@@ -23,6 +22,7 @@
                     </yAxis>
                   </StackedBarChart>
                   <Label id="federalError" layoutX="480.0" layoutY="19.0" prefHeight="23.0" prefWidth="110.0" textFill="RED" />
+                  <ComboBox id="federalOffice" layoutX="14.0" layoutY="15.0" prefWidth="150.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -30,7 +30,6 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ChoiceBox id="stateChoice" fx:id="stateChoice" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
                   <Slider id="stateYearSlider" fx:id="stateYearSlider" layoutX="386.0" layoutY="21.0" prefHeight="18.0" prefWidth="94.0" />
                   <TextField id="stateYearBox" fx:id="stateYearBox" layoutX="327.0" layoutY="14.0" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
                   <StackedBarChart id="stateChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="571.0">
@@ -41,8 +40,9 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </StackedBarChart>
-                  <ChoiceBox id="stateRep" fx:id="stateOffice" layoutX="170.0" layoutY="14.0" prefWidth="150.0" />
                   <Label id="stateError" layoutX="480.0" layoutY="19.0" prefHeight="23.0" prefWidth="110.0" textFill="RED" />
+                  <ComboBox id="stateChoice" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
+                  <ComboBox id="stateRep" layoutX="170.0" layoutY="14.0" prefWidth="150.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -50,7 +50,6 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <ChoiceBox id="countyChoice" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
                   <Slider id="countyYearSlider" layoutX="386.0" layoutY="21.0" prefHeight="18.0" prefWidth="94.0" />
                   <TextField id="countyYearBox" layoutX="327.0" layoutY="14.0" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
                   <StackedBarChart id="countyChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="571.0">
@@ -61,8 +60,10 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </StackedBarChart>
-                  <ChoiceBox id="countyRep" layoutX="170.0" layoutY="14.0" prefWidth="150.0" />
                   <Label id="countyError" layoutX="480.0" layoutY="19.0" prefHeight="23.0" prefWidth="110.0" textFill="RED" />
+                  <ComboBox id="countyChoice" layoutX="119.0" layoutY="14.0" prefHeight="31.0" prefWidth="98.0" />
+                  <ComboBox id="countyRep" layoutX="223.0" layoutY="14.0" prefHeight="31.0" prefWidth="98.0" />
+                  <ComboBox id="countyState" layoutX="15.0" layoutY="14.0" prefHeight="31.0" prefWidth="98.0" />
                </children>
             </AnchorPane>
         </content>
