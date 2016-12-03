@@ -45,7 +45,7 @@ public class CountyAuditorModel {
             candidateRef = candidateRef.child(level + "/" + candidate.getState() + "/" + candidate.getOffice());
         }
         else if(level == "County"){
-            candidateRef = candidateRef.child(level + "/" + candidate.getZip() + "/" + candidate.getOffice());
+            candidateRef = candidateRef.child(level + "/" + candidate.getState() + "/" + candidate.getZip() + "/" + candidate.getOffice());
         }
 
         candidateRef = candidateRef.child(Integer.toString(id));
