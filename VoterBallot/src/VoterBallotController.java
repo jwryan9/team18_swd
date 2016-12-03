@@ -240,7 +240,7 @@ public class VoterBallotController {
             case "countyJudgeDropdown":
                 countyJudgeSelection.setText(countyJudgeDropdown.getValue().toString());
                 break;
-            case "countySheriffSelection":
+            case "countySheriffDropdown":
                 countySheriffSelection.setText(countySheriffDropdown.getValue().toString());
                 break;
         }
