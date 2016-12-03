@@ -19,6 +19,7 @@ public class VoterLoginApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        VoterBallotModel.getElectionCycle();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("voterLogin.fxml"));
         Parent root = loader.load();
         classStage = primaryStage;

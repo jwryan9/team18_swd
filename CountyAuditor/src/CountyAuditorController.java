@@ -102,7 +102,7 @@ public class CountyAuditorController {
             }
         }
         System.out.println("Level Key:" + level);
-        String validInput = CountyAuditorModel.checkInput(name,zip);
+        String validInput = CountyAuditorModel.checkInput(name,zip,state);
 
         if(validInput.isEmpty()){
             System.out.println("VALID INPUT");
