@@ -4,8 +4,9 @@ import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TextField;
 
-import javax.swing.event.ChangeEvent;
+//import javax.swing.event.ChangeEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
@@ -137,12 +138,14 @@ public class VotesResultsController {
         stateOffice.getItems().removeAll();
         stateOffice.getItems().addAll("Governor", "State Senate", "State House");
 
-        countyChoice.getItems().removeAll();
-        countyChoice.getItems().addAll();
+       // countyChoice.getItems().removeAll();
+       // countyChoice.getItems().addAll();
 
-        countyOffice.getItems().removeAll();
-        countyOffice.getItems().addAll("County Judge", "County Sheriff");
+       // countyOffice.getItems().removeAll();
+       // countyOffice.getItems().addAll("County Judge", "County Sheriff");
     }
+
+
     @FXML
     private void actionEventHandler(ActionEvent event) {
         // Declare local variables
@@ -150,27 +153,29 @@ public class VotesResultsController {
         if(event.getSource()==federalYearBox) {
             federalError.setText("");
             try {
-                year = federalYearBox.getColumns();
+                year = Integer.parseInt(federalYearBox.getText());
             } catch (InputMismatchException ime) {
                 federalError.setText("Invalid year");
             }
         } else if(event.getSource()==stateYearBox) {
             stateError.setText("");
             try {
-                year = stateYearBox.getColumns();
+                year = Integer.parseInt(stateYearBox.getText());
             } catch (InputMismatchException ime) {
                 stateError.setText("Invalid year");
             }
         } else if(event.getSource()==countyYearBox) {
             countyError.setText("");
             try {
-                year = countyYearBox.getColumns();
+                year = Integer.parseInt(countyYearBox.getText());
             } catch (InputMismatchException ime) {
                 countyError.setText("Invalid Year");
             }
         }
     }
+    /*
     private void changeEventHandler(ChangeEvent event) {
 
     }
+    */
 }

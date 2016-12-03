@@ -10,6 +10,7 @@ import java.applet.Applet;
  * Created by Daniel on 12/2/2016.
  */
 public class VotesResultsApp extends Application {
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("votesResults.fxml"));
@@ -30,5 +31,5 @@ public class VotesResultsApp extends Application {
 
         primaryStage.show();
     }
-    public static void main() {launch();}
+    public static void main(String args[]) {launch(args);}
 }
