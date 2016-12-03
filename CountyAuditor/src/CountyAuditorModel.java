@@ -18,15 +18,19 @@ public class CountyAuditorModel {
      * Method to check the user input for the candidate information.
      * @param name      the candidate's name.
      * @param zip       the candidate's zip.
+     * @param state     the candidate's state.
      * @return          boolean if the entered data is valid.
      */
-    public static String checkInput(String name, String zip){
+    public static String checkInput(String name, String zip, String state){
 
         if(!name.matches("[a-zA-Z ']*$") || name.length() == 0){
             return "Error: Invalid Name";
         }
         if(!zip.matches("\\d+") || zip.length() != 5 || ZipCode.parseZip(zip, "zipcodes.csv") == null){
             return "Error: Invalid Zip Code";
+        }
+        if(!ZipCode.validateZip(zip, state, "zipcodes.csv")) {
+            return "Error: Invalid State/Zip Code Pair";
         }
 
         return "";

@@ -22,7 +22,7 @@ public class VoterLoginModel{
     private static boolean isRegisteredVoter;
 
 
-    public static String validateInput(String ssn, String zipCode){
+    public static String validateInput(String ssn, String zipCode) {
 
         if(ssn.length() != 9 && !ssn.matches("\\d+")){
             return "Error: Invalid Social Security Number";

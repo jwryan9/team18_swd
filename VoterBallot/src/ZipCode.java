@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ZipCode {
 
     /**
-     * Parses csv file of count/state/zip code values and returns
+     * Parses csv file of county/state/zip code values and returns
      * the set containing the requested zip code.
      *
      * @param zipString zip code being searched for
@@ -19,7 +19,6 @@ public class ZipCode {
     public static String[] parseZip(String zipString, String zipFilePath) {
         String line;
         String[] lineArr;
-        System.out.println("");
         try {
             BufferedReader zipReader = new BufferedReader(new FileReader(zipFilePath));
             while((line = zipReader.readLine()) != null) {

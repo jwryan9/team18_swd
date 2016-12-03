@@ -16,7 +16,7 @@ public class VoterRegistrationModel {
      * @param zip   the voter's zip code.
      * @return      the error code for invalid entry, and an empty string if the input is valid.
      */
-    public static String checkInput(String id, String zip){
+    public static String checkInput(String id, String zip, String state){
 
         if(!id.matches("\\d+") || id.length() != 9){
             return "Error: Invalid Social Security Number";
@@ -24,6 +24,10 @@ public class VoterRegistrationModel {
         if(!zip.matches("\\d+") || zip.length() != 5){
             return "Error: Invalid Zip Code";
         }
+        if(ZipCode.validateZip(zip, state, "zipcodes.csv")) {
+            return "Error: Invalid State/Zip Code pair";
+        }
+
         return "";
     }
 
