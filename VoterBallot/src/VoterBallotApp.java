@@ -27,7 +27,7 @@ public class VoterBallotApp extends Application {
         classStage = primaryStage;
         VoterBallotController controller = loader.getController();
         //controller.initCandidates();
-        controller.setVoterProperties(this.zipCode);
+        controller.setVoterProperties("12345");
 
 
         primaryStage.setTitle("Ballot");

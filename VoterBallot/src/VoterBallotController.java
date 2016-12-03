@@ -5,9 +5,11 @@ import javafx.event.ActionEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * Created by jasonryan on 12/1/16.
@@ -109,9 +111,17 @@ public class VoterBallotController {
 
     private String voterCounty;
 
+
     public void setVoterProperties(String zip){
         this.voterZip = zip;
         System.out.println("Zip in ballot controller: " + voterZip);
+
+        //ZipCode.parseZip(this.voterZip, "zipcodefile.csv");
+        this.voterState = "IL";
+        this.voterCounty = "DuPage";
+        System.out.println("Zip in ballot controller: " + voterZip + " state: " + voterState);
+
+
     }
     /**
      * Initializes ComboBox options of candidates for each office.
@@ -121,8 +131,9 @@ public class VoterBallotController {
     public void initialize() throws InterruptedException {
         VoterBallotModel.initFederal();
         Thread.sleep(1000);
+        System.out.println("Zip in ballot controller 3: " + voterZip + " state 3: " + voterState);
 
-    Map<String, ArrayList<Candidate>> federalCandidates = VoterBallotModel.getFederalCandidates();// VoterBallotModel.getFederalCandidates();
+        Map<String, ArrayList<Candidate>> federalCandidates = VoterBallotModel.getFederalCandidates();// VoterBallotModel.getFederalCandidates();
         while (federalCandidates.keySet().size() < 3) {
             federalCandidates = VoterBallotModel.getFederalCandidates();
         }
@@ -209,6 +220,8 @@ public class VoterBallotController {
         selections.put("State House", String.valueOf(stateHouseName.hashCode()));
         selections.put("County Judge", String.valueOf(countyJudgeName.hashCode()));
         selections.put("County Sheriff", String.valueOf(countySheriffName.hashCode()));
+
+        System.out.println("Zip in ballot controller 2: " + voterZip + " state 2: " + voterState);
 
         VoteProcessor.addBallot(selections, voterZip, voterCounty, voterState);
 

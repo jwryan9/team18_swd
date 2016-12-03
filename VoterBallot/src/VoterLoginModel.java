@@ -13,7 +13,11 @@ public class VoterLoginModel{
 
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Voters");
 
+    private static Firebase alreadyVotedRef = new Firebase("https://votingsystem-5e175.firebaseio.com/Results/Already Voted");
+
     private static Map<String,String> registeredVoters = new HashMap<>();
+
+    private static String alreadyVotedString = "";
 
     private static boolean isRegisteredVoter;
 
@@ -119,12 +123,79 @@ public class VoterLoginModel{
         return isRegisteredVoter;
     }
 
-    /*
-    public void run(){
-        checkVoterRegistration(id,zip);
+    public synchronized static void getAlreadyVotedFromDatabase(){
+
+        alreadyVotedRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                alreadyVotedString = dataSnapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                alreadyVotedString = dataSnapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                alreadyVotedString = dataSnapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.err.println("Firebase Error");
+            }
+        });
+
     }
-*/
+
+    public synchronized static boolean checkAlreadyVoted(String encyrptedSSN){
+
+        if(alreadyVotedString.contains(encyrptedSSN)){
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public synchronized static void markVoterAsHasVoted(String encryptedSSN){
+
+        Firebase voterRegisteredRef = new Firebase("https://votingsystem-5e175.firebaseio.com/Results/Already Voted");
+
+        voterRegisteredRef.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData voterData) {
+                if(voterData.getValue() == null){
+                    voterData.setValue(encryptedSSN + ",");
+                }
+                else{
+                    voterData.setValue(voterData.getValue() + "," + encryptedSSN);
+                }
+                return Transaction.success(voterData);
+            }
+
+            @Override
+            public void onComplete(FirebaseError firebaseError, boolean b, DataSnapshot dataSnapshot) {
+                if (firebaseError != null) {
+                    System.out.println("set voter to has voted failed.");
+                } else {
+                    System.out.println("set voter to has voted succeeded.");
+                }
+            }
+        });
+
+
+
+    }
+
     public boolean getRegisteredVoterBool(){
         return isRegisteredVoter;
     }
+
 }

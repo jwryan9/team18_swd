@@ -34,6 +34,7 @@ public class VoterLoginController {
         String zipCode = zipField.getText();
         String encryptedSSN;
         boolean isRegisteredVoter;
+        boolean hasVoted;
 
         String validInput = VoterLoginModel.validateInput(ssn, zipCode);
 
@@ -47,8 +48,12 @@ public class VoterLoginController {
                 System.out.println("encryptedSSN: " + encryptedSSN);
 
                 isRegisteredVoter=VoterLoginModel.checkVoterRegistrationQuery(encryptedSSN,zipCode);
+                hasVoted = VoterLoginModel.checkAlreadyVoted(encryptedSSN);
 
-                if(isRegisteredVoter == true){
+                if(isRegisteredVoter == true && hasVoted == false){
+
+                    VoterLoginModel.markVoterAsHasVoted(encryptedSSN);
+
                     System.out.println();
                     System.out.println("Registered Voter Found");
                     System.out.println("Opening Ballot");
@@ -56,50 +61,30 @@ public class VoterLoginController {
                     validVoterText.setFill(Color.BLACK);
                     validVoterText.setText("Registered voter found");
 
-
-
                     Parent root;
                     try {
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("voterBallot.fxml"));
-                        VoterBallotController controller = new VoterBallotController();
-                        controller.setVoterProperties(zipCode);
 
-                        loader.setController(controller);
-                        VoterBallotController ball = loader.getController();
-                        System.out.println(ball == controller);
-                        root = loader.load(getClass().getResource("voterBallot.fxml"));
+                        root = loader.load();
+                        try {
+                            Thread.sleep(1000);
+                        }catch (InterruptedException e){System.out.println("print error thread sleep");};
 
-
-
-
+                        VoterBallotController ballController = loader.getController();
+                        ballController.setVoterProperties(zipCode);
 
                         Stage stage = new Stage();
                         stage.setTitle("Ballot");
                         stage.setScene(new Scene(root));
-/*
-                        try {
-                            controller.initCandidates();
-                        }catch (InterruptedException e){
-                            System.out.println("inturruped");
-                        }*/
-                            /*
-                        try {
 
 
-                            controller.initCandidates();
-
-                        }catch (InterruptedException e){
-                            System.err.println("init candidates interrupt exception");
-                        }
-                        */
                         stage.show();
 
                         ((Node)(event.getSource())).getScene().getWindow().hide();
                     }
                     catch (IOException e) {
                         System.err.println("cannot open ballot");
-                        //e.printStackTrace();
                     }
 
 

@@ -24,6 +24,7 @@ public class VoterLoginApp extends Application {
 
         VoterLoginController controller = loader.getController();
         VoterLoginModel.getVotersFromDatabase();
+        VoterLoginModel.getAlreadyVotedFromDatabase();
         primaryStage.setTitle("Ballot Login");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
