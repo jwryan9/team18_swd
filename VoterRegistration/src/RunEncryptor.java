@@ -2,9 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * @author Adam Gary
- * @version 1.0
- *
+ * Class for encrypting strings
  */
 public class RunEncryptor {
     /**
