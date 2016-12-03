@@ -63,10 +63,13 @@ public class VoterLoginController {
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("voterBallot.fxml"));
                         VoterBallotController controller = new VoterBallotController();
+                        controller.setVoterProperties(zipCode);
+
                         loader.setController(controller);
+                        VoterBallotController ball = loader.getController();
+                        System.out.println(ball == controller);
                         root = loader.load(getClass().getResource("voterBallot.fxml"));
 
-                        controller.setVoterProperties(zipCode);
 
 
 
@@ -74,12 +77,12 @@ public class VoterLoginController {
                         Stage stage = new Stage();
                         stage.setTitle("Ballot");
                         stage.setScene(new Scene(root));
-
+/*
                         try {
                             controller.initCandidates();
                         }catch (InterruptedException e){
                             System.out.println("inturruped");
-                        }
+                        }*/
                             /*
                         try {
 

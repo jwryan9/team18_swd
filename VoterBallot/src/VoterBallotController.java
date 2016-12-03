@@ -118,32 +118,31 @@ public class VoterBallotController {
      *
      * @throws InterruptedException Thrown if thread is interrupted gathering candidates from database
      */
-    public void initCandidates() throws InterruptedException {
+    public void initialize() throws InterruptedException {
         VoterBallotModel.initFederal();
-try {
+        Thread.sleep(1000);
+
     Map<String, ArrayList<Candidate>> federalCandidates = VoterBallotModel.getFederalCandidates();// VoterBallotModel.getFederalCandidates();
+        while (federalCandidates.keySet().size() < 3) {
+            federalCandidates = VoterBallotModel.getFederalCandidates();
+        }
+        System.out.println("feds keyset:" + federalCandidates.keySet());
 
-    while (federalCandidates.keySet().size() < 3) {
-        federalCandidates = VoterBallotModel.getFederalCandidates();
-    }
-    System.out.println("feds keyset:" + federalCandidates.keySet());
+        presidentDropdown.getItems().add("");
+        usSenateDropdown.getItems().add("");
+        usHouseDropdown.getItems().add("");
 
-    presidentDropdown.getItems().add("");
-    usSenateDropdown.getItems().add("");
-    usHouseDropdown.getItems().add("");
+        for (Candidate nextCandidate : federalCandidates.get("US President")) {
+            presidentDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
 
-    for (Candidate nextCandidate : federalCandidates.get("US President")) {
-        presidentDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
+        }
+        for (Candidate nextCandidate : federalCandidates.get("US Senate")) {
+            usSenateDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
+        }
 
-    }
-    for (Candidate nextCandidate : federalCandidates.get("US Senate")) {
-        usSenateDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
-    }
-
-    for (Candidate nextCandidate : federalCandidates.get("US House")) {
-        usHouseDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
-    }
-}catch (Exception e){}
+        for (Candidate nextCandidate : federalCandidates.get("US House")) {
+            usHouseDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
+        }
     }
 
     /**
