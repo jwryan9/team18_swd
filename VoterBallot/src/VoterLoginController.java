@@ -53,8 +53,6 @@ public class VoterLoginController {
 
                 if(isRegisteredVoter == true && hasVoted == false){
 
-                    VoterLoginModel.markVoterAsHasVoted(encryptedSSN);
-
                     System.out.println();
                     System.out.println("Registered Voter Found");
                     System.out.println("Opening Ballot");
@@ -65,7 +63,7 @@ public class VoterLoginController {
                     Parent root;
                     try {
                         VoterBallotController ballController1 = new VoterBallotController();
-                        ballController1.setVoterProperties(zipCode);
+                        ballController1.setVoterProperties(zipCode, encryptedSSN);
 
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("voterBallot.fxml"));
@@ -75,7 +73,7 @@ public class VoterLoginController {
                         root = loader.load();
 
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(2000);
                         }catch (InterruptedException e){System.out.println("print error thread sleep");};
 
                         //VoterBallotController ballController = loader.getController();

@@ -111,8 +111,11 @@ public class VoterBallotController {
 
     private String voterCounty;
 
+    private String encryptedSSN;
 
-    public void setVoterProperties(String zip){
+
+    public void setVoterProperties(String zip, String encryptedSSN){
+        this.encryptedSSN = encryptedSSN;
         this.voterZip = zip;
         System.out.println("Zip in ballot controller: " + voterZip);
 
@@ -249,6 +252,9 @@ public class VoterBallotController {
      * @param event ActionEvent calling method
      */
     @FXML private void submitVote(ActionEvent event) {
+
+        VoterLoginModel.markVoterAsHasVoted(this.encryptedSSN);
+
         final int numOffices = 8;
 
         String presidentName = presidentSelection.getText().split(" \\(")[0];
