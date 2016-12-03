@@ -1,5 +1,9 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -51,14 +55,68 @@ public class VoterLoginController {
 
                     validVoterText.setFill(Color.BLACK);
                     validVoterText.setText("Registered voter found");
+
+
+
+                    Parent root;
+                    try {
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("voterBallot.fxml"));
+                        VoterBallotController controller = new VoterBallotController();
+                        controller.setVoterProperties(zipCode);
+
+                        loader.setController(controller);
+                        VoterBallotController ball = loader.getController();
+                        System.out.println(ball == controller);
+                        root = loader.load(getClass().getResource("voterBallot.fxml"));
+
+
+
+
+
+                        Stage stage = new Stage();
+                        stage.setTitle("Ballot");
+                        stage.setScene(new Scene(root));
+/*
+                        try {
+                            controller.initCandidates();
+                        }catch (InterruptedException e){
+                            System.out.println("inturruped");
+                        }*/
+                            /*
+                        try {
+
+
+                            controller.initCandidates();
+
+                        }catch (InterruptedException e){
+                            System.err.println("init candidates interrupt exception");
+                        }
+                        */
+                        stage.show();
+
+                        ((Node)(event.getSource())).getScene().getWindow().hide();
+                    }
+                    catch (IOException e) {
+                        System.err.println("cannot open ballot");
+                        //e.printStackTrace();
+                    }
+
+
+                    /*
                     try {
                         VoterBallotApp newBallot = new VoterBallotApp();
                         newBallot.start(VoterBallotApp.classStage);
+                        newBallot.setZipCode(zipCode);
+
                         Stage stage = (Stage) loginButton.getScene().getWindow();
                         stage.close();
                     }catch (Exception e){
                         System.err.println("cannot open ballot");
+                        System.err.println(e.getLocalizedMessage());
+
                     }
+                    */
                 }
                 else {
                     validVoterText.setFill(Color.RED);
@@ -78,4 +136,5 @@ public class VoterLoginController {
             System.out.println("IOEXCEPTION");
         }
     }
+
 }
