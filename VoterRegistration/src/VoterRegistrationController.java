@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import javax.swing.*;
-import javax.xml.ws.FaultAction;
 import java.awt.*;
 import java.io.IOException;
 
@@ -113,6 +112,9 @@ public class VoterRegistrationController {
 
     }
 
+    /**
+     * Method to reset the GUI elements after submitting a voter's information.
+     */
     private void resetGUI() {
         firstNameField.setText("");
         lastNameField.setText("");
@@ -121,6 +123,11 @@ public class VoterRegistrationController {
         stateDropdown.getSelectionModel().clearSelection();
     }
 
+    /**
+     * Method to show the dialog box.
+     * @param message   The message to be displayed.
+     * @param icon      The image to be displayed.
+     */
     private void showMessage(String message, ImageIcon icon) {
         EventQueue.invokeLater(new Runnable() {
             @Override

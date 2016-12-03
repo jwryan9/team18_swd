@@ -124,6 +124,9 @@ public class CountyAuditorController {
         }
     }
 
+    /**
+     * Method to reset the fields in the county auditor app after a candidate has been entered.
+     */
     private void resetGUI() {
         nameField.setText("");
         zipField.setText("");
@@ -135,7 +138,11 @@ public class CountyAuditorController {
         entryValidText.setText("");
     }
 
-
+    /**
+     * Method to show the dialog box after submitting a candidate.
+     * @param message   the message to display.
+     * @param icon      the icon to display.
+     */
     private void showMessage(String message, ImageIcon icon) {
         EventQueue.invokeLater(new Runnable() {
             @Override

@@ -13,42 +13,101 @@ import java.util.Map;
  * Created by jasonryan on 12/1/16.
  */
 public class VoterBallotController {
+    /**
+     * ComboBox for President selection
+     */
     @FXML private ComboBox presidentDropdown;
 
+    /**
+     * ComboBox for US Senate selection
+     */
     @FXML private ComboBox usSenateDropdown;
 
+    /**
+     * ComboBox for US House selection
+     */
     @FXML private ComboBox usHouseDropdown;
 
+    /**
+     * ComboBox for Governor selection
+     */
     @FXML private ComboBox governorDropdown;
 
+    /**
+     * ComboBox for State Senate selection
+     */
     @FXML private ComboBox stateSenateDropdown;
 
+    /**
+     * ComboBox for State House selection
+     */
     @FXML private ComboBox stateHouseDropdown;
 
+    /**
+     * ComboBox for County Judge selection
+     */
     @FXML private ComboBox countyJudgeDropdown;
 
+    /**
+     * ComboBox for County Sheriff selection
+     */
     @FXML private ComboBox countySheriffDropdown;
 
+    /**
+     * Text for President selection
+     */
     @FXML private Text presidentSelection;
 
+    /**
+     * Text for US Senate selection
+     */
     @FXML private Text usSenateSelection;
 
+    /**
+     * Text for US House selection
+     */
     @FXML private Text usHouseSelection;
 
+    /**
+     * Text for Governor selection
+     */
     @FXML private Text governorSelection;
 
+    /**
+     * Text for State Senate selection
+     */
     @FXML private Text stateSenateSelection;
 
+    /**
+     * Text for State House selection
+     */
     @FXML private Text stateHouseSelection;
 
+    /**
+     * Text for County Judge selection
+     */
     @FXML private Text countyJudgeSelection;
 
+    /**
+     * Text for County Sheriff selection
+     */
     @FXML private Text countySheriffSelection;
 
+    /**
+     * Button for submitting ballot
+     */
     @FXML private Button submitButton;
 
+    /**
+     * Map holds voter selections
+     */
     private Map<String, String> selections;
 
+    /**
+     * Initializes ComboBox options of candidates for each office.
+     *
+     * @throws InterruptedException Thrown if thread is interrupted gathering candidates from database
+     */
     public void initCandidates() throws InterruptedException {
         VoterBallotModel.initFederal();
 
@@ -76,9 +135,12 @@ public class VoterBallotController {
         }
     }
 
-
-
-    @FXML private void setSelections(ActionEvent event) throws NullPointerException {
+    /**
+     * Sets selections for summary tab based on ComboBox selections
+     *
+     * @param event ActionEvent calling method
+     */
+    @FXML private void setSelections(ActionEvent event) {//throws NullPointerException {
         ComboBox a = (ComboBox) event.getSource();
         System.out.println(a.getId());
         switch (a.getId()) {
@@ -109,6 +171,12 @@ public class VoterBallotController {
         }
     }
 
+    /**
+     * Fills HashMap with voter selections for tallying.
+     * Closes ballot window after submission.
+     *
+     * @param event ActionEvent calling method
+     */
     @FXML private void submitVote(ActionEvent event) {
         final int numOffices = 8;
 
