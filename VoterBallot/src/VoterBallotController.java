@@ -129,8 +129,13 @@ public class VoterBallotController {
      * @throws InterruptedException Thrown if thread is interrupted gathering candidates from database
      */
     public void initialize() throws InterruptedException {
+        VoterBallotModel vlm = new VoterBallotModel();
         VoterBallotModel.initFederal();
+
+        vlm.initState(this.voterState);
+
         Thread.sleep(1000);
+
         System.out.println("Zip in ballot controller 3: " + voterZip + " state 3: " + voterState);
 
         Map<String, ArrayList<Candidate>> federalCandidates = VoterBallotModel.getFederalCandidates();// VoterBallotModel.getFederalCandidates();
@@ -154,6 +159,31 @@ public class VoterBallotController {
         for (Candidate nextCandidate : federalCandidates.get("US House")) {
             usHouseDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
         }
+
+        Map<String,Candidate> stateSenateCandidates = vlm.getStateSenateCandidates();
+        Map<String,Candidate> stateHouseCandidates = vlm.getStateHouseCandidates();
+        Map<String,Candidate> governorCandidates = vlm.getGovernorCandidates();
+
+        System.out.println("state senate candi count: " + stateSenateCandidates.size());
+
+        stateSenateDropdown.getItems().add("");
+        stateHouseDropdown.getItems().add("");
+        governorDropdown.getItems().add("");
+
+        for (String nextCandidate : stateSenateCandidates.keySet()) {
+            stateSenateDropdown.getItems().add(stateSenateCandidates.get(nextCandidate).getName() + " (" + stateSenateCandidates.get(nextCandidate).getParty() + ")");
+
+        }
+        for (String nextCandidate : stateHouseCandidates.keySet()) {
+            stateHouseDropdown.getItems().add(stateHouseCandidates.get(nextCandidate).getName() + " (" + stateHouseCandidates.get(nextCandidate).getParty() + ")");
+        }
+
+        for (String nextCandidate : governorCandidates.keySet()) {
+            governorDropdown.getItems().add(governorCandidates.get(nextCandidate).getName() + " (" + governorCandidates.get(nextCandidate).getParty() + ")");
+        }
+
+
+
     }
 
     /**

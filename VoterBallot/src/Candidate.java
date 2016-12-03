@@ -22,6 +22,8 @@ public class Candidate {
 
     }
 
+
+
     public Candidate(String name, String zip, String state, String office, String party){
         //this.idNumber;
         this.name = name;

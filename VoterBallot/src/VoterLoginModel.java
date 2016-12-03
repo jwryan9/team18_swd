@@ -138,15 +138,13 @@ public class VoterLoginModel{
     }
 
     public synchronized static boolean checkAlreadyVoted(String encyrptedSSN){
-        System.out.println("ssn from database: " + alreadyVotedString);
-        System.out.println("ssn: " + encyrptedSSN);
 
-
-        System.out.println(".contains ssn: " + alreadyVotedString.contains(encyrptedSSN));
-        if(alreadyVotedString.contains(encyrptedSSN)){
-            return true;
+//        System.out.println(".contains ssn: " + alreadyVotedString.contains(encyrptedSSN));
+        if(alreadyVotedString != null) {
+            if (alreadyVotedString.contains(encyrptedSSN)) {
+                return true;
+            }
         }
-
         return false;
     }
 

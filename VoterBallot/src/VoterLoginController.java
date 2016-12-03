@@ -63,16 +63,22 @@ public class VoterLoginController {
 
                     Parent root;
                     try {
+                        VoterBallotController ballController1 = new VoterBallotController();
+                        ballController1.setVoterProperties(zipCode);
+
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("voterBallot.fxml"));
 
+                        loader.setController(ballController1);
+
                         root = loader.load();
+
                         try {
                             Thread.sleep(1000);
                         }catch (InterruptedException e){System.out.println("print error thread sleep");};
 
-                        VoterBallotController ballController = loader.getController();
-                        ballController.setVoterProperties(zipCode);
+                        //VoterBallotController ballController = loader.getController();
+                        //ballController.setVoterProperties(zipCode);
 
                         Stage stage = new Stage();
                         stage.setTitle("Ballot");
@@ -105,7 +111,12 @@ public class VoterLoginController {
                 }
                 else {
                     validVoterText.setFill(Color.RED);
-                    validVoterText.setText("ERROR: VOTER NOT REGISTERED");
+                    if(isRegisteredVoter == false) {
+                        validVoterText.setText("ERROR: VOTER NOT REGISTERED");
+                    }
+                    else if(hasVoted == true){
+                        validVoterText.setText("ERROR: VOTER HAS ALREADY VOTED");
+                    }
                     System.out.println("Registered Voter Not Found");
                 }
 
