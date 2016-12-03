@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Class for zip code lookup
@@ -20,11 +21,9 @@ public class ZipCode {
         String[] lineArr;
         System.out.println("");
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(zipFilePath));
-
-            while((line = bufferedReader.readLine()) != null) {
+            BufferedReader zipReader = new BufferedReader(new FileReader(zipFilePath));
+            while((line = zipReader.readLine()) != null) {
                 lineArr = line.split(",");
-                System.out.println("line arr: " + lineArr[0] + lineArr[1] + lineArr[2]);
                 if(lineArr[2].equals(zipString)) {
                     System.out.println("Found!");
 
@@ -32,6 +31,28 @@ public class ZipCode {
                 }
             }
         } catch (IOException ex) {
+            System.err.println("Error opening file");
+        }
+        return null;
+    }
+
+    public static ArrayList<String> parseCounty(String countyString, String stateString, String zipFilePath) {
+        String line;
+        String[] lineArr;
+        ArrayList<String> zipArrList;
+
+        try {
+            BufferedReader zipReader = new BufferedReader(new FileReader(zipFilePath));
+            zipArrList = new ArrayList<>();
+
+            while((line = zipReader.readLine()) != null) {
+                lineArr = line.split(",");
+                if(lineArr[0].equals(countyString) && lineArr[1].equals(stateString)) {
+                    zipArrList.add(lineArr[2]);
+                }
+            }
+            return zipArrList;
+        } catch(IOException ex) {
             System.err.println("Error opening file");
         }
 
