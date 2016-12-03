@@ -23,6 +23,7 @@ public class ZipCode {
             // Loop through the file and return true if state and zip code match
             while((line = zipReader.readLine()) != null) {
                 lineArr = line.split(",");
+
                 if(lineArr[1].equals(stateString) && lineArr[2].equals(zipString)) {
                     return true;
                 }
