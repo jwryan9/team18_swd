@@ -135,16 +135,17 @@ public class VoterBallotController {
         VoterBallotModel.initFederal();
 
         vlm.initState(this.voterState);
+        vlm.initCounty(this.voterCounty, this.voterState);
 
         Thread.sleep(1000);
 
-        System.out.println("Zip in ballot controller 3: " + voterZip + " state 3: " + voterState);
+        //System.out.println("Zip in ballot controller 3: " + voterZip + " state 3: " + voterState);
 
         Map<String, ArrayList<Candidate>> federalCandidates = VoterBallotModel.getFederalCandidates();// VoterBallotModel.getFederalCandidates();
         while (federalCandidates.keySet().size() < 3) {
             federalCandidates = VoterBallotModel.getFederalCandidates();
         }
-        System.out.println("feds keyset:" + federalCandidates.keySet());
+        //System.out.println("feds keyset:" + federalCandidates.keySet());
 
         presidentDropdown.getItems().add("");
         usSenateDropdown.getItems().add("");
@@ -166,7 +167,7 @@ public class VoterBallotController {
         Map<String,Candidate> stateHouseCandidates = vlm.getStateHouseCandidates();
         Map<String,Candidate> governorCandidates = vlm.getGovernorCandidates();
 
-        System.out.println("state senate candi count: " + stateSenateCandidates.size());
+        //System.out.println("state senate candi count: " + stateSenateCandidates.size());
 
         stateSenateDropdown.getItems().add("");
         stateHouseDropdown.getItems().add("");
@@ -184,7 +185,24 @@ public class VoterBallotController {
             governorDropdown.getItems().add(governorCandidates.get(nextCandidate).getName() + " (" + governorCandidates.get(nextCandidate).getParty() + ")");
         }
 
+        Map<String,Candidate> countyJudgeCandidates = vlm.getCountyJudgeCandidates();
+        Map<String,Candidate> countySheriffCandidates = vlm.getCountySheriffCandidates();
 
+        System.out.println("judge candi count: " + countyJudgeCandidates.size());
+        System.out.println("sheriff candi count: " + countySheriffCandidates.size());
+        System.out.println("judge candidates: " + countyJudgeCandidates);
+        System.out.println("sheriff candidates: " + countySheriffCandidates);
+
+        countyJudgeDropdown.getItems().add("");
+        countySheriffDropdown.getItems().add("");
+
+        for (String nextCandidate : countyJudgeCandidates.keySet()) {
+            countyJudgeDropdown.getItems().add(stateSenateCandidates.get(nextCandidate).getName() + " (" + stateSenateCandidates.get(nextCandidate).getParty() + ")");
+
+        }
+        for (String nextCandidate : countySheriffCandidates.keySet()) {
+            countySheriffDropdown.getItems().add(stateHouseCandidates.get(nextCandidate).getName() + " (" + stateHouseCandidates.get(nextCandidate).getParty() + ")");
+        }
 
     }
 

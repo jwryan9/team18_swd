@@ -24,6 +24,11 @@ public class VoterBallotModel {
 
     private Map<String,Candidate> stateGovernorCandidates = new HashMap<>();
 
+    private Map<String,Candidate> countySheriffCandidates = new HashMap<>();
+
+    private Map<String,Candidate> countyJudgeCandidates = new HashMap<>();
+
+
     //private Map<String,Candidate> stateCandidates = new HashMap<>();
 
 
@@ -125,7 +130,6 @@ public class VoterBallotModel {
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.err.println("firebase house error");
-
             }
         });
 
@@ -155,11 +159,59 @@ public class VoterBallotModel {
 
     }
 
-    public synchronized static void initCounty(String county) {
 
 
+    public synchronized void initCounty(String countyName, String stateAbbriviation) {
+
+        String stateURL = "County/" + stateAbbriviation + "/" + countyName;
+        Firebase judgeRef = ref.child(stateURL).child("County Judge");
+        Firebase sheriffRef = ref.child(stateURL).child("County Sheriff");
+
+        judgeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> allCandidates = dataSnapshot.getChildren();
+                System.out.println("judge ref" + judgeRef.toString());
+
+                for (DataSnapshot nextCand: allCandidates) {
+
+                    System.out.println("next judge " + nextCand.getKey());
+                    Map<String,String> nextCandidate = nextCand.getValue(Map.class);
+                    Candidate newCandidate = new Candidate(nextCandidate, Integer.parseInt(nextCand.getKey()));
+                    countyJudgeCandidates.put(nextCand.getKey(), newCandidate);
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.err.println("firebase judge error");
+            }
+        });
+
+        sheriffRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> allCandidates = dataSnapshot.getChildren();
+                System.out.println("sheriff ref" + sheriffRef.toString());
+
+                for (DataSnapshot nextCand: allCandidates) {
+
+                    System.out.println("next sheriff " + nextCand.getKey());
+                    Map<String,String> nextCandidate = nextCand.getValue(Map.class);
+                    Candidate newCandidate = new Candidate(nextCandidate, Integer.parseInt(nextCand.getKey()));
+                    countySheriffCandidates.put(nextCand.getKey(), newCandidate);
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.err.println("firebase sheriff error");
+            }
+        });
 
     }
+
+
 
 
     public static Map<String, ArrayList<Candidate>> getFederalCandidates() throws InterruptedException{
@@ -176,6 +228,14 @@ public class VoterBallotModel {
 
     public Map<String,Candidate> getGovernorCandidates(){
         return stateGovernorCandidates;
+    }
+
+    public Map<String,Candidate> getCountySheriffCandidates(){
+        return countySheriffCandidates;
+    }
+
+    public Map<String,Candidate> getCountyJudgeCandidates(){
+        return countyJudgeCandidates;
     }
 
 }
