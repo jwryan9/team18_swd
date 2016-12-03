@@ -124,38 +124,25 @@ public class VoterLoginModel{
     }
 
     public synchronized static void getAlreadyVotedFromDatabase(){
+    alreadyVotedRef.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            alreadyVotedString = dataSnapshot.getValue(String.class);
+        }
 
-        alreadyVotedRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                alreadyVotedString = dataSnapshot.getValue(String.class);
-            }
+        @Override
+        public void onCancelled(FirebaseError firebaseError) {
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                alreadyVotedString = dataSnapshot.getValue(String.class);
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-                alreadyVotedString = dataSnapshot.getValue(String.class);
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.err.println("Firebase Error");
-            }
-        });
-
+        }
+    });
     }
 
     public synchronized static boolean checkAlreadyVoted(String encyrptedSSN){
+        System.out.println("ssn from database: " + alreadyVotedString);
+        System.out.println("ssn: " + encyrptedSSN);
 
+
+        System.out.println(".contains ssn: " + alreadyVotedString.contains(encyrptedSSN));
         if(alreadyVotedString.contains(encyrptedSSN)){
             return true;
         }
@@ -175,7 +162,7 @@ public class VoterLoginModel{
                     voterData.setValue(encryptedSSN + ",");
                 }
                 else{
-                    voterData.setValue(voterData.getValue() + "," + encryptedSSN);
+                    voterData.setValue(voterData.getValue() + encryptedSSN + ",");
                 }
                 return Transaction.success(voterData);
             }
