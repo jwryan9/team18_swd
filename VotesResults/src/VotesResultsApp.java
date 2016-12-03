@@ -4,8 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.stage.Stage;
 
-import java.applet.Applet;
-
 /**
  * Created by Daniel on 12/2/2016.
  */
@@ -16,7 +14,7 @@ public class VotesResultsApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("votesResults.fxml"));
         Parent root = loader.load();
 
-        VotesResultsController controller = loader.getController();
+        VotesResultsControllerDan controller = loader.getController();
         controller.initGUI();
 
         primaryStage.setTitle("!!POLLS ARE IN!!");

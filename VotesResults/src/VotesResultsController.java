@@ -1,13 +1,12 @@
 import com.sun.corba.se.spi.monitoring.LongMonitoredAttributeBase;
 import javafx.fxml.FXML;
 import javafx.scene.chart.StackedBarChart;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Slider;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 
 //import javax.swing.event.ChangeEvent;
 import java.awt.*;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.util.InputMismatchException;
@@ -36,27 +35,32 @@ public class VotesResultsController {
      * ChoiceBox to choose federal representative
      */
     @FXML
-    private ChoiceBox federalOffice;
+    private ComboBox federalOffice;
     /**
      * ChoiceBox to choose state
      */
     @FXML
-    private ChoiceBox stateChoice;
+    private ComboBox stateChoice;
     /**
      * ChoiceBox to choose state representative
      */
     @FXML
-    private ChoiceBox stateOffice;
+    private ComboBox stateOffice;
+    /**
+     * ChoiceBox to choose state for county
+     */
+    @FXML
+    private ComboBox countyState;
     /**
      * ChoiceBox to choose county
      */
     @FXML
-    private ChoiceBox countyChoice;
+    private ComboBox countyChoice;
     /**
      * ChoiceBox to choose county representative
      */
     @FXML
-    private ChoiceBox countyOffice;
+    private ComboBox countyOffice;
     /**
      * TextField to enter year of federal polls
      */
@@ -118,6 +122,21 @@ public class VotesResultsController {
     @FXML
     private Label countyError;
 
+    //  Variables to hold the values of the controls
+
+    String fedOffice = "";
+    String sta = "";
+    String staOffice = "";
+    String couState = "";
+    String cou = "";
+    String couOffice = "";
+    int fedYear = 0;
+    int staYear = 0;
+    int couYear = 0;
+    int fedSlider = 0;
+    int staSlider = 0;
+    int couSlider = 0;
+
     public void initGUI() {
 
         federalOffice.getItems().removeAll();
@@ -135,8 +154,20 @@ public class VotesResultsController {
                                       "SD", "TN", "TX", "UT", "VT",
                                       "VA", "WA", "WV", "WI", "WY");
 
-        stateOffice.getItems().removeAll();
-        stateOffice.getItems().addAll("Governor", "State Senate", "State House");
+//        stateOffice.getItems().removeAll();
+//        stateOffice.getItems().addAll("Governor", "State Senate", "State House");
+//
+//        countyState.getItems().removeAll();
+//        countyState.getItems().addAll("AL", "AK", "AZ", "AR", "CA",
+//                "CO", "CT", "DE", "FL", "GA",
+//                "HI", "ID", "IL", "IN", "IA",
+//                "KS", "KY", "LA", "ME", "MD",
+//                "MA", "MI", "MN", "MS", "MO",
+//                "MT", "NE", "NV", "NH", "NJ",
+//                "NM", "NY", "NC", "ND", "OH",
+//                "OK", "OR", "PA", "RI", "SC",
+//                "SD", "TN", "TX", "UT", "VT",
+//                "VA", "WA", "WV", "WI", "WY");
 
        // countyChoice.getItems().removeAll();
        // countyChoice.getItems().addAll();
@@ -148,34 +179,42 @@ public class VotesResultsController {
 
     @FXML
     private void actionEventHandler(ActionEvent event) {
-        // Declare local variables
-        int year = 0;
         if(event.getSource()==federalYearBox) {
             federalError.setText("");
             try {
-                year = Integer.parseInt(federalYearBox.getText());
+                fedYear = Integer.parseInt(federalYearBox.getText());
             } catch (InputMismatchException ime) {
                 federalError.setText("Invalid year");
             }
         } else if(event.getSource()==stateYearBox) {
             stateError.setText("");
             try {
-                year = Integer.parseInt(stateYearBox.getText());
+                fedYear = Integer.parseInt(stateYearBox.getText());
             } catch (InputMismatchException ime) {
                 stateError.setText("Invalid year");
             }
         } else if(event.getSource()==countyYearBox) {
             countyError.setText("");
             try {
-                year = Integer.parseInt(countyYearBox.getText());
+                fedYear = Integer.parseInt(countyYearBox.getText());
             } catch (InputMismatchException ime) {
                 countyError.setText("Invalid Year");
             }
         }
+        updateGUI();
     }
     /*
     private void changeEventHandler(ChangeEvent event) {
 
     }
     */
+    private void updateGUI(){
+        if(federal.isSelected()&&(fedOffice!=null&&fedYear!=0&&fedSlider!=0)) {
+            //
+        } else if(state.isSelected()) {
+            //
+        } else if(county.isSelected()) {
+            //
+        }
+    }
 }
