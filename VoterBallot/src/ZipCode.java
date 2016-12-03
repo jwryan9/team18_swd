@@ -25,8 +25,6 @@ public class ZipCode {
             while((line = zipReader.readLine()) != null) {
                 lineArr = line.split(",");
                 if(lineArr[2].equals(zipString)) {
-                    System.out.println("Found!");
-
                     return lineArr;
                 }
             }

@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.stage.Stage;
@@ -19,6 +20,14 @@ public class VotesResultsApp extends Application {
 
         primaryStage.setTitle("!!POLLS ARE IN!!");
         primaryStage.setScene(new Scene(root));
+
+        primaryStage.setOnCloseRequest(
+                e -> {
+                    Platform.exit();
+                    System.exit(0);
+                }
+        );
+
         primaryStage.show();
     }
     public static void main() {launch();}

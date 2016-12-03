@@ -1,5 +1,6 @@
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,6 +36,14 @@ public class CountyAuditorApp extends Application {
 
         primaryStage.setTitle("Candidate Entry");
         primaryStage.setScene(new Scene(root));
+
+        primaryStage.setOnCloseRequest(
+                e -> {
+                    Platform.exit();
+                    System.exit(0);
+                }
+        );
+
         primaryStage.show();
 
     }

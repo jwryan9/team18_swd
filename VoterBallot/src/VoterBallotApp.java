@@ -4,6 +4,7 @@
 
 import com.sun.scenario.effect.impl.prism.PrImage;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,6 +33,14 @@ public class VoterBallotApp extends Application {
 
         primaryStage.setTitle("Ballot");
         primaryStage.setScene(new Scene(root));
+
+        primaryStage.setOnCloseRequest(
+                e -> {
+                    Platform.exit();
+                    System.exit(0);
+                }
+        );
+
         primaryStage.show();
     }
 

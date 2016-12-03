@@ -3,6 +3,7 @@
  */
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,6 +25,14 @@ public class VoterRegistrationApp extends Application {
 
         primaryStage.setTitle("Voter Registration");
         primaryStage.setScene(new Scene(root));
+
+        primaryStage.setOnCloseRequest(
+                e -> {
+                    Platform.exit();
+                    System.exit(0);
+                }
+        );
+
         primaryStage.show();
     }
 }

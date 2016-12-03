@@ -1,3 +1,4 @@
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -84,6 +85,12 @@ public class VoterLoginController {
                         stage.setTitle("Ballot");
                         stage.setScene(new Scene(root));
 
+                        stage.setOnCloseRequest(
+                                e -> {
+                                    Platform.exit();
+                                    System.exit(0);
+                                }
+                        );
 
                         stage.show();
 
