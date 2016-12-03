@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+  <tabs>
+    <Tab id="federal" text="Federal">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ChoiceBox id="federalChoice" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
+                  <TextField id="federalYearBox" layoutX="14.0" layoutY="52.0" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
+                  <Slider id="federalYearSlider" layoutX="77.0" layoutY="59.0" prefHeight="18.0" prefWidth="94.0" />
+                  <StackedBarChart layoutX="177.0" layoutY="13.0" prefHeight="334.0" prefWidth="409.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </StackedBarChart>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab id="state" text="State">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ChoiceBox id="stateChoice" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
+                  <Slider id="stateYearSlider" layoutX="77.0" layoutY="59.0" prefHeight="18.0" prefWidth="94.0" />
+                  <TextField id="stateYearBox" layoutX="14.0" layoutY="52.0" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
+                  <StackedBarChart layoutX="177.0" layoutY="13.0" prefHeight="334.0" prefWidth="409.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </StackedBarChart>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab id="county" text="County">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ChoiceBox id="countyChoice" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
+                  <Slider id="countyYearSlider" layoutX="77.0" layoutY="59.0" prefHeight="18.0" prefWidth="94.0" />
+                  <TextField id="countyYearBox" layoutX="14.0" layoutY="52.0" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
+                  <StackedBarChart layoutX="177.0" layoutY="13.0" prefHeight="334.0" prefWidth="409.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </StackedBarChart>
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
