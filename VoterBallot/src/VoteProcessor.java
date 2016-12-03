@@ -8,9 +8,11 @@ import java.util.Map;
  */
 public class VoteProcessor {
 
-    private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Results");
+    private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com");
 
     public static Map<String,Integer> currentResults = new HashMap<>();
+
+    private static String electionYear = "";
 
     public static void getStateResults(String state){
 
@@ -23,8 +25,9 @@ public class VoteProcessor {
 
 
     public synchronized static void addBallot(Map<String,String> ballot, String voterZip, String voterCounty, String voterState){
+        String electionYear = VoterBallotModel.getElectionYear();
         System.out.println("voter state in add ballot: " + voterState);
-        Firebase stateRef = ref.child(voterState);
+        Firebase stateRef = ref.child(electionYear + "/Results").child(voterState);
         String position;
         String vote;
 

@@ -24,7 +24,7 @@ public class CountyAuditorApp extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        CountyAuditorModel.getElectionCycle();
        // Authorization.authenticate();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("countyAuditor.fxml"));

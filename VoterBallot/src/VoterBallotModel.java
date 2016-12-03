@@ -14,6 +14,10 @@ import com.firebase.client.*;
  */
 public class VoterBallotModel {
 
+    private static Firebase cycleReference = new Firebase("https://votingsystem-5e175.firebaseio.com/Election Cycle");
+
+    private static String electionYear = "";
+
     private static boolean waitingBool = true;
 
     private static Map<String,ArrayList<Candidate>> federalCandidates = new HashMap<>();
@@ -34,16 +38,16 @@ public class VoterBallotModel {
 
     private Map<String,ArrayList<Candidate>> countyCandidates = new HashMap<>();
 
-
-    private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Candidates");
+    private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com");
 
     public synchronized static void initFederal() {
 
         String level = "Federal";
         String[] federalPositions = {"US President", "US Senate", "US House"};
 
+        Firebase cycleRef = ref.child(electionYear + "/Candidates");
 
-            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            cycleRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -87,9 +91,9 @@ public class VoterBallotModel {
     public synchronized void initState(String stateAbbriviation) {
 
         String stateURL = "State/" + stateAbbriviation;
-        Firebase stateGovRef = ref.child(stateURL).child("Governor");
-        Firebase stateHouseRef = ref.child(stateURL).child("State House");
-        Firebase stateSenateRef = ref.child(stateURL).child("State Senate");
+        Firebase stateGovRef = ref.child(electionYear + "/Candidates").child(stateURL).child("Governor");
+        Firebase stateHouseRef = ref.child(electionYear + "/Candidates").child(stateURL).child("State House");
+        Firebase stateSenateRef = ref.child(electionYear + "/Candidates").child(stateURL).child("State Senate");
 
         stateGovRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -164,8 +168,8 @@ public class VoterBallotModel {
     public synchronized void initCounty(String countyName, String stateAbbriviation) {
 
         String stateURL = "County/" + stateAbbriviation + "/" + countyName;
-        Firebase judgeRef = ref.child(stateURL).child("County Judge");
-        Firebase sheriffRef = ref.child(stateURL).child("County Sheriff");
+        Firebase judgeRef = ref.child(electionYear + "/Candidates").child(stateURL).child("County Judge");
+        Firebase sheriffRef = ref.child(electionYear + "/Candidates").child(stateURL).child("County Sheriff");
 
         judgeRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -211,7 +215,19 @@ public class VoterBallotModel {
 
     }
 
+    public synchronized static void getElectionCycle(){
+        cycleReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                electionYear = dataSnapshot.getValue(String.class);
+            }
 
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
 
 
     public static Map<String, ArrayList<Candidate>> getFederalCandidates() throws InterruptedException{
@@ -236,6 +252,10 @@ public class VoterBallotModel {
 
     public Map<String,Candidate> getCountyJudgeCandidates(){
         return countyJudgeCandidates;
+    }
+
+    public static String getElectionYear(){
+        return electionYear;
     }
 
 }

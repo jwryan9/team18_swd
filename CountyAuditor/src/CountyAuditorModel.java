@@ -6,10 +6,13 @@ import com.firebase.client.*;
  */
 public class CountyAuditorModel {
 
+    private static String electionYear = "";
+
+    private static Firebase cycleReference = new Firebase("https://votingsystem-5e175.firebaseio.com/Election Cycle");
     /**
      * Variable to hold reference to the database.
      */
-    private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Candidates");
+    private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/");
 
     /**
      * Method to check the user input for the candidate information.
@@ -36,7 +39,10 @@ public class CountyAuditorModel {
      * @param level         The level of government that the candidate is seeking office.
      */
     public synchronized static void exportCandidate(int id, Candidate candidate, String level){
-        Firebase candidateRef = ref;
+
+
+
+        Firebase candidateRef = ref.child(electionYear).child("Candidates");
 
         if(level == "Federal") {
             candidateRef = candidateRef.child("Federal/" + candidate.getOffice());
@@ -54,5 +60,19 @@ public class CountyAuditorModel {
 
         candidateRef.setValue(candidate);
 
+    }
+
+    public synchronized static void getElectionCycle(){
+        cycleReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                electionYear = dataSnapshot.getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 }
