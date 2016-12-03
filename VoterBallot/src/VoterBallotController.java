@@ -116,10 +116,12 @@ public class VoterBallotController {
         this.voterZip = zip;
         System.out.println("Zip in ballot controller: " + voterZip);
 
-        //ZipCode.parseZip(this.voterZip, "zipcodefile.csv");
-        this.voterState = "IL";
-        this.voterCounty = "DuPage";
-        System.out.println("Zip in ballot controller: " + voterZip + " state: " + voterState);
+        String[] zipArray = ZipCode.parseZip(this.voterZip, "zipcodes.csv");
+        if(zipArray != null) {
+            this.voterCounty = zipArray[0];
+            this.voterState = zipArray[1];
+        }
+        System.out.println("Zip in ballot controller: " + voterZip + " county: " + voterCounty + " state: " + voterState);
 
 
     }
@@ -251,7 +253,7 @@ public class VoterBallotController {
         selections.put("County Judge", String.valueOf(countyJudgeName.hashCode()));
         selections.put("County Sheriff", String.valueOf(countySheriffName.hashCode()));
 
-        System.out.println("Zip in ballot controller 2: " + voterZip + " state 2: " + voterState);
+        //System.out.println("Zip in ballot controller 2: " + voterZip + " state 2: " + voterState);
 
         VoteProcessor.addBallot(selections, voterZip, voterCounty, voterState);
 

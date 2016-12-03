@@ -18,13 +18,16 @@ public class ZipCode {
     public static String[] parseZip(String zipString, String zipFilePath) {
         String line;
         String[] lineArr;
-
+        System.out.println("");
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(zipFilePath));
 
             while((line = bufferedReader.readLine()) != null) {
                 lineArr = line.split(",");
+                System.out.println("line arr: " + lineArr[0] + lineArr[1] + lineArr[2]);
                 if(lineArr[2].equals(zipString)) {
+                    System.out.println("Found!");
+
                     return lineArr;
                 }
             }
