@@ -41,7 +41,7 @@ public class VoteProcessor {
 
             if(!vote.equals("0")){
                 if(key.contains("County")){
-                    resultsRef.child(voterCounty);
+                    resultsRef = resultsRef.child(voterCounty);
                 }
                 String voteChildString = position + "/" + vote;
 

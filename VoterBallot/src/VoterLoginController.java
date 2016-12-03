@@ -96,6 +96,12 @@ public class VoterLoginController {
                     }
                     catch (IOException e) {
                         System.err.println("cannot open ballot");
+                        StackTraceElement[] stackTraceElements = e.getStackTrace();
+                        for(StackTraceElement a:stackTraceElements){
+                            System.err.println(a);
+
+                        }
+                        
                     }
 
 

@@ -140,7 +140,7 @@ public class VoterBallotController {
         vlm.initState(this.voterState);
         vlm.initCounty(this.voterCounty, this.voterState);
 
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         //System.out.println("Zip in ballot controller 3: " + voterZip + " state 3: " + voterState);
 
@@ -200,11 +200,12 @@ public class VoterBallotController {
         countySheriffDropdown.getItems().add("");
 
         for (String nextCandidate : countyJudgeCandidates.keySet()) {
-            countyJudgeDropdown.getItems().add(stateSenateCandidates.get(nextCandidate).getName() + " (" + stateSenateCandidates.get(nextCandidate).getParty() + ")");
+            countyJudgeDropdown.getItems().add(countyJudgeCandidates.get(nextCandidate).getName() + " (" + countyJudgeCandidates.get(nextCandidate).getParty() + ")");
 
         }
+
         for (String nextCandidate : countySheriffCandidates.keySet()) {
-            countySheriffDropdown.getItems().add(stateHouseCandidates.get(nextCandidate).getName() + " (" + stateHouseCandidates.get(nextCandidate).getParty() + ")");
+            countySheriffDropdown.getItems().add(countySheriffCandidates.get(nextCandidate).getName() + " (" + countySheriffCandidates.get(nextCandidate).getParty() + ")");
         }
 
     }
