@@ -124,17 +124,19 @@ public class VoterLoginModel{
     }
 
     public synchronized static void getAlreadyVotedFromDatabase(){
-    alreadyVotedRef.addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            alreadyVotedString = dataSnapshot.getValue(String.class);
-        }
+        Firebase alreadyVotedRef = ref.child(VoterBallotModel.getElectionYear() + "Results/Already Voted");
 
-        @Override
-        public void onCancelled(FirebaseError firebaseError) {
+        alreadyVotedRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                alreadyVotedString = dataSnapshot.getValue(String.class);
+            }
 
-        }
-    });
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 
     public synchronized static boolean checkAlreadyVoted(String encyrptedSSN){
@@ -151,7 +153,8 @@ public class VoterLoginModel{
 
     public synchronized static void markVoterAsHasVoted(String encryptedSSN){
 
-        Firebase voterRegisteredRef = new Firebase("https://votingsystem-5e175.firebaseio.com/Results/Already Voted");
+        String url = "https://votingsystem-5e175.firebaseio.com/" + VoterBallotModel.getElectionYear() + "/Results/Already Voted";
+        Firebase voterRegisteredRef = new Firebase(url);
 
         voterRegisteredRef.runTransaction(new Transaction.Handler() {
             @Override
