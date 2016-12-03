@@ -49,15 +49,15 @@ public class VoterRegistrationController {
     public void initStates() {
         stateDropdown.getItems().removeAll();
         stateDropdown.getItems().addAll("AL", "AK", "AZ", "AR", "CA",
-                "CO", "CT", "DE", "FL", "GA",
-                "HI", "ID", "IL", "IN", "IA",
-                "KS", "KY", "LA", "ME", "MD",
-                "MA", "MI", "MN", "MS", "MO",
-                "MT", "NE", "NV", "NH", "NJ",
-                "NM", "NY", "NC", "ND", "OH",
-                "OK", "OR", "PA", "RI", "SC",
-                "SD", "TN", "TX", "UT", "VT",
-                "VA", "WA", "WV", "WI", "WY");
+                                        "CO", "CT", "DE", "FL", "GA",
+                                        "HI", "ID", "IL", "IN", "IA",
+                                        "KS", "KY", "LA", "ME", "MD",
+                                        "MA", "MI", "MN", "MS", "MO",
+                                        "MT", "NE", "NV", "NH", "NJ",
+                                        "NM", "NY", "NC", "ND", "OH",
+                                        "OK", "OR", "PA", "RI", "SC",
+                                        "SD", "TN", "TX", "UT", "VT",
+                                        "VA", "WA", "WV", "WI", "WY");
     }
 
     /**
@@ -70,10 +70,11 @@ public class VoterRegistrationController {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String zipCode = zipField.getText();
+        String state = stateDropdown.getSelectionModel().getSelectedItem().toString();
         String ssn = ssnField.getText();
         String encryptedSSN = "";
 
-        String validInput = VoterRegistrationModel.checkInput(ssn, zipCode);
+        String validInput = VoterRegistrationModel.checkInput(ssn, zipCode, state);
         System.out.println("ssn :" + ssn);
         System.out.println("First name: " + firstName + "Last Name: " + lastName + "Zip Code: " + zipCode);
 
