@@ -103,6 +103,16 @@ public class VoterBallotController {
      */
     private Map<String, String> selections;
 
+    private String voterZip;
+
+    private String voterState;
+
+    private String voterCounty;
+
+    public void setVoterProperties(String zip){
+        this.voterZip = zip;
+        System.out.println("Zip in ballot controller: " + voterZip);
+    }
     /**
      * Initializes ComboBox options of candidates for each office.
      *
@@ -110,29 +120,30 @@ public class VoterBallotController {
      */
     public void initCandidates() throws InterruptedException {
         VoterBallotModel.initFederal();
+try {
+    Map<String, ArrayList<Candidate>> federalCandidates = VoterBallotModel.getFederalCandidates();// VoterBallotModel.getFederalCandidates();
 
-        Map<String,ArrayList<Candidate>> federalCandidates = VoterBallotModel.getFederalCandidates();// VoterBallotModel.getFederalCandidates();
+    while (federalCandidates.keySet().size() < 3) {
+        federalCandidates = VoterBallotModel.getFederalCandidates();
+    }
+    System.out.println("feds keyset:" + federalCandidates.keySet());
 
-        while(federalCandidates.keySet().size()<3){
-            federalCandidates = VoterBallotModel.getFederalCandidates();
-        }
-        System.out.println("feds keyset:" + federalCandidates.keySet());
+    presidentDropdown.getItems().add("");
+    usSenateDropdown.getItems().add("");
+    usHouseDropdown.getItems().add("");
 
-        presidentDropdown.getItems().add("");
-        usSenateDropdown.getItems().add("");
-        usHouseDropdown.getItems().add("");
+    for (Candidate nextCandidate : federalCandidates.get("US President")) {
+        presidentDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
 
-        for (Candidate nextCandidate : federalCandidates.get("US President")) {
-            presidentDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
+    }
+    for (Candidate nextCandidate : federalCandidates.get("US Senate")) {
+        usSenateDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
+    }
 
-        }
-        for (Candidate nextCandidate : federalCandidates.get("US Senate")) {
-            usSenateDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
-        }
-
-        for (Candidate nextCandidate : federalCandidates.get("US House")) {
-            usHouseDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
-        }
+    for (Candidate nextCandidate : federalCandidates.get("US House")) {
+        usHouseDropdown.getItems().add(nextCandidate.getName() + " (" + nextCandidate.getParty() + ")");
+    }
+}catch (Exception e){}
     }
 
     /**
@@ -199,6 +210,8 @@ public class VoterBallotController {
         selections.put("State House", String.valueOf(stateHouseName.hashCode()));
         selections.put("County Judge", String.valueOf(countyJudgeName.hashCode()));
         selections.put("County Sheriff", String.valueOf(countySheriffName.hashCode()));
+
+        VoteProcessor.addBallot(selections, voterZip, voterCounty, voterState);
 
         try {
             VoterLoginApp newLogin = new VoterLoginApp();

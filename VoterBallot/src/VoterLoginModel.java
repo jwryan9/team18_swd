@@ -20,10 +20,10 @@ public class VoterLoginModel{
 
     public static String validateInput(String ssn, String zipCode){
 
-        if(ssn.length() == 9 && ssn.matches("\\d+")){
+        if(ssn.length() != 9 && !ssn.matches("\\d+")){
             return "Error: Invalid Social Security Number";
         }
-        if(zipCode.length() == 5 && zipCode.matches("\\d+")) {
+        if(zipCode.length() != 5 && !zipCode.matches("\\d+")) {
             return "Error: Invalid Zip Code";
         }
         return "";
