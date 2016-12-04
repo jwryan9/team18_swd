@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -281,7 +283,32 @@ public class VoterBallotController {
         //System.out.println("Zip in ballot controller 2: " + voterZip + " state 2: " + voterState);
 
         VoteProcessor.addBallot(selections, voterZip, voterCounty, voterState);
+        ImageIcon icon = new ImageIcon("iVotedSticker.png");
+        showMessage("Registration Successful",icon);
 
+
+
+    }
+
+    /**
+     * Method to show the dialog box.
+     * @param message   The message to be displayed.
+     * @param icon      The image to be displayed.
+     */
+    private void showMessage(String message, ImageIcon icon) {
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                int input = JOptionPane.showOptionDialog(null, message, "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, null, null);
+                System.out.println("input " + input);
+                if(input == 0){
+                    openLogin();
+                }
+            }
+        });
+    }
+
+    private void openLogin(){
         try {
             VoterLoginApp newLogin = new VoterLoginApp();
             newLogin.start(VoterLoginApp.classStage);
