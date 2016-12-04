@@ -1,4 +1,8 @@
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -9,6 +13,7 @@ import javafx.stage.StageStyle;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -295,68 +300,32 @@ public class VoterBallotController {
         a.showAndWait();
 */
        // showMessage2("Ballot Submit Successful",icon);
-        openLogin();
+        //openLogin();
+        openConfirmation();
 
     }
 
-    /**
-     * Method to show the dialog box.
-     * @param message   The message to be displayed.
-     * @param icon      The image to be displayed.
-     */
-    private void showMessage(String message, ImageIcon icon) {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JOptionPane dialogPane = new JOptionPane();
+    private void openConfirmation() {
+        Parent root;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("voteConfirmation.fxml"));
+            root = loader.load();
 
-                dialogPane.showOptionDialog(null, message, "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, null, null);
+            Stage stage = new Stage();
+            stage.setTitle("Vote Success");
+            stage.setScene(new Scene(root));
 
-                //dialogPane.cre
-            }
-        });
-    }
-
-    private void showMessage2(String message, ImageIcon icon) {
-
-                JOptionPane dialogPane = new JOptionPane();
-
-                int input = dialogPane.showOptionDialog(null, message, "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, null, null);
-        System.out.println("input: " + input);
-        if(input == 0) {
-                    openLogin();
-                }
-    }
-
-    private void showDialogBox(String message, ImageIcon icon) {
-        JFrame dialogFrame = new JFrame("Confirmation");
-        dialogFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        dialogFrame.setSize(300,150);
-        dialogFrame.setAlwaysOnTop(true);
-        dialogFrame.setResizable(false);
-        dialogFrame.setIconImage(icon.getImage());
-        dialogFrame.add(new JLabel(message));
-        JButton okButton = new JButton("OK");
-        dialogFrame.add(okButton);
-
-        okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        openLogin();
+            stage.setOnCloseRequest(
+                    e -> {
+                        Platform.exit();
+                        System.exit(0);
                     }
-                });
 
-                //stage.close();
-            }
-        });
-        dialogFrame.setVisible(true);
+            );
 
-       // JOptionPane dialogPane = new JOptionPane();
-        //dialogPane.showOptionDialog(null, message, "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, null, null);
-        //dialogPane.DEFAULT_OPTION;
+        } catch (IOException ex) {
+            System.err.println("cannot open vote confirmation");
+        }
     }
 
     private void openLogin(){

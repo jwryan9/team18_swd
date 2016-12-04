@@ -74,9 +74,13 @@ public class VoterLoginController {
 
                         root = loader.load();
 
+                        /*
                         try {
                             Thread.sleep(2000);
-                        }catch (InterruptedException e){System.out.println("print error thread sleep");};
+                        }catch (InterruptedException e){
+                            System.out.println("print error thread sleep");
+                        }
+                        */
 
                         //VoterBallotController ballController = loader.getController();
                         //ballController.setVoterProperties(zipCode);
