@@ -11,9 +11,9 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField id="federalYearBox" fx:id="federalYearBox" layoutX="171.0" layoutY="14.0" prefHeight="30.0" prefWidth="52.0" promptText="Year" />
-                  <Slider id="federalYearSlider" fx:id="federalYearSlider" layoutX="230.0" layoutY="21.0" prefHeight="18.0" prefWidth="94.0" />
-                  <StackedBarChart id="federalChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="571.0">
+                  <TextField id="federalYearBox" fx:id="federalYearBox" layoutX="171.0" layoutY="15.0" prefHeight="30.0" prefWidth="52.0" promptText="Year" />
+                  <Slider id="federalYearSlider" fx:id="federalYearSlider" layoutX="230.0" layoutY="22.0" prefHeight="18.0" prefWidth="94.0" />
+                  <StackedBarChart id="federalBarChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -23,6 +23,18 @@
                   </StackedBarChart>
                   <Label id="federalError" layoutX="480.0" layoutY="19.0" prefHeight="23.0" prefWidth="110.0" textFill="RED" />
                   <ComboBox id="federalOffice" layoutX="14.0" layoutY="15.0" prefWidth="150.0" />
+                  <PieChart id="federalPieChart" layoutX="148.0" layoutY="66.0" prefHeight="278.0" prefWidth="306.0" />
+                  <LineChart id="federalLineChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <RadioButton id="federalBarButton" layoutX="512.0" layoutY="120.0" mnemonicParsing="false" text="Bar" />
+                  <RadioButton id="federalLineButton" layoutX="512.0" layoutY="147.0" mnemonicParsing="false" text="Line" />
+                  <RadioButton id="federalPieButton" layoutX="512.0" layoutY="174.0" mnemonicParsing="false" text="Pie" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -30,9 +42,9 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Slider id="stateYearSlider" fx:id="stateYearSlider" layoutX="386.0" layoutY="21.0" prefHeight="18.0" prefWidth="94.0" />
-                  <TextField id="stateYearBox" fx:id="stateYearBox" layoutX="327.0" layoutY="14.0" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
-                  <StackedBarChart id="stateChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="571.0">
+                  <Slider id="stateYearSlider" fx:id="stateYearSlider" layoutX="284.0" layoutY="22.0" prefHeight="18.0" prefWidth="94.0" />
+                  <TextField id="stateYearBox" fx:id="stateYearBox" layoutX="225.0" layoutY="15.0" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
+                  <StackedBarChart id="stateBarChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -41,8 +53,20 @@
                     </yAxis>
                   </StackedBarChart>
                   <Label id="stateError" layoutX="480.0" layoutY="19.0" prefHeight="23.0" prefWidth="110.0" textFill="RED" />
-                  <ComboBox id="stateChoice" layoutX="14.0" layoutY="14.0" prefWidth="150.0" />
-                  <ComboBox id="stateRep" layoutX="170.0" layoutY="14.0" prefWidth="150.0" />
+                  <ComboBox id="stateChoice" layoutX="15.0" layoutY="15.0" prefHeight="31.0" prefWidth="98.0" />
+                  <ComboBox id="stateRep" layoutX="120.0" layoutY="15.0" prefHeight="31.0" prefWidth="98.0" />
+                  <LineChart id="stateLineChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <PieChart id="statePieChart" layoutX="148.0" layoutY="66.0" prefHeight="278.0" prefWidth="306.0" />
+                  <RadioButton id="stateBarButton" layoutX="512.0" layoutY="120.0" mnemonicParsing="false" text="Bar" />
+                  <RadioButton id="stateLineButton" layoutX="512.0" layoutY="147.0" mnemonicParsing="false" text="Line" />
+                  <RadioButton id="statePieButton" layoutX="512.0" layoutY="174.0" mnemonicParsing="false" text="Pie" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -52,7 +76,7 @@
                <children>
                   <Slider id="countyYearSlider" layoutX="386.0" layoutY="21.0" prefHeight="18.0" prefWidth="94.0" />
                   <TextField id="countyYearBox" layoutX="327.0" layoutY="14.0" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
-                  <StackedBarChart id="countyChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="571.0">
+                  <StackedBarChart id="countyBarChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -64,6 +88,17 @@
                   <ComboBox id="countyChoice" layoutX="119.0" layoutY="14.0" prefHeight="31.0" prefWidth="98.0" />
                   <ComboBox id="countyRep" layoutX="223.0" layoutY="14.0" prefHeight="31.0" prefWidth="98.0" />
                   <ComboBox id="countyState" layoutX="15.0" layoutY="14.0" prefHeight="31.0" prefWidth="98.0" />
+                  <LineChart id="countyLineChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <PieChart id="countyPieChart" layoutX="148.0" layoutY="66.0" prefHeight="278.0" prefWidth="306.0" />
+                  <RadioButton layoutX="490.0" layoutY="101.0" mnemonicParsing="false" text="RadioButton" />
+                  <RadioButton layoutX="490.0" layoutY="136.0" mnemonicParsing="false" text="RadioButton" />
                </children>
             </AnchorPane>
         </content>

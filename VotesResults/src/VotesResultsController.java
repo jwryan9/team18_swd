@@ -1,8 +1,11 @@
 import com.sun.corba.se.spi.monitoring.LongMonitoredAttributeBase;
 import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
+import javafx.scene.shape.Line;
 
 //import javax.swing.event.ChangeEvent;
 import java.awt.*;
@@ -32,10 +35,20 @@ public class VotesResultsController {
     @FXML
     private Tab county;
     /**
+     * ChoiceBox to choose chart to view federal results in
+     */
+    @FXML
+    private ComboBox federalChartChoice;
+    /**
      * ChoiceBox to choose federal representative
      */
     @FXML
     private ComboBox federalOffice;
+    /**
+     * ComboBox to choose chart to view state results in
+     */
+    @FXML
+    private ComboBox stateChartChoice;
     /**
      * ChoiceBox to choose state
      */
@@ -46,6 +59,11 @@ public class VotesResultsController {
      */
     @FXML
     private ComboBox stateOffice;
+    /**
+     * ComboBox to choose chart to view county results in
+     */
+    @FXML
+    private ComboBox countyChartChoice;
     /**
      * ChoiceBox to choose state for county
      */
@@ -95,17 +113,29 @@ public class VotesResultsController {
      * Chart to view the results of the federal polls
      */
     @FXML
-    private StackedBarChart federalChart;
+    private StackedBarChart federalBarChart;
     /**
      * Chart to view the results of the state polls
      */
     @FXML
-    private StackedBarChart stateChart;
+    private StackedBarChart stateBarChart;
     /**
      * Chart to view the results of the county polls
      */
     @FXML
-    private StackedBarChart countyChart;
+    private StackedBarChart countyBarChart;
+    @FXML
+    private PieChart federalPieChart;
+    @FXML
+    private PieChart statePieChart;
+    @FXML
+    private PieChart countyPieChart;
+    @FXML
+    private LineChart federalLineChart;
+    @FXML
+    private LineChart stateLineChart;
+    @FXML
+    private LineChart countyLineChart;
     /**
      * Label to display brief user federal information input error message
      */
