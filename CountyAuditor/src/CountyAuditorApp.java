@@ -14,7 +14,7 @@ import javax.swing.*;
 import javax.swing.tree.ExpandVetoException;
 
 /**
- * Class to add candidates to the database.
+ * Class to run application for adding candidates to the database.
  */
 public class CountyAuditorApp extends Application {
     /**
