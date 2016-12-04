@@ -44,8 +44,6 @@ public class CountyAuditorModel {
      */
     public synchronized static void exportCandidate(int id, Candidate candidate, String level){
 
-
-
         Firebase candidateRef = ref.child(electionYear).child("Candidates");
 
         if(level == "Federal") {
@@ -66,6 +64,9 @@ public class CountyAuditorModel {
 
     }
 
+    /**
+     * Method to get the current election cycle year from the database and update the instance variable.
+     */
     public synchronized static void getElectionCycle(){
         cycleReference.addValueEventListener(new ValueEventListener() {
             @Override
