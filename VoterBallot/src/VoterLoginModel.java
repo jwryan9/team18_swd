@@ -13,13 +13,15 @@ public class VoterLoginModel{
 
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Voters");
 
-    private static Firebase alreadyVotedRef = new Firebase("https://votingsystem-5e175.firebaseio.com/Results/Already Voted");
+    private static Firebase alreadyVotedRef = new Firebase("https://votingsystem-5e175.firebaseio.com/");
 
     private static Map<String,String> registeredVoters = new HashMap<>();
 
     private static String alreadyVotedString = "";
 
     private static boolean isRegisteredVoter;
+
+    private static String electionCycle = "";
 
 
     public static String validateInput(String ssn, String zipCode) {
@@ -49,7 +51,7 @@ public class VoterLoginModel{
                     String nextVoterZip = nextVoter.child("zipCode").getValue(String.class);
 
                     System.out.println("next ID: " + nextVoterKey + " next Zip: " + nextVoterZip);
-                    System.out.println("encyptedidcheck: " +encryptedID.equals(nextVoterKey) );
+                    System.out.println("encypted id check: " +encryptedID.equals(nextVoterKey) );
                     System.out.println("zipcheck: " +  zipCode.equals(nextVoterZip));
 
                     if(encryptedID.equals(nextVoterKey) && zipCode.equals(nextVoterZip)) {
@@ -121,13 +123,19 @@ public class VoterLoginModel{
     }
 
     public synchronized static void getAlreadyVotedFromDatabase(){
-        System.err.println("Ref: " + ref);
-        //Firebase alreadyVotedRef = ref.child(VoterBallotModel.getElectionYear() + "Results/Already Voted");
+        //System.err.println("Ref: " + ref);
+
+        String year = VoterBallotModel.getElectionYear();
+        System.err.println("Year in get voted: " + year);
+
+        alreadyVotedRef = alreadyVotedRef.child(year).child("Results/Already Voted");
+        //System.err.println("alreadyRef: " + alreadyVotedRef);
 
         alreadyVotedRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 alreadyVotedString = dataSnapshot.getValue(String.class);
+                System.err.println("Already Voted String1234: " + alreadyVotedString);
             }
 
             @Override
@@ -135,22 +143,27 @@ public class VoterLoginModel{
 
             }
         });
+
+
     }
 
     public synchronized static boolean checkAlreadyVoted(String encyrptedSSN){
 
-//        System.out.println(".contains ssn: " + alreadyVotedString.contains(encyrptedSSN));
-        getAlreadyVotedFromDatabase();
+        //getAlreadyVotedFromDatabase();
         System.err.println(alreadyVotedString);
         try {
+            System.out.println(".contains ssn: " + alreadyVotedString.contains(encyrptedSSN));
+
             if (alreadyVotedString.contains(encyrptedSSN)) {
+                System.out.println("return true");
                 return true;
             }
         } catch (NullPointerException ex){
             System.err.println("Null pointer exception");
-        } finally {
-            return false;
         }
+
+        return false;
+
     }
 
 
@@ -185,6 +198,7 @@ public class VoterLoginModel{
 
     }
 
+    public static String getAlreadyVotedString(){return alreadyVotedString;}
     public boolean getRegisteredVoterBool(){
         return isRegisteredVoter;
     }

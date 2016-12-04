@@ -51,6 +51,8 @@ public class VoterLoginController {
                 isRegisteredVoter=VoterLoginModel.checkVoterRegistrationQuery(encryptedSSN,zipCode);
                 hasVoted = VoterLoginModel.checkAlreadyVoted(encryptedSSN);
 
+                System.out.println("has voted: " + hasVoted);
+
                 if(isRegisteredVoter == true && hasVoted == false){
 
                     System.out.println();

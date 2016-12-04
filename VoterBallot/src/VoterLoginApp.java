@@ -20,13 +20,20 @@ public class VoterLoginApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         VoterBallotModel.getElectionCycle();
+        try {
+            Thread.sleep(500);
+        }catch (Exception e){};
         FXMLLoader loader = new FXMLLoader(getClass().getResource("voterLogin.fxml"));
         Parent root = loader.load();
         classStage = primaryStage;
 
         VoterLoginController controller = loader.getController();
-        VoterLoginModel.getAlreadyVotedFromDatabase();
         VoterLoginModel.getVotersFromDatabase();
+        VoterLoginModel.getAlreadyVotedFromDatabase();
+
+        System.out.println(VoterBallotModel.getElectionYear());
+        System.out.println(VoterLoginModel.getAlreadyVotedString());
+
         primaryStage.setTitle("Ballot Login");
         primaryStage.setScene(new Scene(root));
 

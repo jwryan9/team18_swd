@@ -1,12 +1,14 @@
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -284,9 +286,16 @@ public class VoterBallotController {
 
         VoteProcessor.addBallot(selections, voterZip, voterCounty, voterState);
         ImageIcon icon = new ImageIcon("iVotedSticker.png");
-        showMessage("Registration Successful",icon);
-
-
+        //showMessage("Ballot Submit Successful",icon);
+/*
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle("Ballot Submission Confirmation");
+        a.initStyle(StageStyle.UNDECORATED);
+        a.setContentText("Ballot Submitted Successfully!");
+        a.showAndWait();
+*/
+       // showMessage2("Ballot Submit Successful",icon);
+        openLogin();
 
     }
 
@@ -299,13 +308,55 @@ public class VoterBallotController {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                int input = JOptionPane.showOptionDialog(null, message, "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, null, null);
-                System.out.println("input " + input);
-                if(input == 0){
-                    openLogin();
-                }
+                JOptionPane dialogPane = new JOptionPane();
+
+                dialogPane.showOptionDialog(null, message, "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, null, null);
+
+                //dialogPane.cre
             }
         });
+    }
+
+    private void showMessage2(String message, ImageIcon icon) {
+
+                JOptionPane dialogPane = new JOptionPane();
+
+                int input = dialogPane.showOptionDialog(null, message, "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, null, null);
+        System.out.println("input: " + input);
+        if(input == 0) {
+                    openLogin();
+                }
+    }
+
+    private void showDialogBox(String message, ImageIcon icon) {
+        JFrame dialogFrame = new JFrame("Confirmation");
+        dialogFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        dialogFrame.setSize(300,150);
+        dialogFrame.setAlwaysOnTop(true);
+        dialogFrame.setResizable(false);
+        dialogFrame.setIconImage(icon.getImage());
+        dialogFrame.add(new JLabel(message));
+        JButton okButton = new JButton("OK");
+        dialogFrame.add(okButton);
+
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        openLogin();
+                    }
+                });
+
+                //stage.close();
+            }
+        });
+        dialogFrame.setVisible(true);
+
+       // JOptionPane dialogPane = new JOptionPane();
+        //dialogPane.showOptionDialog(null, message, "Confirmation", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, icon, null, null);
+        //dialogPane.DEFAULT_OPTION;
     }
 
     private void openLogin(){
