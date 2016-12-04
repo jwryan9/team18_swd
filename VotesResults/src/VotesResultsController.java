@@ -1,4 +1,6 @@
 import com.sun.corba.se.spi.monitoring.LongMonitoredAttributeBase;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
@@ -20,6 +22,7 @@ import java.awt.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Map;
 
 /**
  * Created by Daniel on 12/2/2016.
@@ -259,10 +262,12 @@ public class VotesResultsController {
     int staSlider = 0;
     int couSlider = 0;
 
+    Map<String,Integer> results;
+
     private final ToggleGroup federalRadioGroup = new ToggleGroup();
     private final ToggleGroup stateRadioGroup = new ToggleGroup();
     private final ToggleGroup countyRadioGroup = new ToggleGroup();
-
+    private VotesResultsModel vrm = new VotesResultsModel();
 
     public void initGUI() {
 
@@ -369,6 +374,9 @@ public class VotesResultsController {
     private void changeEventHandler(ActionEvent event) {
         if(event.getSource()==federalOffice) {
             fedOffice = federalOffice.getValue().toString();
+            addDataToPlots(fedOffice, 2016);
+
+
         } else if(event.getSource()==stateChoice) {
             sta = stateChoice.getValue().toString();
         } else if(event.getSource()==stateOffice) {
@@ -397,7 +405,7 @@ public class VotesResultsController {
     }
 
     private void updateGUI(){
-        if(federal.isSelected()&&(fedOffice!=null&&fedYear!=0&&fedSlider!=0)) {
+        if(federal.isSelected()&&(fedOffice!=null/*&&fedYear!=0&&fedSlider!=0*/)) {
             if(federalBarButton.isSelected()) {
                 federalBarChart.setVisible(true);
                 federalLineChart.setVisible(false);
@@ -413,7 +421,7 @@ public class VotesResultsController {
             }
             getSeries(fedOffice,fedYear);
 //          reset series in each chart
-        } else if(state.isSelected()&&(staOffice!=null&&staYear!=0&&staSlider!=0)) {
+        } else if(state.isSelected()&&(staOffice!=null/*&&staYear!=0&&staSlider!=0*/)) {
             if(stateBarButton.isSelected()) {
                 stateBarChart.setVisible(true);
                 stateLineChart.setVisible(false);
@@ -450,6 +458,28 @@ public class VotesResultsController {
     private void getSeries(String office, int year) {
         // given an office and a year, find the series of information in terms of names (x-axis) and respective number
         // of votes (y-axis)
+        switch (office){
+            case "US President":
+                results = VotesResultsModel.getPresidentialResults();
+                break;
+            case "US Senate":
+                results = VotesResultsModel.getUsSenateResults();
+                break;
+            case "US House":
+                results = VotesResultsModel.getUsHouseResults();
+                break;
+
+
+        }
+
+        vrm.getStateCandidatesFromDatabase("IL");
+        try{
+            Thread.sleep(1000);
+        }catch (Exception e){};
+        results = vrm.getPresidentialResults();
+        VotesResultsModel.stateResults("IL");
+
+        addDataToPlots("A", 2016);
         // Also reset the slider to hold the range of the year over which we have polls from the voters
     }
     private void updateCountyChoice() {
@@ -457,5 +487,25 @@ public class VotesResultsController {
         // countychoice combobox.
     }
 
+    private void addDataToPlots(String office, int year){
+
+
+        results = VotesResultsModel.getPresidentialResults();
+        System.out.println(results.keySet());
+        System.out.println(results.keySet());
+
+        XYChart.Series series1 = new XYChart.Series();
+        for (String key: results.keySet()) {
+            String name = key;
+            Integer votes = results.get(key);
+            federalPieChart.getData().add(new PieChart.Data(name,votes));
+            federalBarChartXAxis.getCategories().add(name);
+            series1.getData().add(new XYChart.Data(name,votes));
+
+        }
+
+        federalBarChart.getData().add(series1);
+
+    }
 
 }

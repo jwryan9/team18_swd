@@ -19,6 +19,17 @@ public class VotesResultsApp extends Application {
         VotesResultsController controller = loader.getController();
         controller.initGUI();
 
+        VotesResultsModel.getPresidentialCandidatesFromDatabase();
+        //VotesResultsModel.getAllCandidates();
+        try{
+            Thread.sleep(2000);
+        }catch (Exception e){
+            System.err.println("Thread sleep");
+        }
+
+        VotesResultsModel.getPresidentPopularVoteFromDatabase();
+
+
         primaryStage.setTitle("!!POLLS ARE IN!!");
         primaryStage.setScene(new Scene(root));
 

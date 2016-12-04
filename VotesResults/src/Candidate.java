@@ -11,6 +11,7 @@ public class Candidate {
     private String state;
     private String office;
     private String party;
+    private int votes;
 
     public Candidate(Map<String,String> newCandidateMap, int idNumber){
         this.name = newCandidateMap.get("name");
@@ -19,6 +20,7 @@ public class Candidate {
         this.office = newCandidateMap.get("office");
         this.party = newCandidateMap.get("party");
         this.idNumber = idNumber;
+        this.votes = 0;
 
     }
 
@@ -68,6 +70,14 @@ public class Candidate {
 
     public String getParty() {
         return party;
+    }
+
+    public void setVotes(int votes){
+        this.votes = votes;
+    }
+
+    public int getVotes() {
+        return votes;
     }
 
 }

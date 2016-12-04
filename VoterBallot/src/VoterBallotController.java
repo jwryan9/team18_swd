@@ -278,14 +278,14 @@ public class VoterBallotController {
 
         selections = new HashMap<>(numOffices);
 
-        selections.put("US President", String.valueOf(presidentName.hashCode()));
-        selections.put("US Senate", String.valueOf(usSenateName.hashCode()));
-        selections.put("US House", String.valueOf(usHouseName.hashCode()));
-        selections.put("Governor", String.valueOf(governorName.hashCode()));
-        selections.put("State Senate", String.valueOf(stateSenateName.hashCode()));
-        selections.put("State House", String.valueOf(stateHouseName.hashCode()));
-        selections.put("County Judge", String.valueOf(countyJudgeName.hashCode()));
-        selections.put("County Sheriff", String.valueOf(countySheriffName.hashCode()));
+        selections.put("US President", String.valueOf(presidentName));
+        selections.put("US Senate", String.valueOf(usSenateName));
+        selections.put("US House", String.valueOf(usHouseName));
+        selections.put("Governor", String.valueOf(governorName));
+        selections.put("State Senate", String.valueOf(stateSenateName));
+        selections.put("State House", String.valueOf(stateHouseName));
+        selections.put("County Judge", String.valueOf(countyJudgeName));
+        selections.put("County Sheriff", String.valueOf(countySheriffName));
 
         //System.out.println("Zip in ballot controller 2: " + voterZip + " state 2: " + voterState);
 
