@@ -4,13 +4,19 @@ import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Line;
-
+import javafx.scene.text.Text;
+import javafx.scene.control.Label;
+import javafx.event.ActionEvent;
+import javafx.event.*;
 //import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+//import javax.swing.event.ChangeEvent;
+
+//import javax.swing.la
+//import javax.swing.event.ChangeListener;
+
 import java.awt.*;
-import java.awt.Label;
-import java.awt.event.ActionEvent;
+//import java.awt.Label;
+//import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -91,17 +97,17 @@ public class VotesResultsController {
      * TextField to enter year of federal polls
      */
     @FXML
-    private TextField federalYearBox;
+    private Text federalYearBox;
     /**
      * TextField to enter year of state polls
      */
     @FXML
-    private TextField stateYearBox;
+    private Text stateYearBox;
     /**
      * TextField to enter year of county polls
      */
     @FXML
-    private TextField countyYearBox;
+    private Text countyYearBox;
 
     //                                                        Sliders
 
@@ -253,7 +259,24 @@ public class VotesResultsController {
     int staSlider = 0;
     int couSlider = 0;
 
+    private final ToggleGroup federalRadioGroup = new ToggleGroup();
+    private final ToggleGroup stateRadioGroup = new ToggleGroup();
+    private final ToggleGroup countyRadioGroup = new ToggleGroup();
+
+
     public void initGUI() {
+
+        countyBarButton.setToggleGroup(countyRadioGroup);
+        countyLineButton.setToggleGroup(countyRadioGroup);
+        countyPieButton.setToggleGroup(countyRadioGroup);
+
+        stateBarButton.setToggleGroup(stateRadioGroup);
+        stateLineButton.setToggleGroup(stateRadioGroup);
+        statePieButton.setToggleGroup(stateRadioGroup);
+
+        federalBarButton.setToggleGroup(federalRadioGroup);
+        federalLineButton.setToggleGroup(federalRadioGroup);
+        federalPieButton.setToggleGroup(federalRadioGroup);
 
         federalOffice.getItems().removeAll();
         federalOffice.getItems().addAll("US President", "US Senate", "US House");
@@ -342,7 +365,8 @@ public class VotesResultsController {
         updateGUI();
     }
 
-    private void changeEventHandler(ChangeEvent event) {
+    @FXML
+    private void changeEventHandler(ActionEvent event) {
         if(event.getSource()==federalOffice) {
             fedOffice = federalOffice.getValue().toString();
         } else if(event.getSource()==stateChoice) {
@@ -432,4 +456,6 @@ public class VotesResultsController {
         // when a state is chosen from the countyState combobox, update the available counties to choose in the
         // countychoice combobox.
     }
+
+
 }

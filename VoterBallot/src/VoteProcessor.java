@@ -57,7 +57,7 @@ public class VoteProcessor {
 
 
                 if(key.contains("President")){
-                    Firebase presidentURL = ref.child(electionYear + "/" + position + " Popular Vote/" + vote);
+                    Firebase presidentURL = ref.child(electionYear + "/Results/" + position + " Popular Vote/" + vote);
                     updateVoteResultsInDatabase(presidentURL);
                 }
             }

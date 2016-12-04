@@ -11,6 +11,8 @@ public class VotesResultsApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        VotesResultsModel.getElectionCycleFromDatabase();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("votesResults.fxml"));
         Parent root = loader.load();
 
