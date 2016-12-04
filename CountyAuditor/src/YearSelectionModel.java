@@ -5,10 +5,10 @@ import com.firebase.client.Firebase;
  */
 public class YearSelectionModel {
 
-    Firebase ref =
+    private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Election Cycle");
 
     public static void setYear(int year) {
-
+        ref.setValue(year);
     }
 
     public static String validateYear(int year) {
