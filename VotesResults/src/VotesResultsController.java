@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.shape.Line;
 
 //import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
@@ -37,12 +39,12 @@ public class VotesResultsController {
     //                                                      ComboBoxes
 
     /**
-     * ChoiceBox to choose chart to view federal results in
+     * ComboBox to choose chart to view federal results in
      */
     @FXML
     private ComboBox federalChartChoice;
     /**
-     * ChoiceBox to choose federal representative
+     * ComboBox to choose federal representative
      */
     @FXML
     private ComboBox federalOffice;
@@ -52,12 +54,12 @@ public class VotesResultsController {
     @FXML
     private ComboBox stateChartChoice;
     /**
-     * ChoiceBox to choose state
+     * ComboBox to choose state
      */
     @FXML
     private ComboBox stateChoice;
     /**
-     * ChoiceBox to choose state representative
+     * ComboBox to choose state representative
      */
     @FXML
     private ComboBox stateOffice;
@@ -67,17 +69,17 @@ public class VotesResultsController {
     @FXML
     private ComboBox countyChartChoice;
     /**
-     * ChoiceBox to choose state for county
+     * ComboBox to choose state for county
      */
     @FXML
     private ComboBox countyState;
     /**
-     * ChoiceBox to choose county
+     * ComboBox to choose county
      */
     @FXML
     private ComboBox countyChoice;
     /**
-     * ChoiceBox to choose county representative
+     * ComboBox to choose county representative
      */
     @FXML
     private ComboBox countyOffice;
@@ -287,6 +289,12 @@ public class VotesResultsController {
 
        // countyOffice.getItems().removeAll();
        // countyOffice.getItems().addAll("County Judge", "County Sheriff");
+
+
+
+        //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //  SET UP THE RANGES FOR EACH OF THE SLIDERS
+        //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
 
 
@@ -296,38 +304,97 @@ public class VotesResultsController {
             federalError.setText("");
             try {
                 fedYear = Integer.parseInt(federalYearBox.getText());
+                federalYearSlider.adjustValue(fedYear);
             } catch (InputMismatchException ime) {
                 federalError.setText("Invalid year");
             }
         } else if(event.getSource()==stateYearBox) {
             stateError.setText("");
             try {
-                fedYear = Integer.parseInt(stateYearBox.getText());
+                staYear = Integer.parseInt(stateYearBox.getText());
+                countyYearSlider.adjustValue(staYear);
             } catch (InputMismatchException ime) {
                 stateError.setText("Invalid year");
             }
         } else if(event.getSource()==countyYearBox) {
             countyError.setText("");
             try {
-                fedYear = Integer.parseInt(countyYearBox.getText());
+                couYear = Integer.parseInt(countyYearBox.getText());
+                countyYearSlider.adjustValue(couYear);
             } catch (InputMismatchException ime) {
                 countyError.setText("Invalid Year");
             }
         }
         updateGUI();
     }
-    /*
-    private void changeEventHandler(ChangeEvent event) {
 
+    @FXML
+    private void changeEventHandler(ChangeEvent event) {
+        if(event.getSource()==federalOffice) {
+            fedOffice = federalOffice.getValue().toString();
+        } else if(event.getSource()==stateChoice) {
+            sta = stateChoice.getValue().toString();
+        } else if(event.getSource()==stateOffice) {
+            staOffice = stateOffice.getValue().toString();
+        } else if(event.getSource()==countyState) {
+            couState = countyState.getValue().toString();
+        } else if(event.getSource()==countyChoice) {
+            cou = countyChoice.getValue().toString();
+        } else if(event.getSource()==countyOffice) {
+            couOffice = countyOffice.getValue().toString();
+        }
+        updateGUI();
     }
-    */
+
     private void updateGUI(){
         if(federal.isSelected()&&(fedOffice!=null&&fedYear!=0&&fedSlider!=0)) {
-            //
+            if(federalBarButton.isSelected()) {
+                federalBarChart.setVisible(true);
+                federalLineChart.setVisible(false);
+                federalPieChart.setVisible(false);
+            } else if(federalLineButton.isSelected()) {
+                federalBarChart.setVisible(false);
+                federalLineChart.setVisible(true);
+                federalPieChart.setVisible(false);
+            } else if(federalPieButton.isSelected()) {
+                federalBarChart.setVisible(false);
+                federalLineChart.setVisible(false);
+                federalPieChart.setVisible(true);
+            }
+            getSeries(fedOffice,fedYear);
         } else if(state.isSelected()) {
-            //
+            if(stateBarButton.isSelected()) {
+                stateBarChart.setVisible(true);
+                stateLineChart.setVisible(false);
+                statePieChart.setVisible(false);
+            } else if(stateLineButton.isSelected()) {
+                stateBarChart.setVisible(false);
+                stateLineChart.setVisible(true);
+                statePieChart.setVisible(false);
+            } else if(statePieButton.isSelected()) {
+                stateBarChart.setVisible(false);
+                stateLineChart.setVisible(false);
+                statePieChart.setVisible(true);
+            }
+            getSeries(staOffice,staYear);
         } else if(county.isSelected()) {
-            //
+            if(countyBarButton.isSelected()) {
+                federalBarChart.setVisible(true);
+                federalLineChart.setVisible(false);
+                federalPieChart.setVisible(false);
+            } else if(countyLineButton.isSelected()) {
+                federalBarChart.setVisible(false);
+                federalLineChart.setVisible(true);
+                federalPieChart.setVisible(false);
+            } else if(countyPieButton.isSelected()) {
+                federalBarChart.setVisible(false);
+                federalLineChart.setVisible(false);
+                federalPieChart.setVisible(true);
+            }
+            getSeries(couOffice,couYear);
         }
+    }
+    private void getSeries(String office, int year) {
+        //
     }
 }
