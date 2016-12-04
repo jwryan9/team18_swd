@@ -1,7 +1,12 @@
+import com.firebase.client.Firebase;
+
 /**
  * Created by jasonryan on 12/3/16.
  */
 public class YearSelectionModel {
+
+    Firebase ref =
+
     public static void setYear(int year) {
 
     }
