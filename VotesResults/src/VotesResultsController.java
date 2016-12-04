@@ -291,7 +291,20 @@ public class VotesResultsController {
        // countyOffice.getItems().removeAll();
        // countyOffice.getItems().addAll("County Judge", "County Sheriff");
 
-
+        // set x-axis labels
+        federalBarChartXAxis.setLabel("Candidate");
+        federalLineChartXAxis.setLabel("Candidate");
+        stateBarChartXAxis.setLabel("Candidates");
+        stateLineChartXAxis.setLabel("Candidates");
+        countyBarChartXAxis.setLabel("Candidate");
+        countyLineChartXAxis.setLabel("Candidate");
+        // set y-axis labels
+        federalBarChartYAxis.setLabel("Votes");
+        federalLineChartYAxis.setLabel("Votes");
+        stateBarChartYAxis.setLabel("Votes");
+        stateLineChartYAxis.setLabel("Votes");
+        countyBarChartYAxis.setLabel("Votes");
+        countyLineChartYAxis.setLabel("Votes");
 
         //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //  SET UP THE RANGES FOR EACH OF THE SLIDERS
@@ -375,6 +388,7 @@ public class VotesResultsController {
                 federalPieChart.setVisible(true);
             }
             getSeries(fedOffice,fedYear);
+//          reset series in each chart
         } else if(state.isSelected()&&(staOffice!=null&&staYear!=0&&staSlider!=0)) {
             if(stateBarButton.isSelected()) {
                 stateBarChart.setVisible(true);
@@ -390,6 +404,7 @@ public class VotesResultsController {
                 statePieChart.setVisible(true);
             }
             getSeries(staOffice,staYear);
+//          reset series in each chart
         } else if(county.isSelected()&&(couOffice!=null&&couYear!=0&&couSlider!=0)) {
             if(countyBarButton.isSelected()) {
                 federalBarChart.setVisible(true);
@@ -405,6 +420,7 @@ public class VotesResultsController {
                 federalPieChart.setVisible(true);
             }
             getSeries(couOffice,couYear);
+//          reset series in each chart
         }
     }
     private void getSeries(String office, int year) {
