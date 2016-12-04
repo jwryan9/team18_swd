@@ -160,7 +160,7 @@ public class VotesResultsModel {
                     //System.out.println("next Key " + key + " " +presidentialCandidates.containsKey(key));
                     //Candidate currCand = presidentialCandidates.get(key);
                     //currCand.setVotes(idNumberToVotesMap.get(nextKey));
-                    System.out.println("candidate map: " + key + " " + presidentialCandidates.get(key).getName());
+//                    System.out.println("candidate map: " + key + " " + presidentialCandidates.get(key).getName());
 
 
                     presidentialResults.put(nextKey,idNumberToVotesMap.get(nextKey));
@@ -183,50 +183,8 @@ public class VotesResultsModel {
 
     }
 
-    public synchronized static void getFederalCandidatesFromDatabase(){
 
-        Firebase senateRef = ref.child(electionYear + "/Candidates/Federal/US Senate");
-        Firebase houseRef = ref.child(electionYear + "/Candidates/Federal/House");
-
-        senateRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                int idNumber = Integer.parseInt(dataSnapshot.getKey());
-                Map<String,String> nextCandidate = dataSnapshot.getValue(Map.class);
-
-                Candidate newCandidate = new Candidate(nextCandidate, idNumber);
-
-                presidentialCandidates.put(idNumber,newCandidate);
-
-                System.out.println("Pres results keys " + presidentialCandidates.keySet());
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-    }
-
-
-    public synchronized static void stateResults(String state) {
+    public synchronized void stateResults(String state) {
 
 
         Firebase houseRef = ref.child(electionYear + "/Results/" + state + "/State House");
@@ -239,24 +197,16 @@ public class VotesResultsModel {
 
                 Map<String,Integer> idNumberToVotesMap = new HashMap<>();
 
-                //System.out.println("datasnapshot " + dataSnapshot.getValue());
-
 
                 idNumberToVotesMap = dataSnapshot.getValue(HashMap.class);
 
-                //System.out.println("ID map keys: " + idNumberToVotesMap.values());
 
                 for (String nextKey: idNumberToVotesMap.keySet()) {
                     int key = Integer.parseInt(nextKey);
                     System.out.println("id map " + key + " " + idNumberToVotesMap.get(nextKey));
 
-                    //System.out.println("next Key " + key + " " +presidentialCandidates.containsKey(key));
-                    //Candidate currCand = presidentialCandidates.get(key);
-                    //currCand.setVotes(idNumberToVotesMap.get(nextKey));
-                    System.out.println("candidate map: " + key + " " + stateHouseCandidates.get(key).getName());
 
-
-                    stateHouseResults.put(stateHouseCandidates.get(key).getName(),idNumberToVotesMap.get(nextKey));
+                    stateHouseResults.put(nextKey,idNumberToVotesMap.get(nextKey));
 
                     System.out.println("results map keys " + stateHouseResults.keySet());
                     System.out.println("results map values " + stateHouseResults.values());
@@ -296,10 +246,10 @@ public class VotesResultsModel {
                     System.out.println("gov candidate map: " + key + " " + stateGovernorCandidates.get(key).getName());
 
 
-                    stateGovernorResults.put(stateGovernorCandidates.get(key).getName(),idNumberToVotesMap.get(nextKey));
+                    stateGovernorResults.put(nextKey,idNumberToVotesMap.get(nextKey));
 
-                    System.out.println("gov results map keys " + presidentialResults.keySet());
-                    System.out.println("gov results map values " + presidentialResults.values());
+                    System.out.println("gov results map keys " + stateGovernorResults.keySet());
+                    System.out.println("gov results map values " + stateGovernorResults.values());
 
                 }
 

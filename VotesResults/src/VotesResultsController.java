@@ -379,8 +379,10 @@ public class VotesResultsController {
 
         } else if(event.getSource()==stateChoice) {
             sta = stateChoice.getValue().toString();
+            addDataToPlots(sta, 2016);
         } else if(event.getSource()==stateOffice) {
             staOffice = stateOffice.getValue().toString();
+            ada
         } else if(event.getSource()==countyState) {
             couState = countyState.getValue().toString();
 //          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -468,16 +470,8 @@ public class VotesResultsController {
             case "US House":
                 results = VotesResultsModel.getUsHouseResults();
                 break;
-
-
         }
-
-        vrm.getStateCandidatesFromDatabase("IL");
-        try{
-            Thread.sleep(1000);
-        }catch (Exception e){};
-        results = vrm.getPresidentialResults();
-        VotesResultsModel.stateResults("IL");
+        //VotesResultsModel.stateResults("IL");
 
         addDataToPlots("A", 2016);
         // Also reset the slider to hold the range of the year over which we have polls from the voters
@@ -488,7 +482,8 @@ public class VotesResultsController {
     }
 
     private void addDataToPlots(String office, int year){
-
+        federalPieChart.getData().clear();
+        federalBarChart.getData().clear();
 
         results = VotesResultsModel.getPresidentialResults();
         System.out.println(results.keySet());
@@ -499,7 +494,7 @@ public class VotesResultsController {
             String name = key;
             Integer votes = results.get(key);
             federalPieChart.getData().add(new PieChart.Data(name,votes));
-            federalBarChartXAxis.getCategories().add(name);
+            //federalBarChartXAxis.getCategories().add(name);
             series1.getData().add(new XYChart.Data(name,votes));
 
         }

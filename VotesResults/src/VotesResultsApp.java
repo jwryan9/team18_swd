@@ -18,14 +18,15 @@ public class VotesResultsApp extends Application {
 
         VotesResultsController controller = loader.getController();
         controller.initGUI();
-
+/*
         VotesResultsModel.getPresidentialCandidatesFromDatabase();
-        //VotesResultsModel.getAllCandidates();
+        VotesResultsModel.getAllCandidates();
         try{
             Thread.sleep(2000);
         }catch (Exception e){
             System.err.println("Thread sleep");
         }
+        */
 
         VotesResultsModel.getPresidentPopularVoteFromDatabase();
 
