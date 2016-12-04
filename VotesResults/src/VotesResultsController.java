@@ -1,8 +1,6 @@
 import com.sun.corba.se.spi.monitoring.LongMonitoredAttributeBase;
 import javafx.fxml.FXML;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.PieChart;
-import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Line;
@@ -18,7 +16,8 @@ import java.util.InputMismatchException;
  * Created by Daniel on 12/2/2016.
  */
 public class VotesResultsController {
-    // Declare instance variables
+    //                                                      Tabs
+
     /**
      * Tab for federal results
      */
@@ -34,6 +33,9 @@ public class VotesResultsController {
      */
     @FXML
     private Tab county;
+
+    //                                                      ComboBoxes
+
     /**
      * ChoiceBox to choose chart to view federal results in
      */
@@ -79,6 +81,9 @@ public class VotesResultsController {
      */
     @FXML
     private ComboBox countyOffice;
+
+    //                                                        TextFields
+
     /**
      * TextField to enter year of federal polls
      */
@@ -94,6 +99,9 @@ public class VotesResultsController {
      */
     @FXML
     private TextField countyYearBox;
+
+    //                                                        Sliders
+
     /**
      * Slider to select the year of federal polls
      */
@@ -109,33 +117,108 @@ public class VotesResultsController {
      */
     @FXML
     private Slider countyYearSlider;
+
+    //                                                          Charts
+
     /**
-     * Chart to view the results of the federal polls
+     * Bar chart to view the results of the federal polls
      */
     @FXML
-    private StackedBarChart federalBarChart;
+    private StackedBarChart<String, Integer> federalBarChart;
+    @FXML
+    private CategoryAxis federalBarChartXAxis;
+    @FXML
+    private NumberAxis federalBarChartYAxis;
+    @FXML
+    private XYChart.Series<String, Integer> federalSeries;
     /**
-     * Chart to view the results of the state polls
+     * Bar chart to view the results of the state polls
      */
     @FXML
-    private StackedBarChart stateBarChart;
+    private StackedBarChart<String,Integer> stateBarChart;
+    @FXML
+    private CategoryAxis stateBarChartXAxis;
+    @FXML
+    private NumberAxis stateBarChartYAxis;
+    @FXML
+    private XYChart.Series<String, Integer> stateSeries;
     /**
-     * Chart to view the results of the county polls
+     * Bar chart to view the results of the county polls
      */
     @FXML
-    private StackedBarChart countyBarChart;
+    private StackedBarChart<String, Integer> countyBarChart;
+    @FXML
+    private CategoryAxis countyBarChartXAxis;
+    @FXML
+    private NumberAxis countyBarChartYAxis;
+    @FXML
+    private XYChart.Series<String, Integer> countrySeries;
+    /**
+     * Pie chart to view the results of the federal polls
+     */
     @FXML
     private PieChart federalPieChart;
+    /**
+     * Pie chart to view the results of the state polls
+     */
     @FXML
     private PieChart statePieChart;
+    /**
+     * Pie chart to view the results of the county polls
+     */
     @FXML
     private PieChart countyPieChart;
+    /**
+     * Line chart to view the results of the federal polls
+     */
     @FXML
     private LineChart federalLineChart;
     @FXML
+    private CategoryAxis federalLineChartXAxis;
+    @FXML
+    private NumberAxis federalLineChartYAxis;
+    /**
+     * Line chart to view the results of the state polls
+     */
+    @FXML
     private LineChart stateLineChart;
     @FXML
+    private CategoryAxis stateLineChartXAxis;
+    @FXML
+    private NumberAxis stateLineChartYAxis;
+    /**
+     * Line chart to view the results of the county polls
+     */
+    @FXML
     private LineChart countyLineChart;
+    @FXML
+    private CategoryAxis countyLineChartXAxis;
+    @FXML
+    private NumberAxis countyLineChartYAxis;
+
+    //                                                          RadioButtons
+
+    @FXML
+    private RadioButton federalBarButton;
+    @FXML
+    private RadioButton federalLineButton;
+    @FXML
+    private RadioButton federalPieButton;
+    @FXML
+    private RadioButton stateBarButton;
+    @FXML
+    private RadioButton stateLineButton;
+    @FXML
+    private RadioButton statePieButton;
+    @FXML
+    private RadioButton countyBarButton;
+    @FXML
+    private RadioButton countyLineButton;
+    @FXML
+    private RadioButton countyPieButton;
+
+    //                                                          Labels
+
     /**
      * Label to display brief user federal information input error message
      */
@@ -152,7 +235,7 @@ public class VotesResultsController {
     @FXML
     private Label countyError;
 
-    //  Variables to hold the values of the controls
+    //                                      Variables to hold the values of the controls
 
     String fedOffice = "";
     String sta = "";
