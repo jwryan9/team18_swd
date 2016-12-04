@@ -14,15 +14,28 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Created by jasonryan on 12/3/16.
+ * Controller for Year Selection application
  */
 public class YearSelectionController {
+    /**
+     * TextField for entering year
+     */
     @FXML private TextField yearField;
 
+    /**
+     * Button for setting year
+     */
     @FXML private Button setButton;
 
+    /**
+     * Text to inform user if input is invalid
+     */
     @FXML private Text invalidText;
 
+    /**
+     * Sets year for election cycle
+     * @param event ActionEvent calling method
+     */
     @FXML private void setYear(ActionEvent event) {
         int year = -1;
         try {
