@@ -14,7 +14,7 @@ public class VotesResultsApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("votesResults.fxml"));
         Parent root = loader.load();
 
-        VotesResultsControllerDan controller = loader.getController();
+        VotesResultsController controller = loader.getController();
         controller.initGUI();
 
         primaryStage.setTitle("!!POLLS ARE IN!!");
