@@ -42,16 +42,20 @@ public class CountyAuditorController {
      */
     @FXML private ComboBox partyDropdown;
 
+    /**
+     * Text for informing user if entry is valid
+     */
     @FXML private Text entryValidText;
 
+    /**
+     * Map for storing the different offices candidates can run for
+     */
     private static Map<String,String[]> officeOptions = new HashMap<>();
 
     /**
      * Initializes values for comboBoxes and instantiates CandidateMap.
      */
     public void initGUI() {
-
-
         stateDropdown.getItems().removeAll();
         stateDropdown.getItems().addAll("AL", "AK", "AZ", "AR", "CA",
                                         "CO", "CT", "DE", "FL", "GA",

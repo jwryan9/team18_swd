@@ -3,6 +3,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -31,8 +32,9 @@ public class YearSelectionApp extends Application {
 
         YearSelectionController controller = loader.getController();
 
-        primaryStage.setTitle("Candidate Entry");
+        primaryStage.setTitle("Set Election Year");
         primaryStage.setScene(new Scene(root));
+        primaryStage.getIcons().add(new Image("file:american-flag-small.png"));
 
         primaryStage.setOnCloseRequest(
                 e -> {

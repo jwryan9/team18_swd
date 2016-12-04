@@ -7,7 +7,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 
 public class VoterLoginApp extends Application {
 
@@ -36,6 +38,7 @@ public class VoterLoginApp extends Application {
 
         primaryStage.setTitle("Ballot Login");
         primaryStage.setScene(new Scene(root));
+        primaryStage.getIcons().add(new Image("file:american-flag-small.png"));
 
         primaryStage.setOnCloseRequest(
                 e -> {
