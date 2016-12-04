@@ -11,8 +11,8 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField id="federalYearBox" fx:id="federalYearBox" layoutX="122.0" layoutY="15.0" prefHeight="30.0" prefWidth="52.0" promptText="Year" />
-                  <Slider id="federalYearSlider" fx:id="federalYearSlider" layoutX="183.0" layoutY="22.0" prefHeight="18.0" prefWidth="94.0" />
+                  <TextField id="federalYearBox" fx:id="federalYearBox" layoutX="122.0" layoutY="15.0" onAction="#actionEventHandler" prefHeight="30.0" prefWidth="52.0" promptText="Year" />
+                  <Slider id="federalYearSlider" fx:id="federalYearSlider" layoutX="183.0" layoutY="22.0" onDragDetected="#changeEventHandler" prefHeight="18.0" prefWidth="94.0" />
                   <StackedBarChart id="federalBarChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
@@ -22,7 +22,7 @@
                     </yAxis>
                   </StackedBarChart>
                   <Label id="federalError" layoutX="480.0" layoutY="19.0" prefHeight="23.0" prefWidth="110.0" textFill="RED" />
-                  <ComboBox id="federalOffice" layoutX="14.0" layoutY="15.0" prefHeight="31.0" prefWidth="98.0" />
+                  <ComboBox id="federalOffice" fx:id="federalOffice" layoutX="14.0" layoutY="15.0" onAction="#changeEventHandler" prefHeight="31.0" prefWidth="98.0" />
                   <PieChart id="federalPieChart" layoutX="148.0" layoutY="66.0" prefHeight="278.0" prefWidth="306.0" />
                   <LineChart id="federalLineChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
                     <xAxis>
@@ -32,9 +32,9 @@
                       <NumberAxis side="LEFT" />
                     </yAxis>
                   </LineChart>
-                  <RadioButton id="federalBarButton" layoutX="512.0" layoutY="120.0" mnemonicParsing="false" text="Bar" />
-                  <RadioButton id="federalLineButton" layoutX="512.0" layoutY="147.0" mnemonicParsing="false" text="Line" />
-                  <RadioButton id="federalPieButton" layoutX="512.0" layoutY="174.0" mnemonicParsing="false" text="Pie" />
+                  <RadioButton id="federalBarButton" fx:id="federalBarButton" layoutX="512.0" layoutY="120.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Bar" />
+                  <RadioButton id="federalLineButton" fx:id="federalLineButton" layoutX="512.0" layoutY="147.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Line" />
+                  <RadioButton id="federalPieButton" fx:id="federalPieButton" layoutX="512.0" layoutY="174.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Pie" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -42,8 +42,8 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Slider id="stateYearSlider" fx:id="stateYearSlider" layoutX="284.0" layoutY="22.0" prefHeight="18.0" prefWidth="94.0" />
-                  <TextField id="stateYearBox" fx:id="stateYearBox" layoutX="225.0" layoutY="15.0" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
+                  <Slider id="stateYearSlider" fx:id="stateYearSlider" layoutX="284.0" layoutY="22.0" onDragDetected="#changeEventHandler" prefHeight="18.0" prefWidth="94.0" />
+                  <TextField id="stateYearBox" fx:id="stateYearBox" layoutX="225.0" layoutY="15.0" onAction="#actionEventHandler" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
                   <StackedBarChart id="stateBarChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
@@ -53,8 +53,8 @@
                     </yAxis>
                   </StackedBarChart>
                   <Label id="stateError" layoutX="480.0" layoutY="19.0" prefHeight="23.0" prefWidth="110.0" textFill="RED" />
-                  <ComboBox id="stateChoice" layoutX="15.0" layoutY="15.0" prefHeight="31.0" prefWidth="98.0" />
-                  <ComboBox id="stateRep" layoutX="120.0" layoutY="15.0" prefHeight="31.0" prefWidth="98.0" />
+                  <ComboBox id="stateChoice" fx:id="stateChoice" layoutX="15.0" layoutY="15.0" onAction="#changeEventHandler" prefHeight="31.0" prefWidth="98.0" />
+                  <ComboBox id="stateRep" fx:id="stateOffice" layoutX="120.0" layoutY="15.0" onAction="#changeEventHandler" prefHeight="31.0" prefWidth="98.0" />
                   <LineChart id="stateLineChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
@@ -64,9 +64,9 @@
                     </yAxis>
                   </LineChart>
                   <PieChart id="statePieChart" layoutX="148.0" layoutY="66.0" prefHeight="278.0" prefWidth="306.0" />
-                  <RadioButton id="stateBarButton" layoutX="512.0" layoutY="120.0" mnemonicParsing="false" text="Bar" />
-                  <RadioButton id="stateLineButton" layoutX="512.0" layoutY="147.0" mnemonicParsing="false" text="Line" />
-                  <RadioButton id="statePieButton" layoutX="512.0" layoutY="174.0" mnemonicParsing="false" text="Pie" />
+                  <RadioButton id="stateBarButton" fx:id="stateBarButton" layoutX="512.0" layoutY="120.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Bar" />
+                  <RadioButton id="stateLineButton" fx:id="stateLineButton" layoutX="512.0" layoutY="147.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Line" />
+                  <RadioButton id="statePieButton" fx:id="statePieButton" layoutX="512.0" layoutY="174.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Pie" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -74,8 +74,8 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Slider id="countyYearSlider" layoutX="386.0" layoutY="21.0" prefHeight="18.0" prefWidth="94.0" />
-                  <TextField id="countyYearBox" layoutX="327.0" layoutY="14.0" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
+                  <Slider id="countyYearSlider" fx:id="countyYearSlider" layoutX="386.0" layoutY="21.0" onDragDetected="#changeEventHandler" prefHeight="18.0" prefWidth="94.0" />
+                  <TextField id="countyYearBox" fx:id="countyYearBox" layoutX="327.0" layoutY="14.0" onAction="#actionEventHandler" prefHeight="20.0" prefWidth="53.0" promptText="Year" />
                   <StackedBarChart id="countyBarChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
@@ -85,9 +85,9 @@
                     </yAxis>
                   </StackedBarChart>
                   <Label id="countyError" layoutX="480.0" layoutY="19.0" prefHeight="23.0" prefWidth="110.0" textFill="RED" />
-                  <ComboBox id="countyChoice" layoutX="119.0" layoutY="14.0" prefHeight="31.0" prefWidth="98.0" />
-                  <ComboBox id="countyRep" layoutX="223.0" layoutY="14.0" prefHeight="31.0" prefWidth="98.0" />
-                  <ComboBox id="countyState" layoutX="15.0" layoutY="14.0" prefHeight="31.0" prefWidth="98.0" />
+                  <ComboBox id="countyChoice" fx:id="countyChoice" layoutX="119.0" layoutY="14.0" onAction="#changeEventHandler" prefHeight="31.0" prefWidth="98.0" />
+                  <ComboBox id="countyRep" fx:id="countyOffice" layoutX="223.0" layoutY="14.0" onAction="#changeEventHandler" prefHeight="31.0" prefWidth="98.0" />
+                  <ComboBox id="countyState" fx:id="countyState" layoutX="15.0" layoutY="14.0" onAction="#changeEventHandler" prefHeight="31.0" prefWidth="98.0" />
                   <LineChart id="countyLineChart" layoutX="15.0" layoutY="62.0" prefHeight="285.0" prefWidth="488.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
@@ -97,9 +97,9 @@
                     </yAxis>
                   </LineChart>
                   <PieChart id="countyPieChart" layoutX="148.0" layoutY="66.0" prefHeight="278.0" prefWidth="306.0" />
-                  <RadioButton id="countyBarButton" layoutX="512.0" layoutY="120.0" mnemonicParsing="false" text="Bar" />
-                  <RadioButton id="countyLineButton" layoutX="512.0" layoutY="147.0" mnemonicParsing="false" text="Line" />
-                  <RadioButton id="countyPieButton" layoutX="512.0" layoutY="174.0" mnemonicParsing="false" text="Pie" />
+                  <RadioButton id="countyBarButton" fx:id="countyBarButton" layoutX="512.0" layoutY="120.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Bar" />
+                  <RadioButton id="countyLineButton" fx:id="countyLineButton" layoutX="512.0" layoutY="147.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Line" />
+                  <RadioButton id="countyPieButton" fx:id="countyPieButton" layoutX="512.0" layoutY="174.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Pie" />
                </children>
             </AnchorPane>
         </content>

@@ -342,6 +342,12 @@ public class VotesResultsController {
             cou = countyChoice.getValue().toString();
         } else if(event.getSource()==countyOffice) {
             couOffice = countyOffice.getValue().toString();
+        } else if(event.getSource()==federalYearSlider) {
+            //
+        } else if(event.getSource()==stateYearSlider) {
+            //
+        } else if(event.getSource()==countyYearSlider) {
+            //
         }
         updateGUI();
     }
