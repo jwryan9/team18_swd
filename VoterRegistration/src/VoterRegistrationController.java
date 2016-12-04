@@ -91,8 +91,6 @@ public class VoterRegistrationController {
                 Voter newVoter = new Voter(encryptedSSN, (firstName+ " " + lastName), zipCode);
                 VoterRegistrationModel.exportVoter(encryptedSSN, newVoter);
 
-                //registerValidText.setFill(Color.BLACK);
-                //registerValidText.setText(validInput);
                 ImageIcon icon = new ImageIcon("thumbsup.png");
                 System.out.println("size: " + icon.getIconHeight());
                 showMessage("Registration Successful",icon);
@@ -122,6 +120,7 @@ public class VoterRegistrationController {
         ssnField.setText("");
         zipField.setText("");
         stateDropdown.getSelectionModel().clearSelection();
+        registerValidText.setText("");
     }
 
     /**

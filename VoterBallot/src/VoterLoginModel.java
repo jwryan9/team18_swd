@@ -60,7 +60,6 @@ public class VoterLoginModel{
 
             }
 
-
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 System.err.println("Firebase Error");
@@ -108,7 +107,6 @@ public class VoterLoginModel{
     public synchronized static boolean checkVoterRegistrationQuery(String encryptedID, String zipCode) {
 
         if(registeredVoters.containsKey(encryptedID)){
-
             if(registeredVoters.get(encryptedID).equals(zipCode)){
                 System.out.println("true, voter found");
                 isRegisteredVoter = true;
@@ -116,7 +114,6 @@ public class VoterLoginModel{
         }
         else{
             System.out.println("false, voter not found");
-
             isRegisteredVoter = false;
         }
 
@@ -124,7 +121,8 @@ public class VoterLoginModel{
     }
 
     public synchronized static void getAlreadyVotedFromDatabase(){
-        Firebase alreadyVotedRef = ref.child(VoterBallotModel.getElectionYear() + "Results/Already Voted");
+        System.err.println("Ref: " + ref);
+        //Firebase alreadyVotedRef = ref.child(VoterBallotModel.getElectionYear() + "Results/Already Voted");
 
         alreadyVotedRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -142,12 +140,17 @@ public class VoterLoginModel{
     public synchronized static boolean checkAlreadyVoted(String encyrptedSSN){
 
 //        System.out.println(".contains ssn: " + alreadyVotedString.contains(encyrptedSSN));
-        if(alreadyVotedString != null) {
+        getAlreadyVotedFromDatabase();
+        System.err.println(alreadyVotedString);
+        try {
             if (alreadyVotedString.contains(encyrptedSSN)) {
                 return true;
             }
+        } catch (NullPointerException ex){
+            System.err.println("Null pointer exception");
+        } finally {
+            return false;
         }
-        return false;
     }
 
 
