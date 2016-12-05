@@ -6,9 +6,16 @@ import com.firebase.client.*;
  */
 public class CountyAuditorModel {
 
+    /**
+     * Stores current election year
+     */
     private static String electionYear = "";
 
+    /**
+     * Reverence to election cycle in database
+     */
     private static Firebase cycleReference = new Firebase("https://votingsystem-5e175.firebaseio.com/Election Cycle");
+
     /**
      * Variable to hold reference to the database.
      */
@@ -16,6 +23,7 @@ public class CountyAuditorModel {
 
     /**
      * Method to check the user input for the candidate information.
+     *
      * @param name      the candidate's name.
      * @param zip       the candidate's zip.
      * @param state     the candidate's state.
@@ -38,6 +46,7 @@ public class CountyAuditorModel {
 
     /**
      * Method to export a candidate to the database.
+     *
      * @param id            The candidate's id number.
      * @param candidate     The reference to the candidate object.
      * @param level         The level of government that the candidate is seeking office.
