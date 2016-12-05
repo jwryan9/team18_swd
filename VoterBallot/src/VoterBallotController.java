@@ -237,7 +237,7 @@ public class VoterBallotController {
      *
      * @param event ActionEvent calling method
      */
-    @FXML private void setSelections(ActionEvent event) {//throws NullPointerException {
+    @FXML private void setSelections(ActionEvent event) {
         ComboBox a = (ComboBox) event.getSource();
         System.out.println(a.getId());
         switch (a.getId()) {
