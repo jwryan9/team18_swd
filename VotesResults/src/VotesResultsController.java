@@ -131,16 +131,34 @@ public class VotesResultsController {
      */
     @FXML
     private StackedBarChart<String, Integer> federalBarChart;
+    /**
+     * X-Axis for federal polls bar chart
+     */
     @FXML
     private CategoryAxis federalBarChartXAxis;
+    /**
+     * Y-Axis for federal polls bar chart
+     */
     @FXML
     private NumberAxis federalBarChartYAxis;
+    /**
+     * Bar chart to view the results of the Electoral College votes
+     */
     @FXML
     private StackedBarChart<String, Integer> electoralBarChart;
+    /**
+     * X-Axis for electoral college votes
+     */
     @FXML
     CategoryAxis electoralCollegeBarChartXAxis;
+    /**
+     * Y-Axis for electoral college votes
+     */
     @FXML
     NumberAxis electoralCollegeBarChartYAxis;
+    /**
+     *
+     */
     @FXML
     private XYChart.Series<String, Integer> federalSeries;
     /**
@@ -148,10 +166,19 @@ public class VotesResultsController {
      */
     @FXML
     private StackedBarChart<String,Integer> stateBarChart;
+    /**
+     * X-Axis for state election results
+     */
     @FXML
     private CategoryAxis stateBarChartXAxis;
+    /**
+     * Y-Axis for state election results
+     */
     @FXML
     private NumberAxis stateBarChartYAxis;
+    /**
+     * Data series for state election results
+     */
     @FXML
     private XYChart.Series<String, Integer> stateSeries;
     /**
@@ -159,6 +186,9 @@ public class VotesResultsController {
      */
     @FXML
     private StackedBarChart<String, Integer> countyBarChart;
+    /**
+     * X-Axis for county election results
+     */
     @FXML
     private CategoryAxis countyBarChartXAxis;
     @FXML
@@ -721,8 +751,4 @@ System.out.println("EC SIZE: " +newResults.size());
         }
 
     }
-
-
-
-
 }
