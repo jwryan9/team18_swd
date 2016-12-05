@@ -191,6 +191,9 @@ public class VotesResultsController {
      */
     @FXML
     private CategoryAxis countyBarChartXAxis;
+    /**
+     * Y-Axis for county election results
+     */
     @FXML
     private NumberAxis countyBarChartYAxis;
     @FXML
@@ -210,54 +213,42 @@ public class VotesResultsController {
      */
     @FXML
     private PieChart countyPieChart;
-    /**
-     * Line chart to view the results of the federal polls
-     */
-    @FXML
-    private LineChart federalLineChart;
-    @FXML
-    private CategoryAxis federalLineChartXAxis;
-    @FXML
-    private NumberAxis federalLineChartYAxis;
-    /**
-     * Line chart to view the results of the state polls
-     */
-    @FXML
-    private LineChart stateLineChart;
-    @FXML
-    private CategoryAxis stateLineChartXAxis;
-    @FXML
-    private NumberAxis stateLineChartYAxis;
-    /**
-     * Line chart to view the results of the county polls
-     */
-    @FXML
-    private LineChart countyLineChart;
-    @FXML
-    private CategoryAxis countyLineChartXAxis;
-    @FXML
-    private NumberAxis countyLineChartYAxis;
 
     //                                                          RadioButtons
 
+    /**
+     * federal tab button to select bar chart
+     */
     @FXML
     private RadioButton federalBarButton;
-    @FXML
-    private RadioButton federalLineButton;
+    /**
+     * federal tab button to select pie chart
+     */
     @FXML
     private RadioButton federalPieButton;
+    /**
+     * state tab button to select bar chart
+     */
     @FXML
     private RadioButton stateBarButton;
-    @FXML
-    private RadioButton stateLineButton;
+    /**
+     * state tab button to select pie chart
+     */
     @FXML
     private RadioButton statePieButton;
+    /**
+     * county tab button to select bar chart
+     */
     @FXML
     private RadioButton countyBarButton;
-    @FXML
-    private RadioButton countyLineButton;
+    /**
+     * county tab button to select pie chart
+     */
     @FXML
     private RadioButton countyPieButton;
+    /**
+     * federal tab button to select electoral college bar chart
+     */
     @FXML
     private RadioButton electoralCollegeButton;
 
@@ -281,17 +272,53 @@ public class VotesResultsController {
 
     //                                      Variables to hold the values of the controls
 
+    /**
+     * string to hold the text from the federal office drop-down
+     */
     String fedOffice = "";
+    /**
+     * string to hold the text from the state choice drop-down
+     */
     String sta = "";
+    /**
+     * string to hold the text from the state office drop-down
+     */
     String staOffice = "";
+    /**
+     * string to hold the text from the county state choice drop-down
+     */
     String couState = "";
+    /**
+     * string to hold the text from the county choice drop-down
+     */
     String cou = "";
+    /**
+     * string to hold the text from the county office drop-down
+     */
     String couOffice = "";
+    /**
+     * integer to hold the year chosen from the federal textfield
+     */
     int fedYear = 0;
+    /**
+     * integer to hold the year chosen from the state textfield
+     */
     int staYear = 0;
+    /**
+     * integer to hold the year chosen from the county textfield
+     */
     int couYear = 0;
+    /**
+     * integer to hold the year chosen from the federal slider
+     */
     int fedSlider = 0;
+    /**
+     * integer to hold the year chosen from the state slider
+     */
     int staSlider = 0;
+    /**
+     * integer to hold the year chosen from the county slider
+     */
     int couSlider = 0;
 
     Map<String,Integer> results;
@@ -386,20 +413,14 @@ System.out.println("EC SIZE: " +newResults.size());
 
         // set x-axis labels
         federalBarChartXAxis.setLabel("Candidate");
-//        federalLineChartXAxis.setLabel("Candidate");
         electoralCollegeBarChartXAxis.setLabel("Candidate");
         stateBarChartXAxis.setLabel("Candidates");
-        stateLineChartXAxis.setLabel("Candidates");
         countyBarChartXAxis.setLabel("Candidate");
-        countyLineChartXAxis.setLabel("Candidate");
         // set y-axis labels
         federalBarChartYAxis.setLabel("Votes");
- //       federalLineChartYAxis.setLabel("Votes");
         electoralCollegeBarChartYAxis.setLabel("Electoral College Votes");
         stateBarChartYAxis.setLabel("Votes");
-        stateLineChartYAxis.setLabel("Votes");
         countyBarChartYAxis.setLabel("Votes");
-        countyLineChartYAxis.setLabel("Votes");
         electoralCollegeBarChartYAxis.setTickUnit(20);
         electoralCollegeBarChartYAxis.setAutoRanging(false);
 
