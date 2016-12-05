@@ -24,7 +24,7 @@ public class VoterRegistrationModel {
         if(!zip.matches("\\d+") || zip.length() != 5){
             return "Error: Invalid Zip Code";
         }
-        if(!ZipCode.validateZip(zip, state, "Resources/zipcodes.csv")) {
+        if(!ZipCode.validateZip(zip, state, "VoterRegistration/Resources/zipcodes.csv")) {
             return "Error: Invalid State/Zip Code pair";
         }
 

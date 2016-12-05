@@ -87,7 +87,6 @@ public class VoterBallotModel {
                     }
 
                     federalCandidates.put(federalPositions[i],candidateArrayList);
-                    //System.out.println("Federal Keys " + federalCandidates.keySet());
 
                     System.out.println("position:" + federalPositions[i] + " size: " + federalCandidates.get(federalPositions[i]).size());
 

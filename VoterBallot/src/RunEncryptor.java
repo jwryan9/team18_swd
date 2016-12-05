@@ -33,12 +33,12 @@ public class RunEncryptor {
 
      /**
      * Constructor to initialize the RunEncryptor variables.
-     * @param id
-     * @throws IOException
+     * @param id user id
+     * @throws IOException exception reading file
      */
     public RunEncryptor(String id) throws IOException{
 
-        String keyFileLocation = "Resources/keys.txt";
+        String keyFileLocation = "VoterBallot/Resources/keys.txt";
 
 
         try{

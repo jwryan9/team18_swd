@@ -22,7 +22,6 @@ public class CountyAuditorApp extends Application {
         CountyAuditorModel.getElectionCycle();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("countyAuditor.fxml"));
-        // Parent root = FXMLLoader.load(getClass().getResource("countyAuditor.fxml"));
         Parent root = loader.load();
 
         CountyAuditorController controller = loader.getController();
@@ -30,7 +29,7 @@ public class CountyAuditorApp extends Application {
 
         primaryStage.setTitle("Candidate Entry");
         primaryStage.setScene(new Scene(root));
-        primaryStage.getIcons().add(new Image("file:Resources/american-flag-small.png"));
+        primaryStage.getIcons().add(new Image("file:CountyAuditor/Resources/american-flag-small.png"));
 
         primaryStage.setOnCloseRequest(
                 e -> {

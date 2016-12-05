@@ -134,7 +134,7 @@ public class VoterBallotController {
         this.voterZip = zip;
         System.out.println("Zip in ballot controller: " + voterZip);
 
-        String[] zipArray = ZipCode.parseZip(this.voterZip, "Resouces/zipcodes.csv");
+        String[] zipArray = ZipCode.parseZip(this.voterZip, "CountyAuditor/Resources/zipcodes.csv");
         if(zipArray != null) {
             this.voterCounty = zipArray[0];
             this.voterState = zipArray[1];

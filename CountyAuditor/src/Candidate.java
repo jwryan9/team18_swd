@@ -2,7 +2,6 @@
  * Class to create Candidates.
  */
 public class Candidate {
-    //private int idNumber;
     /**
      * Variable to hold candidate's name.
      */
@@ -37,7 +36,6 @@ public class Candidate {
      * @param party     candidate's party.
      */
     public Candidate(String name, String zip, String state, String office, String party){
-        //this.idNumber;
         this.name = name;
         this.zip = zip;
         this.state = state;

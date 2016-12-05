@@ -99,7 +99,7 @@ public class VoterLoginController {
                         Stage stage = new Stage();
                         stage.setTitle("Ballot");
                         stage.setScene(new Scene(root));
-                        stage.getIcons().add(new Image("file:Resources/american-flag-small.png"));
+                        stage.getIcons().add(new Image("file:VoterBallot/Resources/american-flag-small.png"));
 
                         stage.setOnCloseRequest(
                                 e -> {

@@ -94,7 +94,7 @@ public class VoterRegistrationController {
                 Voter newVoter = new Voter(encryptedSSN, (firstName+ " " + lastName), zipCode);
                 VoterRegistrationModel.exportVoter(encryptedSSN, newVoter);
 
-                ImageIcon icon = new ImageIcon("Resources/thumbsup.png");
+                ImageIcon icon = new ImageIcon("VoterRegistration/Resources/thumbsup.png");
                 System.out.println("size: " + icon.getIconHeight());
                 showMessage("Registration Successful",icon);
 

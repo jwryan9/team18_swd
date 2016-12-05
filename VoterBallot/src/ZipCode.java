@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Class for zip code lookup
@@ -28,7 +27,7 @@ public class ZipCode {
                 }
             }
         } catch (IOException ex) {
-            System.err.println("Error opening file");
+            System.err.println("Error opening file " + zipFilePath);
         }
         return null;
     }
