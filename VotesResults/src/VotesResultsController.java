@@ -140,7 +140,7 @@ public class VotesResultsController {
     @FXML
     CategoryAxis electoralCollegeBarChartXAxis;
     @FXML
-    CategoryAxis electoralCollegeBarChartYAxis;
+    NumberAxis electoralCollegeBarChartYAxis;
     @FXML
     private XYChart.Series<String, Integer> federalSeries;
     /**
@@ -272,10 +272,29 @@ public class VotesResultsController {
     private VotesResultsModel vrm = new VotesResultsModel();
 
     public void initGUI() {
-
         couYear = Integer.parseInt(VotesResultsModel.getElectionYear());
         staYear = Integer.parseInt(VotesResultsModel.getElectionYear());
         fedYear = Integer.parseInt(VotesResultsModel.getElectionYear());
+        String[] stateOptions = {"AL", "AK", "AZ", "AR", "CA",
+                "CO", "CT", "DE", "FL", "GA",
+                "HI", "ID", "IL", "IN", "IA",
+                "KS", "KY", "LA", "ME", "MD",
+                "MA", "MI", "MN", "MS", "MO",
+                "MT", "NE", "NV", "NH", "NJ",
+                "NM", "NY", "NC", "ND", "OH",
+                "OK", "OR", "PA", "RI", "SC",
+                "SD", "TN", "TX", "UT", "VT",
+                "VA", "WA", "WV", "WI", "WY"};
+
+        for (String state: stateOptions) {
+            ElectoralCollegeModel.getWinnerOfEachState(String.valueOf(fedYear), state);
+
+        }
+
+
+
+
+        electoralBarChart.setVisible(false);
 
         federalBarChart.setAnimated(false);
         electoralBarChart.setAnimated(false);
@@ -293,7 +312,6 @@ public class VotesResultsController {
         federalBarButton.setToggleGroup(federalRadioGroup);
         federalPieButton.setToggleGroup(federalRadioGroup);
         electoralCollegeButton.setToggleGroup(federalRadioGroup);
-
         federalBarButton.setSelected(true);
 
         federalOffice.getItems().removeAll();
@@ -337,14 +355,16 @@ public class VotesResultsController {
 
         // set x-axis labels
         federalBarChartXAxis.setLabel("Candidate");
-        federalLineChartXAxis.setLabel("Candidate");
+//        federalLineChartXAxis.setLabel("Candidate");
+        electoralCollegeBarChartXAxis.setLabel("Candidate");
         stateBarChartXAxis.setLabel("Candidates");
         stateLineChartXAxis.setLabel("Candidates");
         countyBarChartXAxis.setLabel("Candidate");
         countyLineChartXAxis.setLabel("Candidate");
         // set y-axis labels
         federalBarChartYAxis.setLabel("Votes");
-        federalLineChartYAxis.setLabel("Votes");
+ //       federalLineChartYAxis.setLabel("Votes");
+        electoralCollegeBarChartYAxis.setLabel("Electoral College Votes");
         stateBarChartYAxis.setLabel("Votes");
         stateLineChartYAxis.setLabel("Votes");
         countyBarChartYAxis.setLabel("Votes");
@@ -503,7 +523,6 @@ public class VotesResultsController {
         System.out.println(federalYearSlider.getValue());
         if(event.getSource()==federalOffice) {
             fedOffice = federalOffice.getValue().toString();
-
         } else if(event.getSource()==stateChoice) {
             sta = stateChoice.getValue().toString();
             vrm.stateResults(sta, String.valueOf(staYear));
@@ -595,34 +614,39 @@ public class VotesResultsController {
         System.out.println("results" + results);
         // given an office and a year, find the series of information in terms of names (x-axis) and respective number
         // of votes (y-axis)
-        switch (office){
-            case "US President":
-                newResults = VotesResultsModel.getPresidentialResults();
-                break;
-            case "US Senate":
-                newResults = vrm.getUsSenateResults();
-                break;
-            case "US House":
-                newResults = vrm.getUsHouseResults();
-                break;
-            case "State Senate":
-                newResults = vrm.getStateSenateResults();
-                break;
-            case "State House":
-                newResults = vrm.getStateHouseResults();
-                break;
-            case "Governor":
-                newResults = vrm.getGovernorResults();
-                break;
-            case "County Judge":
-                newResults = vrm.getCountyJudgeResults();
-                break;
-            case "County Sheriff":
-                newResults = vrm.getCountySheriffResults();
-                break;
 
+        if(electoralCollegeButton.isSelected()){
+            newResults = ElectoralCollegeModel.getEcByCandidate();
         }
+        else {
+            switch (office) {
+                case "US President":
+                    newResults = VotesResultsModel.getPresidentialResults();
+                    break;
+                case "US Senate":
+                    newResults = vrm.getUsSenateResults();
+                    break;
+                case "US House":
+                    newResults = vrm.getUsHouseResults();
+                    break;
+                case "State Senate":
+                    newResults = vrm.getStateSenateResults();
+                    break;
+                case "State House":
+                    newResults = vrm.getStateHouseResults();
+                    break;
+                case "Governor":
+                    newResults = vrm.getGovernorResults();
+                    break;
+                case "County Judge":
+                    newResults = vrm.getCountyJudgeResults();
+                    break;
+                case "County Sheriff":
+                    newResults = vrm.getCountySheriffResults();
+                    break;
 
+            }
+        }
         //VotesResultsModel.stateResults("IL");
         results = newResults;
         addDataToPlots(newResults);
