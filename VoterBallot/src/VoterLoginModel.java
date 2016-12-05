@@ -1,10 +1,7 @@
 import com.firebase.client.*;
-import com.firebase.client.snapshot.IndexedNode;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
 /**
  * Created by AdamGary on 12/2/16.

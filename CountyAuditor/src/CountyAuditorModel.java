@@ -1,5 +1,7 @@
-
-import com.firebase.client.*;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 
 /**
  * Class to export candidates to the database.

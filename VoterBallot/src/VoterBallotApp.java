@@ -2,7 +2,6 @@
  * Created by jasonryan on 12/1/16.
  */
 
-import com.sun.scenario.effect.impl.prism.PrImage;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -12,9 +11,9 @@ import javafx.stage.Stage;
 
 public class VoterBallotApp extends Application {
 
-    public static Stage classStage;// = new Stage();
+    private static Stage classStage;// = new Stage();
 
-    public String zipCode;
+    private String zipCode;
 
     public static void main(String[] args) {
         launch(args);

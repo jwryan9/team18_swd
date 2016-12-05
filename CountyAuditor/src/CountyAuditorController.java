@@ -1,10 +1,9 @@
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import sun.jvm.hotspot.debugger.win32.coff.COFFLineNumber;
 
 import javax.swing.*;
 import java.awt.*;

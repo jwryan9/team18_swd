@@ -1,28 +1,22 @@
-import com.sun.corba.se.spi.monitoring.LongMonitoredAttributeBase;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.*;
 import javafx.scene.control.*;
-import javafx.scene.control.TextField;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.scene.control.Label;
-import javafx.event.ActionEvent;
-import javafx.event.*;
-//import javax.swing.event.ChangeEvent;
-//import javax.swing.event.ChangeEvent;
 
+import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.Map;
+import java.util.TreeSet;
+
+//import javax.swing.event.ChangeEvent;
+//import javax.swing.event.ChangeEvent;
 //import javax.swing.la
 //import javax.swing.event.ChangeListener;
-
-import java.awt.*;
 //import java.awt.Label;
 //import java.awt.event.ActionEvent;
-import java.text.ParseException;
-import java.util.*;
 
 /**
  * Created by Daniel on 12/2/2016.

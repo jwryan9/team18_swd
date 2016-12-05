@@ -1,4 +1,3 @@
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -6,7 +5,7 @@ import java.util.Map;
  */
 public class Candidate {
     /**
-     *
+     * Candidate's id number
      */
     private int idNumber;
 
@@ -50,36 +49,6 @@ public class Candidate {
         this.idNumber = idNumber;
 
     }
-
-
-/*
-    public Candidate(String name, String zip, String state, String office, String party){
-        //this.idNumber;
-        this.name = name;
-        this.zip = zip;
-        this.state = state;
-        this.office = office;
-        this.party = party;
-    }
-
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("name", this.name);
-        result.put("zip", this.zip);
-        result.put("state", this.state);
-        result.put("office", this.office);
-        result.put("party", this.party);
-
-        return result;
-    }
-
-    */
-
-    /*
-    public int getIdNumber() {
-        return idNumber;
-    }
-    */
 
     /**
      * Getter method for name attribute
