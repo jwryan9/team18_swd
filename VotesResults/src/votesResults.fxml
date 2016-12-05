@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
-
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="650.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VotesResultsController">
   <tabs>
     <Tab id="federal" fx:id="federal" onClosed="#updateGUI" text="Federal">
@@ -59,14 +56,6 @@
                   <Label id="stateError" layoutX="480.0" layoutY="19.0" prefHeight="23.0" prefWidth="110.0" textFill="RED" />
                   <ComboBox id="stateChoice" fx:id="stateChoice" layoutX="15.0" layoutY="15.0" onAction="#changeEventHandler" prefHeight="31.0" prefWidth="88.0" promptText="State" />
                   <ComboBox id="stateRep" fx:id="stateOffice" layoutX="112.0" layoutY="16.0" onAction="#changeEventHandler" prefHeight="31.0" prefWidth="181.0" promptText="Office" />
-                  <LineChart id="stateLineChart" fx:id="stateLineChart" layoutX="15.0" layoutY="62.0" prefHeight="370.0" prefWidth="490.0">
-                    <xAxis>
-                      <CategoryAxis fx:id="stateLineChartXAxis" side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis fx:id="stateLineChartYAxis" side="LEFT" />
-                    </yAxis>
-                  </LineChart>
                   <PieChart id="statePieChart" fx:id="statePieChart" layoutX="59.0" layoutY="74.0" prefHeight="340.0" prefWidth="440.0" />
                   <RadioButton id="stateBarButton" fx:id="stateBarButton" layoutX="516.0" layoutY="216.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Bar Graph" />
                   <RadioButton id="statePieButton" fx:id="statePieButton" layoutX="517.0" layoutY="247.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Pie Chart" />
