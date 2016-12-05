@@ -11,11 +11,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Created by jasonryan on 12/4/16.
+ * Controller class of vote confirmation popup
  */
 public class VoteConfirmationController {
+
+    /**
+     * Button for continuing application
+     */
     @FXML Button okayButton;
 
+    /**
+     *
+     * @param event ActionEvent of button press
+     */
     @FXML private void buttonPress(ActionEvent event) {
         Parent root;
         try {

@@ -1,29 +1,22 @@
-import com.sun.javafx.event.*;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 /**
- * Created by jasonryan on 12/1/16.
+ * Controller class for voter ballot application
  */
 public class VoterBallotController {
     /**
@@ -116,15 +109,32 @@ public class VoterBallotController {
      */
     private Map<String, String> selections;
 
+    /**
+     * Voter's zip code
+     */
     private String voterZip;
 
+    /**
+     * Voter's state of residence
+     */
     private String voterState;
 
+    /**
+     * Voter's county of residence
+     */
     private String voterCounty;
 
+    /**
+     * Voter's encrypted ssn, used for data base identification
+     */
     private String encryptedSSN;
 
 
+    /**
+     * Sets attributes of voter for generating the correct ballot
+     * @param zip voter's zip code
+     * @param encryptedSSN voter's encrypted social security number
+     */
     public void setVoterProperties(String zip, String encryptedSSN){
         this.encryptedSSN = encryptedSSN;
         this.voterZip = zip;
@@ -308,6 +318,10 @@ public class VoterBallotController {
 
     }
 
+    /**
+     * Opens confirmation dialog box for informing the voter their vote
+     * was successfully counted.
+     */
     private void openConfirmation() {
         Parent root;
         try {
@@ -334,6 +348,9 @@ public class VoterBallotController {
         }
     }
 
+    /**
+     * Opens new login window for next voter.
+     */
     private void openLogin(){
         try {
             VoterLoginApp newLogin = new VoterLoginApp();

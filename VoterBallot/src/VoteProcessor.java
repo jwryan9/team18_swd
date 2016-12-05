@@ -4,24 +4,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by AdamGary on 12/2/16.
+ * Class for processing votes, and submitting the votes to data base
  */
 public class VoteProcessor {
 
+    /**
+     * Reference to Firebase database
+     */
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com");
 
+    /**
+     * Map for holding current election results
+     */
     public static Map<String,Integer> currentResults = new HashMap<>();
 
+    /**
+     * Year of current election
+     */
     private static String electionYear = "";
 
-    public static void getStateResults(String state){
-
-
-
-
-
-
-    }
+    public static void getStateResults(String state){}
 
 
     public synchronized static void addBallot(Map<String,String> ballot, String voterZip, String voterCounty, String voterState){
