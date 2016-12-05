@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class ElectoralCollegeModel {
 
-    private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Election Cycle");
+    private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/");
 
     private static Map<String, Integer> ecByState = new HashMap<>();
 
@@ -35,7 +35,7 @@ public class ElectoralCollegeModel {
     }
 
     public synchronized static void getWinnerOfEachState(String year, String state){
-        Firebase presidentRef =new Firebase("https://votingsystem-5e175.firebaseio.com/2016/Results/IL/US President");// = ref.child(year).child("Results").child(state).child("US President");
+        Firebase presidentRef =ref.child(year + "/Results/" + state +"/US President");// = ref.child(year).child("Results").child(state).child("US President");
 
         System.out.println("ref " + presidentRef);
         presidentRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -60,10 +60,13 @@ public class ElectoralCollegeModel {
 
                                 }
                             }
-                            if (ecByCandidate.containsKey(maxCandidate)) {
-                                ecByCandidate.put(maxCandidate, ecByCandidate.get(maxCandidate) + ecByState.get(state));
-                            } else {
-                                ecByCandidate.put(maxCandidate, ecByState.get(state));
+                            if (maxVotes > 0) {
+
+                                if (ecByCandidate.containsKey(maxCandidate)) {
+                                    ecByCandidate.put(maxCandidate, ecByCandidate.get(maxCandidate) + ecByState.get(state));
+                                } else{
+                                    ecByCandidate.put(maxCandidate, ecByState.get(state));
+                                }
                             }
                         }
                         System.out.println("ec keys" + ecByCandidate.keySet());
@@ -72,8 +75,6 @@ public class ElectoralCollegeModel {
                     }catch (NullPointerException e){
                         System.err.println("null ptr exception");
                     }
-
-                System.out.println("Purple");
 
             }
 
@@ -92,6 +93,6 @@ public class ElectoralCollegeModel {
     }
 
     public static Map<String,Integer> getEcByCandidate(){
-        return getEcByCandidate();
+        return ecByCandidate;
     }
 }

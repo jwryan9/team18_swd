@@ -285,14 +285,15 @@ public class VotesResultsController {
                 "OK", "OR", "PA", "RI", "SC",
                 "SD", "TN", "TX", "UT", "VT",
                 "VA", "WA", "WV", "WI", "WY"};
-
+        String[] stateOptions2 = { "IL", "IN", "IA"};
         for (String state: stateOptions) {
             ElectoralCollegeModel.getWinnerOfEachState(String.valueOf(fedYear), state);
 
         }
 
+        Map<String,Integer> newResults = ElectoralCollegeModel.getEcByCandidate();
 
-
+System.out.println("EC SIZE: " +newResults.size());
 
         electoralBarChart.setVisible(false);
 
@@ -369,6 +370,8 @@ public class VotesResultsController {
         stateLineChartYAxis.setLabel("Votes");
         countyBarChartYAxis.setLabel("Votes");
         countyLineChartYAxis.setLabel("Votes");
+        electoralCollegeBarChartYAxis.setTickUnit(20);
+        electoralCollegeBarChartYAxis.setAutoRanging(false);
 
         //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //  SET UP THE RANGES FOR EACH OF THE SLIDERS
@@ -671,6 +674,7 @@ public class VotesResultsController {
     private void addDataToPlots(Map<String,Integer> results){
         federalPieChart.getData().clear();
         federalBarChart.getData().clear();
+        electoralBarChart.getData().clear();
         statePieChart.getData().clear();
         stateBarChart.getData().clear();
         countyBarChart.getData().clear();
@@ -682,6 +686,7 @@ public class VotesResultsController {
 
 
         XYChart.Series series1 = new XYChart.Series();
+        XYChart.Series series2 = new XYChart.Series();
 
         if (federal.isSelected()) {
             for (String key : results.keySet()) {
@@ -689,8 +694,10 @@ public class VotesResultsController {
                 Integer votes = results.get(key);
                 federalPieChart.getData().add(new PieChart.Data(name, votes));
                 series1.getData().add(new XYChart.Data(name, votes));
+                series2.getData().add(new XYChart.Data(name,votes));
             }
             federalBarChart.getData().add(series1);
+            electoralBarChart.getData().add(series2);
         }
         else if (state.isSelected()){
             for (String key : results.keySet()) {
