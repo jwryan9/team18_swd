@@ -274,17 +274,14 @@ public class VotesResultsController {
         countyBarChart.setAnimated(false);
 
         countyBarButton.setToggleGroup(countyRadioGroup);
-        countyLineButton.setToggleGroup(countyRadioGroup);
         countyPieButton.setToggleGroup(countyRadioGroup);
         countyBarButton.setSelected(true);
 
         stateBarButton.setToggleGroup(stateRadioGroup);
-        stateLineButton.setToggleGroup(stateRadioGroup);
         statePieButton.setToggleGroup(stateRadioGroup);
         stateBarButton.setSelected(true);
 
         federalBarButton.setToggleGroup(federalRadioGroup);
-        federalLineButton.setToggleGroup(federalRadioGroup);
         federalPieButton.setToggleGroup(federalRadioGroup);
         federalBarButton.setSelected(true);
 
@@ -345,7 +342,54 @@ public class VotesResultsController {
         //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //  SET UP THE RANGES FOR EACH OF THE SLIDERS
         //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        Double electionYear = Double.parseDouble(VotesResultsModel.getElectionYear());
+
+        federalYearSlider.setMax(electionYear);
+        federalYearSlider.setMin(electionYear - 8);
+        federalYearSlider.setMajorTickUnit(4);
+        federalYearSlider.setValue(2016);
+        federalYearSlider.setMinorTickCount(1);
+        federalYearSlider.setShowTickMarks(true);
+        federalYearSlider.setSnapToTicks(true);
+        federalYearBox.setText(VotesResultsModel.getElectionYear());
+
+
+        stateYearSlider.setMax(electionYear);
+        stateYearSlider.setMin(electionYear - 8);
+        stateYearSlider.setMajorTickUnit(4);
+        stateYearSlider.setValue(2016);
+        stateYearSlider.setMinorTickCount(1);
+        stateYearSlider.setShowTickMarks(true);
+        stateYearSlider.setSnapToTicks(true);
+        stateYearBox.setText(VotesResultsModel.getElectionYear());
+
+
+        countyYearSlider.setMax(electionYear);
+        countyYearSlider.setMin(electionYear - 8);
+        countyYearSlider.setMajorTickUnit(4);
+        countyYearSlider.setValue(2016);
+        countyYearSlider.setMinorTickCount(1);
+        countyYearSlider.setShowTickMarks(true);
+        countyYearSlider.setSnapToTicks(true);
+        countyYearBox.setText(VotesResultsModel.getElectionYear());
+
+
+        federalYearSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            fedYear = (int)federalYearSlider.getValue();
+            federalYearBox.setText(Integer.toString(fedYear));
+        });
+        stateYearSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            staYear = (int)stateYearSlider.getValue();
+            stateYearBox.setText(Integer.toString(staYear));
+
+        });
+        countyYearSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            couYear = (int)countyYearSlider.getValue();
+
+            countyYearBox.setText(Integer.toString(couYear));
+        });
     }
+
 
 
     @FXML
@@ -380,6 +424,8 @@ public class VotesResultsController {
 
     @FXML
     private void changeEventHandler(ActionEvent event) {
+
+        System.out.println(federalYearSlider.getValue());
         if(event.getSource()==federalOffice) {
             fedOffice = federalOffice.getValue().toString();
 
@@ -422,48 +468,39 @@ public class VotesResultsController {
 
     @FXML
     private void updateGUI(){
-        if(federal.isSelected()&&(fedOffice!=null/*&&fedYear!=0&&fedSlider!=0*/)) {
+        if(federal.isSelected()&&(fedOffice!=null)) {
             if(federalBarButton.isSelected()) {
                 federalBarChart.setVisible(true);
                 federalLineChart.setVisible(false);
                 federalPieChart.setVisible(false);
-            } else if(federalLineButton.isSelected()) {
-                federalBarChart.setVisible(false);
-                federalLineChart.setVisible(true);
-                federalPieChart.setVisible(false);
-            } else if(federalPieButton.isSelected()) {
+            }
+            else if(federalPieButton.isSelected()) {
                 federalBarChart.setVisible(false);
                 federalLineChart.setVisible(false);
                 federalPieChart.setVisible(true);
             }
             getSeries(fedOffice,fedYear);
 //          reset series in each chart
-        } else if(state.isSelected()&&(staOffice!=null/*&&staYear!=0&&staSlider!=0*/)) {
+        } else if(state.isSelected()&&(staOffice!=null)) {
             if(stateBarButton.isSelected()) {
                 stateBarChart.setVisible(true);
                 stateLineChart.setVisible(false);
                 statePieChart.setVisible(false);
-            } else if(stateLineButton.isSelected()) {
-                stateBarChart.setVisible(false);
-                stateLineChart.setVisible(true);
-                statePieChart.setVisible(false);
-            } else if(statePieButton.isSelected()) {
+            }
+            else if(statePieButton.isSelected()) {
                 stateBarChart.setVisible(false);
                 stateLineChart.setVisible(false);
                 statePieChart.setVisible(true);
             }
             getSeries(staOffice,staYear);
 //          reset series in each chart
-        } else if(county.isSelected()&&(couOffice!=null/*&&couYear!=0&&couSlider!=0*/)) {
+        } else if(county.isSelected()&&(couOffice!=null)) {
             if(countyBarButton.isSelected()) {
                 countyBarChart.setVisible(true);
                 countyLineChart.setVisible(false);
                 countyPieChart.setVisible(false);
-            } else if(countyLineButton.isSelected()) {
-                countyBarChart.setVisible(false);
-                countyLineChart.setVisible(true);
-                countyPieChart.setVisible(false);
-            } else if(countyPieButton.isSelected()) {
+            }
+            else if(countyPieButton.isSelected()) {
                 countyBarChart.setVisible(false);
                 countyLineChart.setVisible(false);
                 countyPieChart.setVisible(true);
@@ -472,6 +509,7 @@ public class VotesResultsController {
 //          reset series in each chart
         }
     }
+
     private void getSeries(String office, int year) {
         Map<String, Integer > newResults = new HashMap<>();
         System.out.println("results" + results);
