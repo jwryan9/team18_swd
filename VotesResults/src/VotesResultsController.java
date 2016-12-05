@@ -1,4 +1,6 @@
 import com.sun.corba.se.spi.monitoring.LongMonitoredAttributeBase;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -377,7 +379,21 @@ public class VotesResultsController {
         federalYearSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             fedYear = (int)federalYearSlider.getValue();
             federalYearBox.setText(Integer.toString(fedYear));
+            changeEventHandler(new ActionEvent("e",null));
         });
+        federalYearSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    changeEventHandler(new ActionEvent("e",null));
+
+                } else {
+
+
+                }
+            }
+        });
+
         stateYearSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             staYear = (int)stateYearSlider.getValue();
             stateYearBox.setText(Integer.toString(staYear));
