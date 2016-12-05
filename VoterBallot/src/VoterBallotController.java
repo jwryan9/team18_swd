@@ -150,7 +150,7 @@ public class VoterBallotController {
      */
     public void initialize() throws InterruptedException {
         VoterBallotModel vlm = new VoterBallotModel();
-        VoterBallotModel.initFederal();
+        VoterBallotModel.initFederal(this.voterState);
 
         vlm.initState(this.voterState);
         vlm.initCounty(this.voterCounty, this.voterState);
