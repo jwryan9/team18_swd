@@ -8,36 +8,76 @@ import java.util.Map;
  * Created by Daniel on 12/2/2016.
  */
 public class VotesResultsModel {
-
-
+    /**
+     * create a reference to the database election cycle
+     */
     private static Firebase cycleReference = new Firebase("https://votingsystem-5e175.firebaseio.com/Election Cycle");
 
+    /**
+     * string representation of the year of the election
+     */
     private static String electionYear = "2016";
 
+    /**
+     * map holding the presidential candidates
+     */
     private static Map<Integer,Candidate> presidentialCandidates = new HashMap<>();
 
+    /**
+     * map holding the presidential results
+     */
     private static Map<String,Integer> presidentialResults = new HashMap<>();
 
+    /**
+     * map holding the federal senate results
+     */
     private Map<String,Integer> usSenateResults = new HashMap<>();
 
+    /**
+     * map holding the federal house of representatives results
+     */
     private Map<String,Integer> usHouseResults = new HashMap<>();
 
 
+    /**
+     * map holding the state senate candidates
+     */
     private Map<String,Candidate> stateSenateCandidates = new HashMap<>();
 
+    /**
+     * map holding the state senate results
+     */
     private Map<String,Integer> stateSenateResults = new HashMap<>();
 
+    /**
+     * map holding the state house of representatives candidates
+     */
     private Map<String,Candidate> stateHouseCandidates = new HashMap<>();
 
+    /**
+     * map holding the state house of representatives results
+     */
     private Map<String,Integer> stateHouseResults = new HashMap<>();
 
+    /**
+     * map holding the state governor candidates
+     */
     private Map<String,Candidate> stateGovernorCandidates = new HashMap<>();
 
+    /**
+     * map holding the state governor results
+     */
     private Map<String,Integer> stateGovernorResults = new HashMap<>();
 
 
+    /**
+     * map holding the county sheriff results
+     */
     private Map<String,Integer> countySheriffResults = new HashMap<>();
 
+    /**
+     * map holding the county judge results
+     */
     private Map<String,Integer> countyJudgeResults = new HashMap<>();
 
 
@@ -45,11 +85,20 @@ public class VotesResultsModel {
     //private Map<String,Candidate> stateCandidates = new HashMap<>();
 
 
+    /**
+     * map holding the possible counties
+     */
     private Map<String,ArrayList<Candidate>> countyCandidates = new HashMap<>();
 
+    /**
+     * create a reference to the database
+     */
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com");
 
 
+    /**
+     * get the possible presidential candidates from the database
+     */
     public synchronized static void getPresidentialCandidatesFromDatabase(){
 
         Firebase cycleRef = ref.child(electionYear + "/Candidates/Federal/US President");
@@ -92,6 +141,10 @@ public class VotesResultsModel {
     }
 
 
+    /**
+     * get the popular vote of the presidential candidates from the database
+     * @param year
+     */
     public synchronized static void getPresidentPopularVoteFromDatabase(String year) {
 
         Firebase popularRef = ref.child(year + "/Results/US President Popular Vote");
@@ -142,6 +195,11 @@ public class VotesResultsModel {
     }
 
 
+    /**
+     * Given a state and year get the results of the states elections
+     * @param state
+     * @param year
+     */
     public synchronized void stateResults(String state, String year) {
         this.stateSenateResults = new HashMap<>();
         this.stateHouseResults = new HashMap<>();
@@ -344,7 +402,12 @@ public class VotesResultsModel {
     }
 
 
-
+    /**
+     * given a county, state, and year find the county voting info
+     * @param countyName
+     * @param stateAbbriviation
+     * @param year
+     */
     public synchronized void initCounty(String countyName, String stateAbbriviation, String year) {
         countyJudgeResults = new HashMap<>();
         countySheriffResults = new HashMap<>();
@@ -419,6 +482,9 @@ public class VotesResultsModel {
 
     }
 
+    /**
+     * get the election year cycle from the database
+     */
     public synchronized static void getElectionCycleFromDatabase(){
         cycleReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -434,42 +500,75 @@ public class VotesResultsModel {
     }
 
 
+    /**
+     * map holding the presidential results
+     * @return
+     */
     public synchronized static Map<String,Integer> getPresidentialResults(){
         return presidentialResults;
     }
 
+    /**
+     * map holding the state senate results
+     * @return
+     */
     public Map<String,Integer> getStateSenateResults(){
         return stateSenateResults;
     }
 
+    /**
+     * map holding the state house of representatives results
+     * @return
+     */
     public Map<String,Integer> getStateHouseResults(){
         return stateHouseResults;
     }
 
+    /**
+     * map holding the governor results
+     * @return
+     */
     public Map<String,Integer> getGovernorResults(){
         return stateGovernorResults;
     }
 
+    /**
+     * map holding the county sheriff results
+     * @return
+     */
     public Map<String,Integer> getCountySheriffResults(){
         return countySheriffResults;
     }
 
+    /**
+     * map holding the county judge results
+     * @return
+     */
     public Map<String,Integer> getCountyJudgeResults(){
         return countyJudgeResults;
     }
 
+    /**
+     * map holding the federal senate results
+     * @return
+     */
     public Map<String,Integer> getUsSenateResults(){
         return usSenateResults;
     }
 
+    /**
+     * map holding the federal house of representatives results
+     * @return
+     */
     public Map<String,Integer> getUsHouseResults(){
         return usHouseResults;
     }
 
+    /**
+     * map holding the year of the election
+     * @return
+     */
     public static String getElectionYear(){
         return electionYear;
     }
-
-
-
 }
