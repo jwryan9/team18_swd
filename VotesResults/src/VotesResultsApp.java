@@ -13,6 +13,10 @@ public class VotesResultsApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         VotesResultsModel.getElectionCycleFromDatabase();
+
+        ElectoralCollegeModel.generateElectoralCollegeModel("VotesResults/Resources/ElectoralVotesByState.csv");
+
+
         try{
             Thread.sleep(1000);
         }catch (Exception e){}
@@ -21,13 +25,14 @@ public class VotesResultsApp extends Application {
         try{
             Thread.sleep(2000);
         }catch (Exception e){}
-
+        //ElectoralCollegeModel.getWinnerOfEachState("2016");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("votesResults.fxml"));
         Parent root = loader.load();
 
         VotesResultsController controller = loader.getController();
         controller.initGUI();
+
 
 
 

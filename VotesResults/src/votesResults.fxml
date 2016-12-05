@@ -14,6 +14,14 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="300.0">
                <children>
                   <Slider id="federalYearSlider" fx:id="federalYearSlider" layoutX="291.0" layoutY="22.0" prefHeight="18.0" prefWidth="94.0" />
+                  <StackedBarChart fx:id="electoralBarChart" layoutX="15.0" layoutY="62.0" prefHeight="370.0" prefWidth="490.0">
+                    <xAxis>
+                      <CategoryAxis fx:id="electoralCollegeBarChartXAxis" side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="electoralCollegeBarChartYAxis" side="LEFT" upperBound="300.0" />
+                    </yAxis>
+                  </StackedBarChart>
                   <StackedBarChart id="federalBarChart" fx:id="federalBarChart" layoutX="15.0" layoutY="62.0" prefHeight="370.0" prefWidth="490.0">
                     <xAxis>
                       <CategoryAxis fx:id="federalBarChartXAxis" side="BOTTOM" />
@@ -25,29 +33,13 @@
                   <Label id="federalError" layoutX="480.0" layoutY="19.0" prefHeight="23.0" prefWidth="110.0" textFill="RED" />
                   <ComboBox id="federalOffice" fx:id="federalOffice" layoutX="14.0" layoutY="15.0" onAction="#changeEventHandler" prefHeight="31.0" prefWidth="217.0" promptText="Office" />
                   <PieChart id="federalPieChart" fx:id="federalPieChart" layoutX="61.0" layoutY="66.0" prefHeight="340.0" prefWidth="440.0" />
-                  <LineChart id="federalLineChart" fx:id="federalLineChart" layoutX="15.0" layoutY="62.0" prefHeight="370.0" prefWidth="490.0">
-                    <xAxis>
-                      <CategoryAxis fx:id="federalLineChartXAxis" side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis fx:id="federalLineChartYAxis" side="LEFT" />
-                    </yAxis>
-                  </LineChart>
                   <RadioButton id="federalBarButton" fx:id="federalBarButton" layoutX="516.0" layoutY="216.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Bar Graph" />
                   <RadioButton id="federalPieButton" fx:id="federalPieButton" layoutX="516.0" layoutY="239.0" mnemonicParsing="false" onAction="#actionEventHandler" text="Pie Chart" />
                   <Text fx:id="federalYearBox" layoutX="233.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year" textAlignment="CENTER" wrappingWidth="52.21875">
                      <font>
                         <Font size="14.0" />
                      </font></Text>
-                  <RadioButton layoutX="516.0" layoutY="262.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="134.0" text="Electoral College" />
-                  <StackedBarChart layoutX="15.0" layoutY="62.0" prefHeight="370.0" prefWidth="490.0">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
-                  </StackedBarChart>
+                  <RadioButton fx:id="electoralCollegeButton" layoutX="516.0" layoutY="262.0" mnemonicParsing="false" onAction="#changeEventHandler" prefHeight="18.0" prefWidth="134.0" text="Electoral College" />
                </children></AnchorPane>
       </content>
     </Tab>
