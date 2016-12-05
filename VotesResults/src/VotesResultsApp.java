@@ -3,6 +3,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -23,7 +24,7 @@ public class VotesResultsApp extends Application {
         VotesResultsModel.getPresidentPopularVoteFromDatabase(VotesResultsModel.getElectionYear());
 
         try{
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         }catch (Exception e){}
         //ElectoralCollegeModel.getWinnerOfEachState("2016");
 
@@ -38,6 +39,7 @@ public class VotesResultsApp extends Application {
 
         primaryStage.setTitle("!!POLLS ARE IN!!");
         primaryStage.setScene(new Scene(root));
+        primaryStage.getIcons().add(new Image("file:Resources/american-flag-small.png"));
 
         primaryStage.setOnCloseRequest(
                 e -> {
