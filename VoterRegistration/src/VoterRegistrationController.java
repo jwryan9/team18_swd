@@ -41,6 +41,9 @@ public class VoterRegistrationController {
      */
     @FXML private PasswordField ssnField;
 
+    /**
+     * Text to display if user registration information is valid
+     */
     @FXML private Text registerValidText;
 
     /**
