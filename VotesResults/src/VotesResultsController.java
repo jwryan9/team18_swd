@@ -742,7 +742,7 @@ System.out.println("EC SIZE: " +newResults.size());
         // when a state is chosen from the countyState combobox, update the available counties to choose in the
         // countychoice combobox.
         countyChoice.getItems().clear();
-        TreeSet<String> countyArrayList = ZipCode.parseState(state, "zipcodes.csv");
+        TreeSet<String> countyArrayList = ZipCode.parseState(state, "VotesResults/Resources/zipcodes.csv");
 
 
 

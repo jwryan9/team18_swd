@@ -37,7 +37,7 @@ public class VoterRegistrationApp extends Application {
 
         primaryStage.setTitle("Voter Registration");
         primaryStage.setScene(new Scene(root));
-        primaryStage.getIcons().add(new Image("file:Resources/american-flag-small.png"));
+        primaryStage.getIcons().add(new Image("file:VoterRegistration/Resources/american-flag-small.png"));
 
         primaryStage.setOnCloseRequest(
                 e -> {

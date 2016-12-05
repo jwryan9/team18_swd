@@ -66,7 +66,7 @@ public class YearSelectionController {
                     Stage stage = new Stage();
                     stage.setTitle("Add Candidate");
                     stage.setScene(new Scene(root));
-                    stage.getIcons().add(new Image("file:Resources/american-flag-small.png"));
+                    stage.getIcons().add(new Image("file:CountyAuditor/Resources/american-flag-small.png"));
 
                     stage.setOnCloseRequest(
                             e -> {

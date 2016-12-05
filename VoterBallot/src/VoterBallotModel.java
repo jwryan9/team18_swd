@@ -62,7 +62,7 @@ public class VoterBallotModel {
     /**
      * Synchronized method for initializing the list of federal candidates on the ballot
      */
-    public synchronized static void initFederal() {
+    public synchronized static void initFederal(String state) {
 
         String level = "Federal";
         String[] federalPositions = {"US President", "US Senate", "US House"};
@@ -73,9 +73,9 @@ public class VoterBallotModel {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for(int i = 0; i < federalPositions.length; i++){
+               // for(int i = 0; i < federalPositions.length; i++){
                     ArrayList<Candidate> candidateArrayList = new ArrayList<>();
-                    Iterable<DataSnapshot> allCandidates = dataSnapshot.child(level + "/" + federalPositions[i]).getChildren();
+                    Iterable<DataSnapshot> allCandidates = dataSnapshot.child(level + "/" + "US President").getChildren();
 
 
                     for(DataSnapshot nextCand: allCandidates){
@@ -86,12 +86,11 @@ public class VoterBallotModel {
                         candidateArrayList.add(newCandidate);
                     }
 
-                    federalCandidates.put(federalPositions[i],candidateArrayList);
-                    //System.out.println("Federal Keys " + federalCandidates.keySet());
+                    federalCandidates.put("US President",candidateArrayList);
 
-                    System.out.println("position:" + federalPositions[i] + " size: " + federalCandidates.get(federalPositions[i]).size());
+                    System.out.println("position:" + "US President" + " size: " + federalCandidates.get("US President").size());
 
-                }
+              //  }
 
 
 
@@ -106,6 +105,80 @@ public class VoterBallotModel {
             }
         });
 
+        Firebase houseRef = cycleRef.child("State").child(state).child("US House");
+System.err.println("houseref " + houseRef);
+        houseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    ArrayList<Candidate> candidateArrayList = new ArrayList<>();
+                    Iterable<DataSnapshot> allCandidates = dataSnapshot.getChildren();
+
+
+                    for(DataSnapshot nextCand: allCandidates){
+                        int idNumber = Integer.parseInt(nextCand.getKey());
+                        Map<String,String> nextCandidate = nextCand.getValue(Map.class);
+
+                        Candidate newCandidate = new Candidate(nextCandidate, idNumber);
+                        candidateArrayList.add(newCandidate);
+                    }
+
+                    federalCandidates.put("US House",candidateArrayList);
+
+                    System.out.println("position:" + federalPositions[2] + " size: " + federalCandidates.get(federalPositions[2]).size());
+
+
+
+
+
+
+                System.out.println("Federal Keys " + federalCandidates.keySet());
+                System.out.println("Federal Keys " + federalCandidates.values());
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.err.println("Firebase Error");
+            }
+        });
+
+        Firebase senateRef = cycleRef.child("State").child(state).child("US Senate");
+        System.err.println("senateref " + senateRef);
+
+        senateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                ArrayList<Candidate> candidateArrayList = new ArrayList<>();
+                Iterable<DataSnapshot> allCandidates = dataSnapshot.getChildren();
+
+
+                for(DataSnapshot nextCand: allCandidates){
+                    int idNumber = Integer.parseInt(nextCand.getKey());
+                    Map<String,String> nextCandidate = nextCand.getValue(Map.class);
+
+                    Candidate newCandidate = new Candidate(nextCandidate, idNumber);
+                    candidateArrayList.add(newCandidate);
+                }
+
+                federalCandidates.put("US Senate",candidateArrayList);
+
+                System.out.println("position:" + federalPositions[1] + " size: " + federalCandidates.get(federalPositions[1]).size());
+
+
+
+
+
+
+                System.out.println("Federal Keys " + federalCandidates.keySet());
+                System.out.println("Federal Keys " + federalCandidates.values());
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.err.println("Firebase Error");
+            }
+        });
     }
 
     /**

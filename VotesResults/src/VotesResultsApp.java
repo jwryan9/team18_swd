@@ -39,7 +39,7 @@ public class VotesResultsApp extends Application {
 
         primaryStage.setTitle("!!POLLS ARE IN!!");
         primaryStage.setScene(new Scene(root));
-        primaryStage.getIcons().add(new Image("file:Resources/american-flag-small.png"));
+        primaryStage.getIcons().add(new Image("file:VotesResults/Resources/american-flag-small.png"));
 
         primaryStage.setOnCloseRequest(
                 e -> {

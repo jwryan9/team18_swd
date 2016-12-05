@@ -134,7 +134,7 @@ public class VoterBallotController {
         this.voterZip = zip;
         System.out.println("Zip in ballot controller: " + voterZip);
 
-        String[] zipArray = ZipCode.parseZip(this.voterZip, "Resouces/zipcodes.csv");
+        String[] zipArray = ZipCode.parseZip(this.voterZip, "CountyAuditor/Resources/zipcodes.csv");
         if(zipArray != null) {
             this.voterCounty = zipArray[0];
             this.voterState = zipArray[1];
@@ -150,7 +150,7 @@ public class VoterBallotController {
      */
     public void initialize() throws InterruptedException {
         VoterBallotModel vlm = new VoterBallotModel();
-        VoterBallotModel.initFederal();
+        VoterBallotModel.initFederal(this.voterState);
 
         vlm.initState(this.voterState);
         vlm.initCounty(this.voterCounty, this.voterState);

@@ -117,7 +117,7 @@ public class CountyAuditorController {
 
             entryValidText.setFill(Color.BLACK);
             entryValidText.setText("Candidate Added");
-            ImageIcon icon = new ImageIcon("Resources/countryflag.png");
+            ImageIcon icon = new ImageIcon("CountyAuditor/Resources/countryflag.png");
             showMessage("Added Candidate Successfully",icon);
             resetGUI();
         }
