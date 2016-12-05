@@ -4,23 +4,47 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by AdamGary on 12/2/16.
+ * Model for voter login application
  */
 public class VoterLoginModel{
 
+    /**
+     * Reference to database registered voters
+     */
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com/Voters");
 
+    /**
+     * Refernce to database voters who have already voted
+     */
     private static Firebase alreadyVotedRef = new Firebase("https://votingsystem-5e175.firebaseio.com/");
 
+    /**
+     * Map of registered voter
+     */
     private static Map<String,String> registeredVoters = new HashMap<>();
 
+    /**
+     * String of voters who have previously voted
+     */
     private static String alreadyVotedString = "";
 
+    /**
+     * boolean variable for checking if voter is registered
+     */
     private static boolean isRegisteredVoter;
 
+    /**
+     * Election year
+     */
     private static String electionCycle = "";
 
-
+    /**
+     * Validates user social security number and zip code inputs
+     *
+     * @param ssn user social security number
+     * @param zipCode user zip code
+     * @return empty string if valid, error message if invalid
+     */
     public static String validateInput(String ssn, String zipCode) {
 
         if(ssn.length() != 9 && !ssn.matches("\\d+")){
@@ -32,46 +56,9 @@ public class VoterLoginModel{
         return "";
     }
 
-    public synchronized static boolean checkVoterRegistration(String encryptedID, String zipCode) {
-
-        isRegisteredVoter = false;
-
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Iterable<DataSnapshot> allVoters = dataSnapshot.getChildren();
-
-                for(DataSnapshot nextVoter: allVoters){
-
-                    String nextVoterKey = nextVoter.getKey();
-                    String nextVoterZip = nextVoter.child("zipCode").getValue(String.class);
-
-                    System.out.println("next ID: " + nextVoterKey + " next Zip: " + nextVoterZip);
-                    System.out.println("encypted id check: " +encryptedID.equals(nextVoterKey) );
-                    System.out.println("zipcheck: " +  zipCode.equals(nextVoterZip));
-
-                    if(encryptedID.equals(nextVoterKey) && zipCode.equals(nextVoterZip)) {
-                        System.out.println("true, voter found");
-                        isRegisteredVoter = true;
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.err.println("Firebase Error");
-            }
-        });
-
-
-        System.out.println("Leaving voter check");
-
-        return isRegisteredVoter;
-
-    }
-
+    /**
+     * Synchronized method for getting voters from database
+     */
     public synchronized static void getVotersFromDatabase(){
 
         ref.addChildEventListener(new ChildEventListener() {
@@ -103,6 +90,13 @@ public class VoterLoginModel{
 
     }
 
+    /**
+     * Synchronized method for checking if voters are registered
+     *
+     * @param encryptedID encrypted social security number
+     * @param zipCode voter zip code
+     * @return true if voter is registered, otherwise false
+     */
     public synchronized static boolean checkVoterRegistrationQuery(String encryptedID, String zipCode) {
 
         if(registeredVoters.containsKey(encryptedID)){
@@ -119,14 +113,15 @@ public class VoterLoginModel{
         return isRegisteredVoter;
     }
 
+    /**
+     * Synchronized method for getting list of people who have voted previously voted in current election
+     */
     public synchronized static void getAlreadyVotedFromDatabase(){
-        //System.err.println("Ref: " + ref);
 
         String year = VoterBallotModel.getElectionYear();
         System.err.println("Year in get voted: " + year);
 
         alreadyVotedRef = alreadyVotedRef.child(year).child("Results/Already Voted");
-        //System.err.println("alreadyRef: " + alreadyVotedRef);
 
         alreadyVotedRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -140,13 +135,15 @@ public class VoterLoginModel{
 
             }
         });
-
-
     }
 
+    /**
+     * Synchronized method for checking if voter has voted previously in current election
+     *
+     * @param encyrptedSSN voter's encrypted social security number
+     * @return true  if voter has already voted, else false
+     */
     public synchronized static boolean checkAlreadyVoted(String encyrptedSSN){
-
-        //getAlreadyVotedFromDatabase();
         System.err.println(alreadyVotedString);
         try {
             System.out.println(".contains ssn: " + alreadyVotedString.contains(encyrptedSSN));
@@ -158,12 +155,14 @@ public class VoterLoginModel{
         } catch (NullPointerException ex){
             System.err.println("Null pointer exception");
         }
-
         return false;
-
     }
 
-
+    /**
+     * Synchronized method to add voter to has voted list in database
+     *
+     * @param encryptedSSN encrypted sosial security number of voter
+     */
     public synchronized static void markVoterAsHasVoted(String encryptedSSN){
 
         String url = "https://votingsystem-5e175.firebaseio.com/" + VoterBallotModel.getElectionYear() + "/Results/Already Voted";
@@ -195,7 +194,18 @@ public class VoterLoginModel{
 
     }
 
+    /**
+     * Getter method for already voted string
+     *
+     * @return String of voters who have already voted in the election
+     */
     public static String getAlreadyVotedString(){return alreadyVotedString;}
+
+    /**
+     * Getter method for isRegisteredVoter boolean
+     *
+     * @return boolean representing if voter is registered
+     */
     public boolean getRegisteredVoterBool(){
         return isRegisteredVoter;
     }
