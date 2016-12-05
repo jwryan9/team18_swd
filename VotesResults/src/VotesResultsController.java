@@ -696,10 +696,7 @@ System.out.println("EC SIZE: " +newResults.size());
         // given an office and a year, find the series of information in terms of names (x-axis) and respective number
         // of votes (y-axis)
 
-        if(electoralCollegeButton.isSelected()){
-            newResults = ElectoralCollegeModel.getEcByCandidate();
-        }
-        else {
+
             switch (office) {
                 case "US President":
                     newResults = VotesResultsModel.getPresidentialResults();
@@ -727,6 +724,9 @@ System.out.println("EC SIZE: " +newResults.size());
                     break;
 
             }
+
+        if(electoralCollegeButton.isSelected() && federal.isSelected()){
+            newResults = ElectoralCollegeModel.getEcByCandidate();
         }
         //VotesResultsModel.stateResults("IL");
         results = newResults;
