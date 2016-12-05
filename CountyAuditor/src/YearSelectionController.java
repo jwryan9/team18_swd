@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -62,13 +63,10 @@ public class YearSelectionController {
                         Thread.sleep(500);
                     }catch (InterruptedException e){System.out.println("print error thread sleep");};
 
-
-                    //VoterBallotController ballController = loader.getController();
-                    //ballController.setVoterProperties(zipCode);
-
                     Stage stage = new Stage();
                     stage.setTitle("Add Candidate");
                     stage.setScene(new Scene(root));
+                    stage.getIcons().add(new Image("file:Resources/american-flag-small.png"));
 
                     stage.setOnCloseRequest(
                             e -> {

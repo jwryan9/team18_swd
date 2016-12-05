@@ -1,16 +1,10 @@
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -140,7 +134,7 @@ public class VoterBallotController {
         this.voterZip = zip;
         System.out.println("Zip in ballot controller: " + voterZip);
 
-        String[] zipArray = ZipCode.parseZip(this.voterZip, "zipcodes.csv");
+        String[] zipArray = ZipCode.parseZip(this.voterZip, "Resouces/zipcodes.csv");
         if(zipArray != null) {
             this.voterCounty = zipArray[0];
             this.voterState = zipArray[1];
@@ -161,15 +155,12 @@ public class VoterBallotController {
         vlm.initState(this.voterState);
         vlm.initCounty(this.voterCounty, this.voterState);
 
-        Thread.sleep(2000);
-
-        //System.out.println("Zip in ballot controller 3: " + voterZip + " state 3: " + voterState);
+        Thread.sleep(1000);
 
         Map<String, ArrayList<Candidate>> federalCandidates = VoterBallotModel.getFederalCandidates();// VoterBallotModel.getFederalCandidates();
         while (federalCandidates.keySet().size() < 3) {
             federalCandidates = VoterBallotModel.getFederalCandidates();
         }
-        //System.out.println("feds keyset:" + federalCandidates.keySet());
 
         presidentDropdown.getItems().add("");
         usSenateDropdown.getItems().add("");
@@ -190,8 +181,6 @@ public class VoterBallotController {
         Map<String,Candidate> stateSenateCandidates = vlm.getStateSenateCandidates();
         Map<String,Candidate> stateHouseCandidates = vlm.getStateHouseCandidates();
         Map<String,Candidate> governorCandidates = vlm.getGovernorCandidates();
-
-        //System.out.println("state senate candi count: " + stateSenateCandidates.size());
 
         stateSenateDropdown.getItems().add("");
         stateHouseDropdown.getItems().add("");
@@ -228,8 +217,6 @@ public class VoterBallotController {
         for (String nextCandidate : countySheriffCandidates.keySet()) {
             countySheriffDropdown.getItems().add(countySheriffCandidates.get(nextCandidate).getName() + " (" + countySheriffCandidates.get(nextCandidate).getParty() + ")");
         }
-
-        //submitButton.setOnAction(event -> submitVote());
     }
 
     /**
@@ -300,52 +287,10 @@ public class VoterBallotController {
         selections.put("County Judge", String.valueOf(countyJudgeName));
         selections.put("County Sheriff", String.valueOf(countySheriffName));
 
-        //System.out.println("Zip in ballot controller 2: " + voterZip + " state 2: " + voterState);
-
         VoteProcessor.addBallot(selections, voterZip, voterCounty, voterState);
-        ImageIcon icon = new ImageIcon("iVotedSticker.png");
-        //showMessage("Ballot Submit Successful",icon);
-/*
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setTitle("Ballot Submission Confirmation");
-        a.initStyle(StageStyle.UNDECORATED);
-        a.setContentText("Ballot Submitted Successfully!");
-        a.showAndWait();
-*/
-       // showMessage2("Ballot Submit Successful",icon);
+
         openLogin();
-        //openConfirmation();
 
-    }
-
-    /**
-     * Opens confirmation dialog box for informing the voter their vote
-     * was successfully counted.
-     */
-    private void openConfirmation() {
-        Parent root;
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("voteConfirmation.fxml"));
-
-            root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setTitle("Vote Success");
-            stage.setScene(new Scene(root));
-
-            stage.setOnCloseRequest(
-                    e -> {
-                        Platform.exit();
-                        System.exit(0);
-                    }
-
-            );
-
-            stage.show();
-
-        } catch (IOException ex) {
-            System.err.println("cannot open vote confirmation");
-        }
     }
 
     /**

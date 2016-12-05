@@ -51,7 +51,7 @@ public class VoterLoginApp extends Application {
 
         primaryStage.setTitle("Ballot Login");
         primaryStage.setScene(new Scene(root));
-        primaryStage.getIcons().add(new Image("file:american-flag-small.png"));
+        primaryStage.getIcons().add(new Image("file:Resources/american-flag-small.png"));
 
         primaryStage.setOnCloseRequest(
                 e -> {
