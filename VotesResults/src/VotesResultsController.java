@@ -275,56 +275,56 @@ public class VotesResultsController {
     /**
      * string to hold the text from the federal office drop-down
      */
-    String fedOffice = "";
+    private String fedOffice = "";
     /**
      * string to hold the text from the state choice drop-down
      */
-    String sta = "";
+    private String sta = "";
     /**
      * string to hold the text from the state office drop-down
      */
-    String staOffice = "";
+    private String staOffice = "";
     /**
      * string to hold the text from the county state choice drop-down
      */
-    String couState = "";
+    private String couState = "";
     /**
      * string to hold the text from the county choice drop-down
      */
-    String cou = "";
+    private String cou = "";
     /**
      * string to hold the text from the county office drop-down
      */
-    String couOffice = "";
+    private String couOffice = "";
     /**
      * integer to hold the year chosen from the federal textfield
      */
-    int fedYear = 0;
+    private int fedYear = 0;
     /**
      * integer to hold the year chosen from the state textfield
      */
-    int staYear = 0;
+    private int staYear = 0;
     /**
      * integer to hold the year chosen from the county textfield
      */
-    int couYear = 0;
+    private int couYear = 0;
     /**
      * integer to hold the year chosen from the federal slider
      */
-    int fedSlider = 0;
+    private int fedSlider = 0;
     /**
      * integer to hold the year chosen from the state slider
      */
-    int staSlider = 0;
+    private int staSlider = 0;
     /**
      * integer to hold the year chosen from the county slider
      */
-    int couSlider = 0;
+    private int couSlider = 0;
 
     /**
      * map to hold the results from the elections
      */
-    Map<String,Integer> results;
+    private Map<String,Integer> results;
 
     /**
      * create a togglegroup for the radiobuttons in the federal tab
@@ -539,7 +539,6 @@ System.out.println("EC SIZE: " +newResults.size());
                     startLog.getItems().add("a");
 
                 } else {
-                    //changeEventHandler(federalOffice.);
                     System.out.println("Im here");
                     couYear = (int)countyYearSlider.getValue();
                     vrm.initCounty(countyChoice.getSelectionModel().getSelectedItem().toString(),countyState.getSelectionModel().getSelectedItem().toString(),String.valueOf(couYear));
@@ -608,7 +607,7 @@ System.out.println("EC SIZE: " +newResults.size());
             System.out.println("Here");
             try{
                 Thread.sleep(1000);
-            }catch(Exception e){};
+            }catch(Exception e){}
         } else if(event.getSource()==stateOffice) {
             staOffice = stateOffice.getValue().toString();
 
