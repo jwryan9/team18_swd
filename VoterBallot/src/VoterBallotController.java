@@ -1,4 +1,6 @@
+import com.sun.javafx.event.*;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -217,6 +219,7 @@ public class VoterBallotController {
             countySheriffDropdown.getItems().add(countySheriffCandidates.get(nextCandidate).getName() + " (" + countySheriffCandidates.get(nextCandidate).getParty() + ")");
         }
 
+        //submitButton.setOnAction(event -> submitVote());
     }
 
     /**
@@ -300,8 +303,8 @@ public class VoterBallotController {
         a.showAndWait();
 */
        // showMessage2("Ballot Submit Successful",icon);
-        //openLogin();
-        openConfirmation();
+        openLogin();
+        //openConfirmation();
 
     }
 
@@ -309,6 +312,7 @@ public class VoterBallotController {
         Parent root;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("voteConfirmation.fxml"));
+
             root = loader.load();
 
             Stage stage = new Stage();
@@ -322,6 +326,8 @@ public class VoterBallotController {
                     }
 
             );
+
+            stage.show();
 
         } catch (IOException ex) {
             System.err.println("cannot open vote confirmation");

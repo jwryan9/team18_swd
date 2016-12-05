@@ -59,8 +59,9 @@ public class YearSelectionController {
                     root = loader.load();
 
                     try {
-                        Thread.sleep(2000);
+                        Thread.sleep(500);
                     }catch (InterruptedException e){System.out.println("print error thread sleep");};
+
 
                     //VoterBallotController ballController = loader.getController();
                     //ballController.setVoterProperties(zipCode);
@@ -85,9 +86,7 @@ public class YearSelectionController {
                     StackTraceElement[] stackTraceElements = e.getStackTrace();
                     for(StackTraceElement a:stackTraceElements){
                         System.err.println(a);
-
                     }
-
                 }
 
             } else {
