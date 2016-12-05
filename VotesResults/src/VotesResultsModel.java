@@ -20,27 +20,27 @@ public class VotesResultsModel {
 
     private static Map<String,Integer> presidentialResults = new HashMap<>();
 
-    private static Map<String,Integer> usSenateResults = new HashMap<>();
+    private Map<String,Integer> usSenateResults = new HashMap<>();
 
-    private static Map<String,Integer> usHouseResults = new HashMap<>();
-
-
-    private static Map<String,Candidate> stateSenateCandidates = new HashMap<>();
-
-    private static Map<String,Integer> stateSenateResults = new HashMap<>();
-
-    private static Map<String,Candidate> stateHouseCandidates = new HashMap<>();
-
-    private static Map<String,Integer> stateHouseResults = new HashMap<>();
-
-    private static Map<String,Candidate> stateGovernorCandidates = new HashMap<>();
-
-    private static Map<String,Integer> stateGovernorResults = new HashMap<>();
+    private Map<String,Integer> usHouseResults = new HashMap<>();
 
 
-    private static Map<String,Candidate> countySheriffCandidates = new HashMap<>();
+    private Map<String,Candidate> stateSenateCandidates = new HashMap<>();
 
-    private static Map<String,Candidate> countyJudgeCandidates = new HashMap<>();
+    private Map<String,Integer> stateSenateResults = new HashMap<>();
+
+    private Map<String,Candidate> stateHouseCandidates = new HashMap<>();
+
+    private Map<String,Integer> stateHouseResults = new HashMap<>();
+
+    private Map<String,Candidate> stateGovernorCandidates = new HashMap<>();
+
+    private Map<String,Integer> stateGovernorResults = new HashMap<>();
+
+
+    private Map<String,Integer> countySheriffResults = new HashMap<>();
+
+    private Map<String,Integer> countyJudgeResults = new HashMap<>();
 
 
     //private Map<String,Candidate> stateCandidates = new HashMap<>();
@@ -50,49 +50,6 @@ public class VotesResultsModel {
 
     private static Firebase ref = new Firebase("https://votingsystem-5e175.firebaseio.com");
 
-
-    public synchronized static void getAllCandidates(){
-
-        Firebase cycleRef = ref.child(electionYear + "/Results");
-
-        cycleRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-//                int idNumber = Integer.parseInt(dataSnapshot.getKey());
-                Map<String,HashMap<String,String>> nextCandidate = dataSnapshot.getValue(HashMap.class);
-                 //nextCandidate = dataSnapshot.getValue(HashMap.class);
-
-                System.out.println("Next candidate: " + nextCandidate.keySet());
-                //Candidate newCandidate = new Candidate(nextCandidate, idNumber);
-
-                //presidentialCandidates.put(idNumber,newCandidate);
-
-                //System.out.println("Pres results keys " + presidentialCandidates.keySet());
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-
-            }
-        });
-    }
 
     public synchronized static void getPresidentialCandidatesFromDatabase(){
 
@@ -152,25 +109,27 @@ public class VotesResultsModel {
                 idNumberToVotesMap = dataSnapshot.getValue(HashMap.class);
 
                 //System.out.println("ID map keys: " + idNumberToVotesMap.values());
+                try{
+                    for (String nextKey : idNumberToVotesMap.keySet()) {
+                        //int key = Integer.parseInt(nextKey);
+                        //System.out.println("id map " + key + " " + idNumberToVotesMap.get(nextKey));
 
-                for (String nextKey: idNumberToVotesMap.keySet()) {
-                    int key = Integer.parseInt(nextKey);
-                    System.out.println("id map " + key + " " + idNumberToVotesMap.get(nextKey));
-
-                    //System.out.println("next Key " + key + " " +presidentialCandidates.containsKey(key));
-                    //Candidate currCand = presidentialCandidates.get(key);
-                    //currCand.setVotes(idNumberToVotesMap.get(nextKey));
+                        //System.out.println("next Key " + key + " " +presidentialCandidates.containsKey(key));
+                        //Candidate currCand = presidentialCandidates.get(key);
+                        //currCand.setVotes(idNumberToVotesMap.get(nextKey));
 //                    System.out.println("candidate map: " + key + " " + presidentialCandidates.get(key).getName());
 
 
-                    presidentialResults.put(nextKey,idNumberToVotesMap.get(nextKey));
+                        presidentialResults.put(nextKey, idNumberToVotesMap.get(nextKey));
 
-                    System.out.println("results map keys " + presidentialResults.keySet());
-                    System.out.println("results map values " + presidentialResults.values());
+                        System.out.println("results map keys " + presidentialResults.keySet());
+                        System.out.println("results map values " + presidentialResults.values());
 
+                    }
+
+                }catch (NullPointerException e) {
+                    System.out.println("null pt exception");
                 }
-
-
 
             }
 
@@ -185,6 +144,12 @@ public class VotesResultsModel {
 
 
     public synchronized void stateResults(String state) {
+        this.stateSenateResults = new HashMap<>();
+        this.stateHouseResults = new HashMap<>();
+        this.usSenateResults = new HashMap<>();
+        this.usHouseResults = new HashMap<>();
+        this.stateGovernorResults = new HashMap<>();
+        this.stateSenateResults = new HashMap<>();
 
 
         Firebase houseRef = ref.child(electionYear + "/Results/" + state + "/State House");
@@ -200,20 +165,23 @@ public class VotesResultsModel {
 
                 idNumberToVotesMap = dataSnapshot.getValue(HashMap.class);
 
+                try{
 
-                for (String nextKey: idNumberToVotesMap.keySet()) {
-                    int key = Integer.parseInt(nextKey);
-                    System.out.println("id map " + key + " " + idNumberToVotesMap.get(nextKey));
+                    for (String nextKey : idNumberToVotesMap.keySet()) {
 
 
-                    stateHouseResults.put(nextKey,idNumberToVotesMap.get(nextKey));
+                        stateHouseResults.put(nextKey, idNumberToVotesMap.get(nextKey));
 
-                    System.out.println("results map keys " + stateHouseResults.keySet());
-                    System.out.println("results map values " + stateHouseResults.values());
+                        System.out.println("results map keys " + stateHouseResults.keySet());
+                        System.out.println("results map values " + stateHouseResults.values());
 
+                    }
+
+                }catch (NullPointerException e) {
+                    stateHouseResults.put("No Results", 0);
+
+                    System.out.println("null pt exception");
                 }
-
-
 
             }
 
@@ -229,31 +197,23 @@ public class VotesResultsModel {
 
                 Map<String,Integer> idNumberToVotesMap = new HashMap<>();
 
-                //System.out.println("datasnapshot " + dataSnapshot.getValue());
-
-
                 idNumberToVotesMap = dataSnapshot.getValue(HashMap.class);
 
-                //System.out.println("ID map keys: " + idNumberToVotesMap.values());
+                try{
+                    for (String nextKey : idNumberToVotesMap.keySet()) {
 
-                for (String nextKey: idNumberToVotesMap.keySet()) {
-                    int key = Integer.parseInt(nextKey);
-                    System.out.println("gov id map " + key + " " + idNumberToVotesMap.get(nextKey));
+                        stateGovernorResults.put(nextKey, idNumberToVotesMap.get(nextKey));
 
-                    //System.out.println("next Key " + key + " " +presidentialCandidates.containsKey(key));
-                    //Candidate currCand = presidentialCandidates.get(key);
-                    //currCand.setVotes(idNumberToVotesMap.get(nextKey));
-                    System.out.println("gov candidate map: " + key + " " + stateGovernorCandidates.get(key).getName());
+                        System.out.println("gov results map keys " + stateGovernorResults.keySet());
+                        System.out.println("gov results map values " + stateGovernorResults.values());
 
+                    }
 
-                    stateGovernorResults.put(nextKey,idNumberToVotesMap.get(nextKey));
+                }catch (NullPointerException e) {
+                    stateGovernorResults.put("No Results", 0);
 
-                    System.out.println("gov results map keys " + stateGovernorResults.keySet());
-                    System.out.println("gov results map values " + stateGovernorResults.values());
-
+                    System.out.println("null pt exception");
                 }
-
-
 
             }
 
@@ -275,24 +235,100 @@ public class VotesResultsModel {
                 idNumberToVotesMap = dataSnapshot.getValue(HashMap.class);
 
                 //System.out.println("ID map keys: " + idNumberToVotesMap.values());
+                try {
+                    for (String nextKey : idNumberToVotesMap.keySet()) {
+                       // int key = Integer.parseInt(nextKey);
+                        //System.out.println("id map " + key + " " + idNumberToVotesMap.get(nextKey));
 
-                for (String nextKey: idNumberToVotesMap.keySet()) {
-                    int key = Integer.parseInt(nextKey);
-                    System.out.println("id map " + key + " " + idNumberToVotesMap.get(nextKey));
-
-                    //System.out.println("next Key " + key + " " +presidentialCandidates.containsKey(key));
-                    //Candidate currCand = presidentialCandidates.get(key);
-                    //currCand.setVotes(idNumberToVotesMap.get(nextKey));
-                    System.out.println("candidate map: " + key + " " + stateSenateCandidates.get(key).getName());
+                        //System.out.println("next Key " + key + " " +presidentialCandidates.containsKey(key));
+                        //Candidate currCand = presidentialCandidates.get(key);
+                        //currCand.setVotes(idNumberToVotesMap.get(nextKey));
+//                    System.out.println("candidate map: " + key + " " + stateSenateCandidates.get(key).getName());
 
 
-                    stateSenateResults.put(stateSenateCandidates.get(key).getName(),idNumberToVotesMap.get(nextKey));
+                        stateSenateResults.put(nextKey, idNumberToVotesMap.get(nextKey));
 
-                    System.out.println("results map keys " + stateSenateResults.keySet());
-                    System.out.println("results map values " + stateSenateResults.values());
+                        System.out.println("results map keys " + stateSenateResults.keySet());
+                        System.out.println("results map values " + stateSenateResults.values());
 
+                    }
+                } catch (NullPointerException e){
+                    stateSenateResults.put("No Results", 0);
+
+                    System.out.println("null pt exception");
                 }
 
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.err.println("Firebase Error");
+            }
+        });
+
+        Firebase usHouseRef = ref.child(electionYear + "/Results/" + state + "/US House");
+        Firebase usSenateRef = ref.child(electionYear + "/Results/" + state + "/US Senate");
+
+
+        usHouseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Map<String,Integer> idNumberToVotesMap = new HashMap<>();
+
+
+                idNumberToVotesMap = dataSnapshot.getValue(HashMap.class);
+
+                try{
+                for (String nextKey : idNumberToVotesMap.keySet()) {
+
+
+                        usHouseResults.put(nextKey, idNumberToVotesMap.get(nextKey));
+
+                        System.out.println("results map keys " + usHouseResults.keySet());
+                        System.out.println("results map values " + usHouseResults.values());
+
+                    }
+                }catch (NullPointerException e){
+                    usHouseResults.put("No Results", 0);
+
+                    System.out.println("null pt exception");
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                System.err.println("Firebase Error");
+            }
+        });
+
+        usSenateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Map<String,Integer> idNumberToVotesMap = new HashMap<>();
+
+                idNumberToVotesMap = dataSnapshot.getValue(HashMap.class);
+
+                //System.out.println("ID map keys: " + idNumberToVotesMap.values());
+                try{
+                    for (String nextKey : idNumberToVotesMap.keySet()) {
+
+
+                        usSenateResults.put(nextKey, idNumberToVotesMap.get(nextKey));
+
+                        System.out.println("results map keys " + usSenateResults.keySet());
+                        System.out.println("results map values " + usSenateResults.values());
+
+                    }
+                }catch (NullPointerException e){
+                    usSenateResults.put("No Results", 0);
+
+                    System.out.println("null pt exception");
+                }
 
 
             }
@@ -304,103 +340,43 @@ public class VotesResultsModel {
         });
     }
 
-    public synchronized void getStateCandidatesFromDatabase(String stateAbbriviation) {
-
-        String stateURL = "State/" + stateAbbriviation;
-        Firebase stateGovRef = ref.child(electionYear + "/Candidates").child(stateURL).child("Governor");
-        Firebase stateHouseRef = ref.child(electionYear + "/Candidates").child(stateURL).child("State House");
-        Firebase stateSenateRef = ref.child(electionYear + "/Candidates").child(stateURL).child("State Senate");
-
-        stateGovRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Iterable<DataSnapshot> allCandidates = dataSnapshot.getChildren();
-
-                for (DataSnapshot nextCand: allCandidates) {
-                    Map<String,String> nextCandidate = nextCand.getValue(Map.class);
-                    Candidate newCandidate = new Candidate(nextCandidate, Integer.parseInt(nextCand.getKey()));
-                    stateGovernorCandidates.put(nextCand.getKey(), newCandidate);
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.err.println("firebase governor error");
-            }
-        });
-
-        stateHouseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Iterable<DataSnapshot> allCandidates = dataSnapshot.getChildren();
-
-                for (DataSnapshot nextCand: allCandidates) {
-                    Map<String,String> nextCandidate = nextCand.getValue(Map.class);
-                    Candidate newCandidate = new Candidate(nextCandidate, Integer.parseInt(nextCand.getKey()));
-                    stateHouseCandidates.put(nextCand.getKey(), newCandidate);
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.err.println("firebase house error");
-            }
-        });
-
-        stateSenateRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                Iterable<DataSnapshot> allCandidates = dataSnapshot.getChildren();
-                System.out.println("senate ref" + stateSenateRef.toString());
-
-                for (DataSnapshot nextCand: allCandidates) {
-
-                    System.out.println("next senator" + nextCand.getKey());
-                    Map<String,String> nextCandidate = nextCand.getValue(Map.class);
-                    Candidate newCandidate = new Candidate(nextCandidate, Integer.parseInt(nextCand.getKey()));
-                    stateSenateCandidates.put(nextCand.getKey(), newCandidate);
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.err.println("firebase senate error");
-            }
-        });
-
-    }
-
 
 
     public synchronized void initCounty(String countyName, String stateAbbriviation) {
+        countyJudgeResults = new HashMap<>();
+        countySheriffResults = new HashMap<>();
 
-        String stateURL = "County/" + stateAbbriviation + "/" + countyName;
-        Firebase judgeRef = ref.child(electionYear + "/Candidates").child(stateURL).child("County Judge");
-        Firebase sheriffRef = ref.child(electionYear + "/Candidates").child(stateURL).child("County Sheriff");
+        String stateURL = stateAbbriviation + "/" + countyName;
+        Firebase judgeRef = ref.child(electionYear + "/Results").child(stateURL).child("County Judge");
+        Firebase sheriffRef = ref.child(electionYear + "/Results").child(stateURL).child("County Sheriff");
+        System.out.println(judgeRef);
 
         judgeRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> allCandidates = dataSnapshot.getChildren();
-                System.out.println("judge ref" + judgeRef.toString());
+                Map<String,Integer> idNumberToVotesMap = new HashMap<>();
 
-                for (DataSnapshot nextCand: allCandidates) {
+                idNumberToVotesMap = dataSnapshot.getValue(HashMap.class);
 
-                    System.out.println("next judge " + nextCand.getKey());
-                    Map<String,String> nextCandidate = nextCand.getValue(Map.class);
-                    Candidate newCandidate = new Candidate(nextCandidate, Integer.parseInt(nextCand.getKey()));
-                    countyJudgeCandidates.put(nextCand.getKey(), newCandidate);
+                try{
+                    for (String nextKey : idNumberToVotesMap.keySet()) {
+
+
+                        countyJudgeResults.put(nextKey, idNumberToVotesMap.get(nextKey));
+
+                        System.out.println("results map keys " + countyJudgeResults.keySet());
+                        System.out.println("results map values " + countyJudgeResults.values());
+
+                    }
+                }catch (NullPointerException e){
+                    countyJudgeResults.put("No Results", 0);
+
+                    System.out.println("null pt exception");
                 }
+
+
             }
+
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
@@ -411,15 +387,24 @@ public class VotesResultsModel {
         sheriffRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> allCandidates = dataSnapshot.getChildren();
-                System.out.println("sheriff ref" + sheriffRef.toString());
+                Map<String,Integer> idNumberToVotesMap = new HashMap<>();
 
-                for (DataSnapshot nextCand: allCandidates) {
+                idNumberToVotesMap = dataSnapshot.getValue(HashMap.class);
 
-                    System.out.println("next sheriff " + nextCand.getKey());
-                    Map<String,String> nextCandidate = nextCand.getValue(Map.class);
-                    Candidate newCandidate = new Candidate(nextCandidate, Integer.parseInt(nextCand.getKey()));
-                    countySheriffCandidates.put(nextCand.getKey(), newCandidate);
+                try{
+                    for (String nextKey : idNumberToVotesMap.keySet()) {
+
+
+                        countySheriffResults.put(nextKey, idNumberToVotesMap.get(nextKey));
+
+                        System.out.println("results map keys " + countySheriffResults.keySet());
+                        System.out.println("results map values " + countySheriffResults.values());
+
+                    }
+                }catch (NullPointerException e){
+                    countySheriffResults.put("No Results", 0);
+
+                    System.out.println("null pt exception");
                 }
             }
 
@@ -450,7 +435,7 @@ public class VotesResultsModel {
         return presidentialResults;
     }
 
-    public Map<String,Integer> getStateSenateCandidates(){
+    public Map<String,Integer> getStateSenateResults(){
         return stateSenateResults;
     }
 
@@ -462,19 +447,19 @@ public class VotesResultsModel {
         return stateGovernorResults;
     }
 
-    public static Map<String,Candidate> getCountySheriffResults(){
-        return countySheriffCandidates;
+    public Map<String,Integer> getCountySheriffResults(){
+        return countySheriffResults;
     }
 
-    public static Map<String,Candidate> getCountyJudgeResults(){
-        return countyJudgeCandidates;
+    public Map<String,Integer> getCountyJudgeResults(){
+        return countyJudgeResults;
     }
 
-    public static Map<String,Integer> getUsSenateResults(){
+    public Map<String,Integer> getUsSenateResults(){
         return usSenateResults;
     }
 
-    public static Map<String,Integer> getUsHouseResults(){
+    public Map<String,Integer> getUsHouseResults(){
         return usHouseResults;
     }
 

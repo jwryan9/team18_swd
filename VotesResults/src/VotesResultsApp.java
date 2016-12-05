@@ -12,23 +12,19 @@ public class VotesResultsApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         VotesResultsModel.getElectionCycleFromDatabase();
+        VotesResultsModel.getPresidentPopularVoteFromDatabase();
+
+        try{
+            Thread.sleep(2000);
+        }catch (Exception e){}
+
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("votesResults.fxml"));
         Parent root = loader.load();
 
         VotesResultsController controller = loader.getController();
         controller.initGUI();
-/*
-        VotesResultsModel.getPresidentialCandidatesFromDatabase();
-        VotesResultsModel.getAllCandidates();
-        try{
-            Thread.sleep(2000);
-        }catch (Exception e){
-            System.err.println("Thread sleep");
-        }
-        */
 
-        VotesResultsModel.getPresidentPopularVoteFromDatabase();
 
 
         primaryStage.setTitle("!!POLLS ARE IN!!");

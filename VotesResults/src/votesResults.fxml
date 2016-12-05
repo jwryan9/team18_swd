@@ -8,7 +8,7 @@
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VotesResultsController">
   <tabs>
-    <Tab id="federal" fx:id="federal" text="Federal">
+    <Tab id="federal" fx:id="federal" onClosed="#updateGUI" text="Federal">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -42,7 +42,7 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab id="state" fx:id="state" text="State">
+    <Tab id="state" fx:id="state" onClosed="#updateGUI" text="State">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -78,7 +78,7 @@
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab id="county" fx:id="county" text="County">
+      <Tab id="county" fx:id="county" onClosed="#updateGUI" onSelectionChanged="#updateGUI" text="County">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>

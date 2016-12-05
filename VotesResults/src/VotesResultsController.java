@@ -20,9 +20,7 @@ import java.awt.*;
 //import java.awt.Label;
 //import java.awt.event.ActionEvent;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Daniel on 12/2/2016.
@@ -271,20 +269,27 @@ public class VotesResultsController {
 
     public void initGUI() {
 
+        federalBarChart.setAnimated(false);
+        stateBarChart.setAnimated(false);
+        countyBarChart.setAnimated(false);
+
         countyBarButton.setToggleGroup(countyRadioGroup);
         countyLineButton.setToggleGroup(countyRadioGroup);
         countyPieButton.setToggleGroup(countyRadioGroup);
+        countyBarButton.setSelected(true);
 
         stateBarButton.setToggleGroup(stateRadioGroup);
         stateLineButton.setToggleGroup(stateRadioGroup);
         statePieButton.setToggleGroup(stateRadioGroup);
+        stateBarButton.setSelected(true);
 
         federalBarButton.setToggleGroup(federalRadioGroup);
         federalLineButton.setToggleGroup(federalRadioGroup);
         federalPieButton.setToggleGroup(federalRadioGroup);
+        federalBarButton.setSelected(true);
 
         federalOffice.getItems().removeAll();
-        federalOffice.getItems().addAll("US President", "US Senate", "US House");
+        federalOffice.getItems().addAll("US President");
 
         stateChoice.getItems().removeAll();
         stateChoice.getItems().addAll("AL", "AK", "AZ", "AR", "CA",
@@ -299,7 +304,7 @@ public class VotesResultsController {
                                       "VA", "WA", "WV", "WI", "WY");
 
         stateOffice.getItems().removeAll();
-        stateOffice.getItems().addAll("Governor", "State Senate", "State House");
+        stateOffice.getItems().addAll("US Senate", "US House", "Governor", "State Senate", "State House");
 
         countyState.getItems().removeAll();
         countyState.getItems().addAll("AL", "AK", "AZ", "AR", "CA",
@@ -312,6 +317,9 @@ public class VotesResultsController {
                                       "OK", "OR", "PA", "RI", "SC",
                                       "SD", "TN", "TX", "UT", "VT",
                                       "VA", "WA", "WV", "WI", "WY");
+
+        countyOffice.getItems().removeAll();
+        countyOffice.getItems().addAll("County Judge", "County Sheriff");
 
        // countyChoice.getItems().removeAll();
        // countyChoice.getItems().addAll();
@@ -374,25 +382,31 @@ public class VotesResultsController {
     private void changeEventHandler(ActionEvent event) {
         if(event.getSource()==federalOffice) {
             fedOffice = federalOffice.getValue().toString();
-            addDataToPlots(fedOffice, 2016);
-
 
         } else if(event.getSource()==stateChoice) {
             sta = stateChoice.getValue().toString();
-            addDataToPlots(sta, 2016);
+            vrm.stateResults(sta);
+            System.out.println("Here");
+            try{
+                Thread.sleep(1000);
+            }catch(Exception e){};
         } else if(event.getSource()==stateOffice) {
             staOffice = stateOffice.getValue().toString();
-            ada
+
         } else if(event.getSource()==countyState) {
             couState = countyState.getValue().toString();
 //          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //          UPDATE THE CHOICES LISTED IN THE COUNTYCHOICE COMBOBOX
-//          updateCountyChoice();
+            updateCountyChoice(countyState.getValue().toString());
 //          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         } else if(event.getSource()==countyChoice) {
             cou = countyChoice.getValue().toString();
+            vrm.initCounty(cou, countyState.getValue().toString());
         } else if(event.getSource()==countyOffice) {
             couOffice = countyOffice.getValue().toString();
+            try{
+                Thread.sleep(1000);
+            }catch(Exception e){};
         } else if(event.getSource()==federalYearSlider) {
             fedYear = (int)Math.round(federalYearSlider.getValue());
             federalYearBox.setText(Integer.toString(fedYear));
@@ -406,6 +420,7 @@ public class VotesResultsController {
         updateGUI();
     }
 
+    @FXML
     private void updateGUI(){
         if(federal.isSelected()&&(fedOffice!=null/*&&fedYear!=0&&fedSlider!=0*/)) {
             if(federalBarButton.isSelected()) {
@@ -439,67 +454,122 @@ public class VotesResultsController {
             }
             getSeries(staOffice,staYear);
 //          reset series in each chart
-        } else if(county.isSelected()&&(couOffice!=null&&couYear!=0&&couSlider!=0)) {
+        } else if(county.isSelected()&&(couOffice!=null/*&&couYear!=0&&couSlider!=0*/)) {
             if(countyBarButton.isSelected()) {
-                federalBarChart.setVisible(true);
-                federalLineChart.setVisible(false);
-                federalPieChart.setVisible(false);
+                countyBarChart.setVisible(true);
+                countyLineChart.setVisible(false);
+                countyPieChart.setVisible(false);
             } else if(countyLineButton.isSelected()) {
-                federalBarChart.setVisible(false);
-                federalLineChart.setVisible(true);
-                federalPieChart.setVisible(false);
+                countyBarChart.setVisible(false);
+                countyLineChart.setVisible(true);
+                countyPieChart.setVisible(false);
             } else if(countyPieButton.isSelected()) {
-                federalBarChart.setVisible(false);
-                federalLineChart.setVisible(false);
-                federalPieChart.setVisible(true);
+                countyBarChart.setVisible(false);
+                countyLineChart.setVisible(false);
+                countyPieChart.setVisible(true);
             }
             getSeries(couOffice,couYear);
 //          reset series in each chart
         }
     }
     private void getSeries(String office, int year) {
+        Map<String, Integer > newResults = new HashMap<>();
+        System.out.println("results" + results);
         // given an office and a year, find the series of information in terms of names (x-axis) and respective number
         // of votes (y-axis)
         switch (office){
             case "US President":
-                results = VotesResultsModel.getPresidentialResults();
+                newResults = VotesResultsModel.getPresidentialResults();
                 break;
             case "US Senate":
-                results = VotesResultsModel.getUsSenateResults();
+                newResults = vrm.getUsSenateResults();
                 break;
             case "US House":
-                results = VotesResultsModel.getUsHouseResults();
+                newResults = vrm.getUsHouseResults();
                 break;
-        }
-        //VotesResultsModel.stateResults("IL");
+            case "State Senate":
+                newResults = vrm.getStateSenateResults();
+                break;
+            case "State House":
+                newResults = vrm.getStateHouseResults();
+                break;
+            case "Governor":
+                newResults = vrm.getGovernorResults();
+                break;
+            case "County Judge":
+                newResults = vrm.getCountyJudgeResults();
+                break;
+            case "County Sheriff":
+                newResults = vrm.getCountySheriffResults();
+                break;
 
-        addDataToPlots("A", 2016);
+        }
+
+        //VotesResultsModel.stateResults("IL");
+        results = newResults;
+        addDataToPlots(newResults);
         // Also reset the slider to hold the range of the year over which we have polls from the voters
     }
-    private void updateCountyChoice() {
+    private void updateCountyChoice(String state) {
         // when a state is chosen from the countyState combobox, update the available counties to choose in the
         // countychoice combobox.
-    }
+        countyChoice.getItems().clear();
+        TreeSet<String> countyArrayList = ZipCode.parseState(state, "zipcodes.csv");
 
-    private void addDataToPlots(String office, int year){
-        federalPieChart.getData().clear();
-        federalBarChart.getData().clear();
 
-        results = VotesResultsModel.getPresidentialResults();
-        System.out.println(results.keySet());
-        System.out.println(results.keySet());
 
-        XYChart.Series series1 = new XYChart.Series();
-        for (String key: results.keySet()) {
-            String name = key;
-            Integer votes = results.get(key);
-            federalPieChart.getData().add(new PieChart.Data(name,votes));
-            //federalBarChartXAxis.getCategories().add(name);
-            series1.getData().add(new XYChart.Data(name,votes));
+        for (String aCounty : countyArrayList){
+            countyChoice.getItems().add(aCounty);
+            System.out.println(aCounty);
 
         }
 
-        federalBarChart.getData().add(series1);
+    }
+
+    private void addDataToPlots(Map<String,Integer> results){
+        federalPieChart.getData().clear();
+        federalBarChart.getData().clear();
+        statePieChart.getData().clear();
+        stateBarChart.getData().clear();
+        countyBarChart.getData().clear();
+        countyPieChart.getData().clear();
+
+        //results = VotesResultsModel.getPresidentialResults();
+        System.out.println("Result keys" + results.keySet());
+        System.out.println("Result values" + results.values());
+
+
+        XYChart.Series series1 = new XYChart.Series();
+
+        if (federal.isSelected()) {
+            for (String key : results.keySet()) {
+                String name = key;
+                Integer votes = results.get(key);
+                federalPieChart.getData().add(new PieChart.Data(name, votes));
+                series1.getData().add(new XYChart.Data(name, votes));
+            }
+            federalBarChart.getData().add(series1);
+        }
+        else if (state.isSelected()){
+            for (String key : results.keySet()) {
+                String name = key;
+                Integer votes = results.get(key);
+                statePieChart.getData().add(new PieChart.Data(name, votes));
+                series1.getData().add(new XYChart.Data(name, votes));
+
+            }
+            stateBarChart.getData().add(series1);
+        }
+        else{
+            for (String key : results.keySet()) {
+                String name = key;
+                Integer votes = results.get(key);
+                countyPieChart.getData().add(new PieChart.Data(name, votes));
+                series1.getData().add(new XYChart.Data(name, votes));
+
+            }
+            countyBarChart.getData().add(series1);
+        }
 
     }
 
