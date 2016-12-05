@@ -15,18 +15,36 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Created by jasonryan on 12/1/16.
+ * Controller class for voter login application
  */
 public class VoterLoginController {
 
+    /**
+     * PasswordField for user social security number
+     */
     @FXML private PasswordField ssnField;
 
+    /**
+     * TextField for user zip code
+     */
     @FXML private TextField zipField;
 
+    /**
+     * Button to login to ballot
+     */
     @FXML private Button loginButton;
-    
+
+    /**
+     * Text for displaying invalid login information
+     */
     @FXML private Text validVoterText;
 
+    /**
+     * Checks if voter provides valid input and if voter is a registered voter.
+     * Open's voter's ballot.
+     *
+     * @param event ActionEvent source of event
+     */
     @FXML private void login(ActionEvent event) {
         String ssn = ssnField.getText();
         String zipCode = zipField.getText();
@@ -50,7 +68,7 @@ public class VoterLoginController {
 
                 System.out.println("has voted: " + hasVoted);
 
-                if(isRegisteredVoter == true && hasVoted == false){
+                if(isRegisteredVoter && !hasVoted){
 
                     System.out.println();
                     System.out.println("Registered Voter Found");
@@ -71,16 +89,11 @@ public class VoterLoginController {
 
                         root = loader.load();
 
-                        /*
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(500);
                         }catch (InterruptedException e){
-                            System.out.println("print error thread sleep");
+                            System.err.println("print error thread sleep");
                         }
-                        */
-
-                        //VoterBallotController ballController = loader.getController();
-                        //ballController.setVoterProperties(zipCode);
 
                         Stage stage = new Stage();
                         stage.setTitle("Ballot");
@@ -102,33 +115,15 @@ public class VoterLoginController {
                         StackTraceElement[] stackTraceElements = e.getStackTrace();
                         for(StackTraceElement a:stackTraceElements){
                             System.err.println(a);
-
                         }
-                        
                     }
-
-
-                    /*
-                    try {
-                        VoterBallotApp newBallot = new VoterBallotApp();
-                        newBallot.start(VoterBallotApp.classStage);
-                        newBallot.setZipCode(zipCode);
-
-                        Stage stage = (Stage) loginButton.getScene().getWindow();
-                        stage.close();
-                    }catch (Exception e){
-                        System.err.println("cannot open ballot");
-                        System.err.println(e.getLocalizedMessage());
-
-                    }
-                    */
                 }
                 else {
                     validVoterText.setFill(Color.RED);
-                    if(isRegisteredVoter == false) {
+                    if(!isRegisteredVoter) {
                         validVoterText.setText("ERROR: VOTER NOT REGISTERED");
                     }
-                    else if(hasVoted == true){
+                    else if(hasVoted){
                         validVoterText.setText("ERROR: VOTER HAS ALREADY VOTED");
                     }
                     System.out.println("Registered Voter Not Found");

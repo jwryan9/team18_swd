@@ -32,27 +32,4 @@ public class ZipCode {
         }
         return null;
     }
-
-    public static ArrayList<String> parseCounty(String countyString, String stateString, String zipFilePath) {
-        String line;
-        String[] lineArr;
-        ArrayList<String> zipArrList;
-
-        try {
-            BufferedReader zipReader = new BufferedReader(new FileReader(zipFilePath));
-            zipArrList = new ArrayList<>();
-
-            while((line = zipReader.readLine()) != null) {
-                lineArr = line.split(",");
-                if(lineArr[0].equals(countyString) && lineArr[1].equals(stateString)) {
-                    zipArrList.add(lineArr[2]);
-                }
-            }
-            return zipArrList;
-        } catch(IOException ex) {
-            System.err.println("Error opening file");
-        }
-
-        return null;
-    }
 }
