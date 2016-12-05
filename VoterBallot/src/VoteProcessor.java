@@ -44,7 +44,7 @@ public class VoteProcessor {
 
             System.out.println("vote != 0" + !vote.equals("0"));
 
-            if(!vote.equals("0")){
+            if(!vote.equals("")){
                 if(key.contains("County")){
                     resultsRef = resultsRef.child(voterCounty);
                 }

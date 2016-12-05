@@ -93,9 +93,9 @@ public class VotesResultsModel {
     }
 
 
-    public synchronized static void getPresidentPopularVoteFromDatabase() {
+    public synchronized static void getPresidentPopularVoteFromDatabase(String year) {
 
-        Firebase popularRef = ref.child(electionYear + "/Results/US President Popular Vote");
+        Firebase popularRef = ref.child(year + "/Results/US President Popular Vote");
 
         popularRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -143,18 +143,17 @@ public class VotesResultsModel {
     }
 
 
-    public synchronized void stateResults(String state) {
+    public synchronized void stateResults(String state, String year) {
         this.stateSenateResults = new HashMap<>();
         this.stateHouseResults = new HashMap<>();
         this.usSenateResults = new HashMap<>();
         this.usHouseResults = new HashMap<>();
         this.stateGovernorResults = new HashMap<>();
-        this.stateSenateResults = new HashMap<>();
 
 
-        Firebase houseRef = ref.child(electionYear + "/Results/" + state + "/State House");
-        Firebase govRef = ref.child(electionYear + "/Results/" + state+ "/Governor");
-        Firebase senateRef = ref.child(electionYear + "/Results/" + state + "/State Senate");
+        Firebase houseRef = ref.child(year + "/Results/" + state + "/State House");
+        Firebase govRef = ref.child(year + "/Results/" + state+ "/Governor");
+        Firebase senateRef = ref.child(year + "/Results/" + state + "/State Senate");
 
         houseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -267,8 +266,8 @@ public class VotesResultsModel {
             }
         });
 
-        Firebase usHouseRef = ref.child(electionYear + "/Results/" + state + "/US House");
-        Firebase usSenateRef = ref.child(electionYear + "/Results/" + state + "/US Senate");
+        Firebase usHouseRef = ref.child(year + "/Results/" + state + "/US House");
+        Firebase usSenateRef = ref.child(year + "/Results/" + state + "/US Senate");
 
 
         usHouseRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -342,13 +341,13 @@ public class VotesResultsModel {
 
 
 
-    public synchronized void initCounty(String countyName, String stateAbbriviation) {
+    public synchronized void initCounty(String countyName, String stateAbbriviation, String year) {
         countyJudgeResults = new HashMap<>();
         countySheriffResults = new HashMap<>();
 
         String stateURL = stateAbbriviation + "/" + countyName;
-        Firebase judgeRef = ref.child(electionYear + "/Results").child(stateURL).child("County Judge");
-        Firebase sheriffRef = ref.child(electionYear + "/Results").child(stateURL).child("County Sheriff");
+        Firebase judgeRef = ref.child(year + "/Results").child(stateURL).child("County Judge");
+        Firebase sheriffRef = ref.child(year + "/Results").child(stateURL).child("County Sheriff");
         System.out.println(judgeRef);
 
         judgeRef.addListenerForSingleValueEvent(new ValueEventListener() {

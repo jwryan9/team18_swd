@@ -12,7 +12,7 @@ public class DatabaseRunner {
             Thread.sleep(2000);
         }catch (Exception e){System.err.println("database runner error");}
 
-        VotesResultsModel.getPresidentPopularVoteFromDatabase();
+        VotesResultsModel.getPresidentPopularVoteFromDatabase(VotesResultsModel.getElectionYear());
         //VotesResultsModel.get
         try {
             Thread.sleep(1000000000);

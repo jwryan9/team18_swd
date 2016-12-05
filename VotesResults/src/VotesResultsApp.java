@@ -12,7 +12,10 @@ public class VotesResultsApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         VotesResultsModel.getElectionCycleFromDatabase();
-        VotesResultsModel.getPresidentPopularVoteFromDatabase();
+        try{
+            Thread.sleep(1000);
+        }catch (Exception e){}
+        VotesResultsModel.getPresidentPopularVoteFromDatabase(VotesResultsModel.getElectionYear());
 
         try{
             Thread.sleep(2000);

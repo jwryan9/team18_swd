@@ -347,7 +347,7 @@ public class VotesResultsController {
         federalYearSlider.setMax(electionYear);
         federalYearSlider.setMin(electionYear - 8);
         federalYearSlider.setMajorTickUnit(4);
-        federalYearSlider.setValue(2016);
+        federalYearSlider.setValue(electionYear);
         federalYearSlider.setMinorTickCount(1);
         federalYearSlider.setShowTickMarks(true);
         federalYearSlider.setSnapToTicks(true);
@@ -357,7 +357,7 @@ public class VotesResultsController {
         stateYearSlider.setMax(electionYear);
         stateYearSlider.setMin(electionYear - 8);
         stateYearSlider.setMajorTickUnit(4);
-        stateYearSlider.setValue(2016);
+        stateYearSlider.setValue(electionYear);
         stateYearSlider.setMinorTickCount(1);
         stateYearSlider.setShowTickMarks(true);
         stateYearSlider.setSnapToTicks(true);
@@ -367,7 +367,7 @@ public class VotesResultsController {
         countyYearSlider.setMax(electionYear);
         countyYearSlider.setMin(electionYear - 8);
         countyYearSlider.setMajorTickUnit(4);
-        countyYearSlider.setValue(2016);
+        countyYearSlider.setValue(electionYear);
         countyYearSlider.setMinorTickCount(1);
         countyYearSlider.setShowTickMarks(true);
         countyYearSlider.setSnapToTicks(true);
@@ -431,7 +431,7 @@ public class VotesResultsController {
 
         } else if(event.getSource()==stateChoice) {
             sta = stateChoice.getValue().toString();
-            vrm.stateResults(sta);
+            vrm.stateResults(sta, String.valueOf(staYear));
             System.out.println("Here");
             try{
                 Thread.sleep(1000);
@@ -447,7 +447,7 @@ public class VotesResultsController {
 //          !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         } else if(event.getSource()==countyChoice) {
             cou = countyChoice.getValue().toString();
-            vrm.initCounty(cou, countyState.getValue().toString());
+            vrm.initCounty(cou, countyState.getValue().toString(), String.valueOf(couYear));
         } else if(event.getSource()==countyOffice) {
             couOffice = countyOffice.getValue().toString();
             try{
