@@ -52,41 +52,6 @@ public class YearSelectionController {
                 invalidText.setText("");
                 System.out.println("Year set");
 
-                Parent root;
-                try {
-
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("countyAuditor.fxml"));
-
-                    root = loader.load();
-
-                    try {
-                        Thread.sleep(500);
-                    }catch (InterruptedException e){System.out.println("print error thread sleep");};
-
-                    Stage stage = new Stage();
-                    stage.setTitle("Add Candidate");
-                    stage.setScene(new Scene(root));
-                    stage.getIcons().add(new Image("file:CountyAuditor/Resources/american-flag-small.png"));
-
-                    stage.setOnCloseRequest(
-                            e -> {
-                                Platform.exit();
-                                System.exit(0);
-                            }
-                    );
-
-                    stage.show();
-
-                    ((Node)(event.getSource())).getScene().getWindow().hide();
-                }
-                catch (IOException e) {
-                    System.err.println("cannot open ballot");
-                    StackTraceElement[] stackTraceElements = e.getStackTrace();
-                    for(StackTraceElement a:stackTraceElements){
-                        System.err.println(a);
-                    }
-                }
-
             } else {
                 invalidText.setFill(Color.RED);
                 invalidText.setText(isValidText);
