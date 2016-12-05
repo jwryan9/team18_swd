@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -98,6 +99,7 @@ public class VoterLoginController {
                         Stage stage = new Stage();
                         stage.setTitle("Ballot");
                         stage.setScene(new Scene(root));
+                        stage.getIcons().add(new Image("file:Resources/american-flag-small.png"));
 
                         stage.setOnCloseRequest(
                                 e -> {

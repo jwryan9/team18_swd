@@ -3,6 +3,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -29,6 +30,7 @@ public class CountyAuditorApp extends Application {
 
         primaryStage.setTitle("Candidate Entry");
         primaryStage.setScene(new Scene(root));
+        primaryStage.getIcons().add(new Image("file:Resources/american-flag-small.png"));
 
         primaryStage.setOnCloseRequest(
                 e -> {

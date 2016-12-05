@@ -36,10 +36,10 @@ public class CountyAuditorModel {
         if(!name.matches("[a-zA-Z ']*$") || name.length() == 0){
             return "Error: Invalid Name";
         }
-        if(!zip.matches("\\d+") || zip.length() != 5 || ZipCode.parseZip(zip, "zipcodes.csv") == null){
+        if(!zip.matches("\\d+") || zip.length() != 5 || ZipCode.parseZip(zip, "Resources/zipcodes.csv") == null){
             return "Error: Invalid Zip Code";
         }
-        if(!ZipCode.validateZip(zip, state, "zipcodes.csv")) {
+        if(!ZipCode.validateZip(zip, state, "Resources/zipcodes.csv")) {
             return "Error: Invalid State/Zip Code Pair";
         }
 
@@ -64,7 +64,7 @@ public class CountyAuditorModel {
             candidateRef = candidateRef.child(level + "/" + candidate.getState() + "/" + candidate.getOffice());
         }
         else if(level == "County"){
-            String[] candidateCounty = ZipCode.parseZip(candidate.getZip(), "zipcodes.csv");
+            String[] candidateCounty = ZipCode.parseZip(candidate.getZip(), "Resources/zipcodes.csv");
 
             candidateRef = candidateRef.child(level + "/" + candidate.getState() + "/" + candidateCounty[0] + "/" + candidate.getOffice());
         }

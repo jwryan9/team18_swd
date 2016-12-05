@@ -38,7 +38,7 @@ public class RunEncryptor {
      */
     public RunEncryptor(String id) throws IOException{
 
-        String keyFileLocation = "keys.txt";
+        String keyFileLocation = "Resources/keys.txt";
 
 
         try{
