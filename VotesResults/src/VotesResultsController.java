@@ -471,7 +471,7 @@ System.out.println("EC SIZE: " +newResults.size());
         countyYearSlider.setMin(electionYear - 8);
         countyYearSlider.setMajorTickUnit(4);
         countyYearSlider.setValue(electionYear);
-        countyYearSlider.setMinorTickCount(1);
+        //countyYearSlider.setMinorTickCount(1);
         countyYearSlider.setShowTickMarks(true);
         countyYearSlider.setSnapToTicks(true);
         countyYearBox.setText(VotesResultsModel.getElectionYear());
