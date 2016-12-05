@@ -136,6 +136,12 @@ public class VotesResultsController {
     @FXML
     private NumberAxis federalBarChartYAxis;
     @FXML
+    private StackedBarChart<String, Integer> electoralBarChart;
+    @FXML
+    CategoryAxis electoralCollegeBarChartXAxis;
+    @FXML
+    CategoryAxis electoralCollegeBarChartYAxis;
+    @FXML
     private XYChart.Series<String, Integer> federalSeries;
     /**
      * Bar chart to view the results of the state polls
@@ -222,6 +228,8 @@ public class VotesResultsController {
     private RadioButton countyLineButton;
     @FXML
     private RadioButton countyPieButton;
+    @FXML
+    private RadioButton electoralCollegeButton;
 
     //                                                          Labels
 
@@ -265,7 +273,12 @@ public class VotesResultsController {
 
     public void initGUI() {
 
+        couYear = Integer.parseInt(VotesResultsModel.getElectionYear());
+        staYear = Integer.parseInt(VotesResultsModel.getElectionYear());
+        fedYear = Integer.parseInt(VotesResultsModel.getElectionYear());
+
         federalBarChart.setAnimated(false);
+        electoralBarChart.setAnimated(false);
         stateBarChart.setAnimated(false);
         countyBarChart.setAnimated(false);
 
@@ -279,6 +292,8 @@ public class VotesResultsController {
 
         federalBarButton.setToggleGroup(federalRadioGroup);
         federalPieButton.setToggleGroup(federalRadioGroup);
+        electoralCollegeButton.setToggleGroup(federalRadioGroup);
+
         federalBarButton.setSelected(true);
 
         federalOffice.getItems().removeAll();
@@ -369,19 +384,28 @@ public class VotesResultsController {
         countyYearSlider.setSnapToTicks(true);
         countyYearBox.setText(VotesResultsModel.getElectionYear());
 
+        final ListView<String> startLog = new ListView<>();
+        final ListView<String> endLog   = new ListView<>();
 
         federalYearSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             fedYear = (int)federalYearSlider.getValue();
             federalYearBox.setText(Integer.toString(fedYear));
-            changeEventHandler(new ActionEvent("e",null));
+            //changeEventHandler(new ActionEvent("e",null));
         });
         federalYearSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 if (newValue) {
-                    changeEventHandler(new ActionEvent("e",null));
-
+                    startLog.getItems().add("a");
                 } else {
+                    //changeEventHandler(federalOffice.);
+                    System.out.println("Im here");
+                    fedYear = (int)federalYearSlider.getValue();
+                    VotesResultsModel.getPresidentPopularVoteFromDatabase(String.valueOf(fedYear));
+                    try{
+                        Thread.sleep(1000);
+                    }catch(Exception e){}
+                    updateGUI();
 
 
                 }
@@ -393,10 +417,51 @@ public class VotesResultsController {
             stateYearBox.setText(Integer.toString(staYear));
 
         });
+        stateYearSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    startLog.getItems().add("a");
+                } else {
+                    System.out.println("Im here");
+                    staYear = (int)stateYearSlider.getValue();
+                    vrm.stateResults(stateChoice.getSelectionModel().getSelectedItem().toString(),String.valueOf(staYear));
+                    try{
+                        Thread.sleep(1000);
+                    }catch(Exception e){}
+                    updateGUI();
+
+
+                }
+            }
+        });
+
         countyYearSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             couYear = (int)countyYearSlider.getValue();
-
             countyYearBox.setText(Integer.toString(couYear));
+        });
+        countyYearSlider.valueChangingProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    startLog.getItems().add("a");
+
+                } else {
+                    //changeEventHandler(federalOffice.);
+                    System.out.println("Im here");
+                    couYear = (int)countyYearSlider.getValue();
+                    vrm.initCounty(countyChoice.getSelectionModel().getSelectedItem().toString(),countyState.getSelectionModel().getSelectedItem().toString(),String.valueOf(couYear));
+                    System.out.println("here 1");
+                    try{
+                        Thread.sleep(2000);
+                    }catch(Exception e){}
+                    System.out.print("here 2");
+                    updateGUI();
+
+
+
+                }
+            }
         });
     }
 
@@ -462,7 +527,7 @@ public class VotesResultsController {
             couOffice = countyOffice.getValue().toString();
             try{
                 Thread.sleep(1000);
-            }catch(Exception e){};
+            }catch(Exception e){}
         } else if(event.getSource()==federalYearSlider) {
             fedYear = (int)Math.round(federalYearSlider.getValue());
             federalYearBox.setText(Integer.toString(fedYear));
@@ -481,13 +546,18 @@ public class VotesResultsController {
         if(federal.isSelected()&&(fedOffice!=null)) {
             if(federalBarButton.isSelected()) {
                 federalBarChart.setVisible(true);
-                federalLineChart.setVisible(false);
+                electoralBarChart.setVisible(false);
                 federalPieChart.setVisible(false);
             }
             else if(federalPieButton.isSelected()) {
                 federalBarChart.setVisible(false);
-                federalLineChart.setVisible(false);
+                electoralBarChart.setVisible(false);
                 federalPieChart.setVisible(true);
+            }
+            else if(electoralCollegeButton.isSelected()) {
+                federalBarChart.setVisible(false);
+                electoralBarChart.setVisible(true);
+                federalPieChart.setVisible(false);
             }
             getSeries(fedOffice,fedYear);
 //          reset series in each chart
@@ -620,5 +690,8 @@ public class VotesResultsController {
         }
 
     }
+
+
+
 
 }

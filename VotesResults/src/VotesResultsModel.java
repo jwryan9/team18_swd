@@ -41,6 +41,7 @@ public class VotesResultsModel {
     private Map<String,Integer> countyJudgeResults = new HashMap<>();
 
 
+
     //private Map<String,Candidate> stateCandidates = new HashMap<>();
 
 
@@ -94,7 +95,7 @@ public class VotesResultsModel {
     public synchronized static void getPresidentPopularVoteFromDatabase(String year) {
 
         Firebase popularRef = ref.child(year + "/Results/US President Popular Vote");
-
+        System.out.println("popular Ref " + popularRef );
         popularRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -152,6 +153,11 @@ public class VotesResultsModel {
         Firebase houseRef = ref.child(year + "/Results/" + state + "/State House");
         Firebase govRef = ref.child(year + "/Results/" + state+ "/Governor");
         Firebase senateRef = ref.child(year + "/Results/" + state + "/State Senate");
+
+        System.out.println("house Ref " + houseRef );
+        System.out.println("gov Ref " + govRef );
+        System.out.println("senate Ref " + senateRef );
+
 
         houseRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
