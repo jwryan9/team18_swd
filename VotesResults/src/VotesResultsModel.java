@@ -146,7 +146,7 @@ public class VotesResultsModel {
      * @param year
      */
     public synchronized static void getPresidentPopularVoteFromDatabase(String year) {
-
+        presidentialResults.clear();
         Firebase popularRef = ref.child(year + "/Results/US President Popular Vote");
         System.out.println("popular Ref " + popularRef );
         popularRef.addListenerForSingleValueEvent(new ValueEventListener() {

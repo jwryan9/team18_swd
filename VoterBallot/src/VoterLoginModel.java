@@ -121,12 +121,16 @@ public class VoterLoginModel{
         String year = VoterBallotModel.getElectionYear();
         System.err.println("Year in get voted: " + year);
 
+        try{
+            Thread.sleep(1000);
+        }catch (Exception e){}
+
         alreadyVotedRef = alreadyVotedRef.child(year).child("Results/Already Voted");
 
         alreadyVotedRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                alreadyVotedString = dataSnapshot.getValue(String.class);
+                alreadyVotedString += dataSnapshot.getValue(String.class);
                 System.err.println("Already Voted String1234: " + alreadyVotedString);
             }
 
@@ -144,7 +148,7 @@ public class VoterLoginModel{
      * @return true  if voter has already voted, else false
      */
     public synchronized static boolean checkAlreadyVoted(String encyrptedSSN){
-        System.err.println(alreadyVotedString);
+        System.err.println("voted error already voted string:" +alreadyVotedString);
         try {
             System.out.println(".contains ssn: " + alreadyVotedString.contains(encyrptedSSN));
 
@@ -161,10 +165,10 @@ public class VoterLoginModel{
     /**
      * Synchronized method to add voter to has voted list in database
      *
-     * @param encryptedSSN encrypted sosial security number of voter
+     * @param encryptedSSN encrypted social security number of voter
      */
     public synchronized static void markVoterAsHasVoted(String encryptedSSN){
-
+        alreadyVotedString = alreadyVotedString + "," + encryptedSSN;
         String url = "https://votingsystem-5e175.firebaseio.com/" + VoterBallotModel.getElectionYear() + "/Results/Already Voted";
         Firebase voterRegisteredRef = new Firebase(url);
 
@@ -177,6 +181,8 @@ public class VoterLoginModel{
                 else{
                     voterData.setValue(voterData.getValue() + encryptedSSN + ",");
                 }
+                System.out.println("voterData.getvale " + voterData.getValue());
+
                 return Transaction.success(voterData);
             }
 
@@ -189,7 +195,6 @@ public class VoterLoginModel{
                 }
             }
         });
-
 
 
     }

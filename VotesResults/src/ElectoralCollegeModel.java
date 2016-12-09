@@ -35,6 +35,7 @@ public class ElectoralCollegeModel {
     }
 
     public synchronized static void getWinnerOfEachState(String year, String state){
+        ecByCandidate.clear();
         Firebase presidentRef =ref.child(year + "/Results/" + state +"/US President");// = ref.child(year).child("Results").child(state).child("US President");
 
         System.out.println("ref " + presidentRef);

@@ -132,14 +132,14 @@ public class VoterBallotController {
     public void setVoterProperties(String zip, String encryptedSSN){
         this.encryptedSSN = encryptedSSN;
         this.voterZip = zip;
-        System.out.println("Zip in ballot controller: " + voterZip);
+        // System.out.println("Zip in ballot controller: " + voterZip);
 
         String[] zipArray = ZipCode.parseZip(this.voterZip, "CountyAuditor/Resources/zipcodes.csv");
         if(zipArray != null) {
             this.voterCounty = zipArray[0];
             this.voterState = zipArray[1];
         }
-        System.out.println("Zip in ballot controller: " + voterZip + " county: " + voterCounty + " state: " + voterState);
+        //System.out.println("Zip in ballot controller: " + voterZip + " county: " + voterCounty + " state: " + voterState);
 
 
     }
@@ -201,10 +201,10 @@ public class VoterBallotController {
         Map<String,Candidate> countyJudgeCandidates = vlm.getCountyJudgeCandidates();
         Map<String,Candidate> countySheriffCandidates = vlm.getCountySheriffCandidates();
 
-        System.out.println("judge candi count: " + countyJudgeCandidates.size());
-        System.out.println("sheriff candi count: " + countySheriffCandidates.size());
-        System.out.println("judge candidates: " + countyJudgeCandidates);
-        System.out.println("sheriff candidates: " + countySheriffCandidates);
+        //System.out.println("judge candi count: " + countyJudgeCandidates.size());
+        //System.out.println("sheriff candi count: " + countySheriffCandidates.size());
+        //System.out.println("judge candidates: " + countyJudgeCandidates);
+        //System.out.println("sheriff candidates: " + countySheriffCandidates);
 
         countyJudgeDropdown.getItems().add("");
         countySheriffDropdown.getItems().add("");
@@ -226,7 +226,7 @@ public class VoterBallotController {
      */
     @FXML private void setSelections(ActionEvent event) {
         ComboBox a = (ComboBox) event.getSource();
-        System.out.println(a.getId());
+        //System.out.println(a.getId());
         switch (a.getId()) {
             case "presidentDropdown":
                 presidentSelection.setText(presidentDropdown.getValue().toString());
@@ -262,8 +262,7 @@ public class VoterBallotController {
      * @param event ActionEvent calling method
      */
     @FXML private void submitVote(ActionEvent event) {
-
-        VoterLoginModel.markVoterAsHasVoted(this.encryptedSSN);
+        //VoterLoginModel.getAlreadyVotedFromDatabase();
 
         final int numOffices = 8;
 

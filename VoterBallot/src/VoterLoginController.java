@@ -50,19 +50,23 @@ public class VoterLoginController {
         String ssn = ssnField.getText();
         String zipCode = zipField.getText();
         String encryptedSSN;
-        boolean isRegisteredVoter;
-        boolean hasVoted;
+        boolean isRegisteredVoter = false;
+        boolean hasVoted = false;
 
         String validInput = VoterLoginModel.validateInput(ssn, zipCode);
 
         try {
+            //VoterLoginModel.getAlreadyVotedFromDatabase();
+            try{
+                Thread.sleep(500);
+            }catch(Exception e){}
 
             if(validInput.isEmpty()){
                 System.out.println("VALID INPUT");
 
                 RunEncryptor myEncryptor = new RunEncryptor(ssn); // create an object of type RunEncryptor
                 encryptedSSN = myEncryptor.encodeMessage(); // encrypt the message
-                System.out.println("encryptedSSN: " + encryptedSSN);
+                //System.out.println("encryptedSSN: " + encryptedSSN);
 
                 isRegisteredVoter=VoterLoginModel.checkVoterRegistrationQuery(encryptedSSN,zipCode);
                 hasVoted = VoterLoginModel.checkAlreadyVoted(encryptedSSN);
@@ -74,6 +78,7 @@ public class VoterLoginController {
                     System.out.println();
                     System.out.println("Registered Voter Found");
                     System.out.println("Opening Ballot");
+                    VoterLoginModel.markVoterAsHasVoted(encryptedSSN);
 
                     validVoterText.setFill(Color.BLACK);
                     validVoterText.setText("Registered voter found");
